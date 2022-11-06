@@ -1,0 +1,81 @@
+[gd_scene load_steps=3 format=2]
+
+[sub_resource type="CapsuleShape" id=1]
+margin = 0.02
+radius = 0.01
+height = 0.02
+
+[sub_resource type="CapsuleMesh" id=2]
+radius = 0.01
+mid_height = 0.02
+
+[node name="CollisionShape" type="CollisionShape"]
+shape = SubResource( 1 )
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+mesh = SubResource( 2 )
+
+[node name="RayCasts" type="Spatial" parent="."]
+
+[node name="RayCastDown" type="RayCast" parent="RayCasts"]
+transform = Transform( 1, 0, 0, 0, 1, -2.08616e-07, 0, 2.08616e-07, 1, 0, -6.63102e-06, 0 )
+enabled = true
+cast_to = Vector3( 0, -0.01, 0 )
+collision_mask = 2305
+
+[node name="RayCastLeftDown" type="RayCast" parent="RayCasts"]
+transform = Transform( 0.707107, 0.707107, -1.47514e-07, -0.707107, 0.707107, -1.47514e-07, 0, 2.08616e-07, 1, 0, -6.63102e-06, 0 )
+enabled = true
+cast_to = Vector3( 0, -0.01, 0 )
+collision_mask = 2305
+
+[node name="RayCastRightDown" type="RayCast" parent="RayCasts"]
+transform = Transform( 0.707107, -0.707107, 1.47514e-07, 0.707107, 0.707107, -1.47514e-07, 0, 2.08616e-07, 1, 0, -6.63102e-06, 0 )
+enabled = true
+cast_to = Vector3( 0, -0.01, 0 )
+collision_mask = 2305
+
+[node name="RayCastForward" type="RayCast" parent="RayCasts"]
+transform = Transform( 1, 0, 0, 0, -1.49012e-07, -1, 0, 1, -1.49012e-07, 0, 0, -0.01 )
+enabled = true
+cast_to = Vector3( 0, -0.01, 0 )
+collision_mask = 2305
+
+[node name="RayCastForwardUp" type="RayCast" parent="RayCasts"]
+transform = Transform( 1, 0, 0, 0, -0.707107, -0.707107, 0, 0.707107, -0.707107, 0, 0, -0.01 )
+enabled = true
+cast_to = Vector3( 0, -0.01, 0 )
+collision_mask = 2305
+
+[node name="RayCastForwardDown" type="RayCast" parent="RayCasts"]
+transform = Transform( 1, 0, 0, 0, 0.707107, -0.707107, 0, 0.707107, 0.707107, 0, 0, -0.01 )
+enabled = true
+cast_to = Vector3( 0, -0.01, 0 )
+collision_mask = 2305
+
+[node name="RayCastForwardLeftDown" type="RayCast" parent="RayCasts"]
+transform = Transform( 0.707107, 0.5, 0.5, 0, 0.707107, -0.707107, -0.707107, 0.5, 0.5, 0, 0, -0.01 )
+enabled = true
+cast_to = Vector3( 0, -0.01, 0 )
+collision_mask = 2305
+
+[node name="RayCastForwardRightDown" type="RayCast" parent="RayCasts"]
+transform = Transform( 0.707107, -0.5, -0.5, 0, 0.707107, -0.707107, 0.707107, 0.5, 0.5, 0, 0, -0.01 )
+enabled = true
+cast_to = Vector3( 0, -0.01, 0 )
+collision_mask = 2305
+
+[node name="RayCastBackwardDown" type="RayCast" parent="RayCasts"]
+transform = Transform( -1, 5.96046e-08, 5.96046e-08, 0, 0.707107, -0.707107, -8.9407e-08, -0.707107, -0.707107, 0, 0, 0.01 )
+cast_to = Vector3( 0, -0.01, 0 )
+collision_mask = 2305
+
+[node name="RayCastBackwardLeftDown" type="RayCast" parent="RayCasts"]
+transform = Transform( -0.707107, -0.5, -0.5, 0, 0.707107, -0.707107, 0.707107, -0.5, -0.5, 0, 0, 0.01 )
+cast_to = Vector3( 0, -0.01, 0 )
+collision_mask = 2305
+
+[node name="RayCastBackwardRightDown" type="RayCast" parent="RayCasts"]
+transform = Transform( -0.707107, 0.5, 0.5, 0, 0.707107, -0.707107, -0.707107, -0.5, -0.5, 0, 0, 0.01 )
+cast_to = Vector3( 0, -0.01, 0 )
+collision_mask = 2305
