@@ -2,6 +2,8 @@
 
 This plugin for Godot 3 provides scripts and scenes for physics-based XR movement. Player hands collide with environment and can grab or push physics object in realistic manner. Player body can be pushed away from other objects using hands or head.
 
+[Watch the showcase video](https://github.com/patrykkalinowski/godot-xr-physical-movement/blob/master/img/showcase.mp4)
+
 ## Features
 
 - Physical hand follows controller and can be blocked by world objects
