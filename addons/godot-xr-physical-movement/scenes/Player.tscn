@@ -1,0 +1,126 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://addons/godot-openxr/scenes/first_person_controller_vr.gd" type="Script" id=1]
+[ext_resource path="res://addons/godot-openxr/config/OpenXRConfig.gdns" type="Script" id=2]
+[ext_resource path="res://addons/godot-xr-physical-movement/scripts/PhysicalHand.gd" type="Script" id=3]
+[ext_resource path="res://addons/godot-xr-physical-movement/scripts/PhysicalBody.gd" type="Script" id=4]
+[ext_resource path="res://addons/godot-xr-physical-movement/scripts/PhysicalHead.gd" type="Script" id=5]
+[ext_resource path="res://addons/godot-openxr/scenes/right_hand_mesh.tscn" type="PackedScene" id=6]
+[ext_resource path="res://addons/godot-openxr/scenes/left_hand_mesh.tscn" type="PackedScene" id=7]
+[ext_resource path="res://RightHandPhysical.tscn" type="PackedScene" id=8]
+[ext_resource path="res://addons/godot-xr-physical-movement/scripts/Chest.gd" type="Script" id=9]
+[ext_resource path="res://addons/godot-xr-physical-movement/scripts/ARVRController.gd" type="Script" id=10]
+[ext_resource path="res://addons/godot-openxr/assets/valve_hand_models/left_hand.glb" type="PackedScene" id=12]
+
+[sub_resource type="SphereShape" id=3]
+radius = 0.11
+
+[node name="Player" type="Spatial"]
+
+[node name="Body" type="RigidBody" parent="."]
+collision_layer = 0
+collision_mask = 0
+mode = 2
+mass = 80.0
+gravity_scale = 0.0
+can_sleep = false
+script = ExtResource( 4 )
+
+[node name="ARVROrigin" type="ARVROrigin" parent="Body"]
+script = ExtResource( 1 )
+
+[node name="Configuration" type="Node" parent="Body/ARVROrigin"]
+script = ExtResource( 2 )
+
+[node name="ARVRCamera" type="ARVRCamera" parent="Body/ARVROrigin"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8, 0 )
+cull_mask = 524287
+fov = 65.0
+near = 0.1
+
+[node name="Head" type="RigidBody" parent="Body/ARVROrigin/ARVRCamera"]
+collision_layer = 256
+collision_mask = 1537
+mode = 3
+mass = 10.0
+gravity_scale = 0.0
+custom_integrator = true
+continuous_cd = true
+contacts_reported = 1
+contact_monitor = true
+can_sleep = false
+script = ExtResource( 5 )
+
+[node name="HeadCollider" type="CollisionShape" parent="Body/ARVROrigin/ARVRCamera/Head"]
+shape = SubResource( 3 )
+
+[node name="Chest" type="Spatial" parent="Body/ARVROrigin/ARVRCamera"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3, 0 )
+script = ExtResource( 9 )
+
+[node name="LeftHand" parent="Body/ARVROrigin" instance=ExtResource( 7 )]
+
+[node name="RightHand" parent="Body/ARVROrigin" instance=ExtResource( 6 )]
+
+[node name="ARVRController1" type="ARVRController" parent="Body/ARVROrigin"]
+script = ExtResource( 10 )
+
+[node name="ARVRController2" type="ARVRController" parent="Body/ARVROrigin"]
+controller_id = 2
+script = ExtResource( 10 )
+
+[node name="LeftHandPhysical" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
+script = ExtResource( 3 )
+
+[node name="HandModel" parent="LeftHandPhysical" instance=ExtResource( 12 )]
+
+[node name="WristL" type="RigidBody" parent="LeftHandPhysical"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, -0.5, -1 )
+collision_layer = 512
+gravity_scale = 0.0
+continuous_cd = true
+linear_damp = 1.0
+angular_damp = 1.0
+
+[node name="HoldRayCast" type="RayCast" parent="LeftHandPhysical/WristL"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.08 )
+enabled = true
+cast_to = Vector3( 0, -0.05, 0 )
+
+[node name="HoldJoint" type="Generic6DOFJoint" parent="LeftHandPhysical/WristL"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.05, 0 )
+
+[node name="RightHandPhysical" parent="." instance=ExtResource( 8 )]
+script = ExtResource( 3 )
+physical_skeleton = NodePath("")
+controller_skeleton = NodePath("")
+
+[node name="WristR" type="RigidBody" parent="RightHandPhysical"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1, -0.5 )
+collision_layer = 1024
+collision_mask = 513
+gravity_scale = 0.0
+continuous_cd = true
+contacts_reported = 100
+contact_monitor = true
+linear_damp = 1.0
+
+[node name="HoldRayCast" type="RayCast" parent="RightHandPhysical/WristR"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.001, -0.08 )
+enabled = true
+cast_to = Vector3( 0, -0.05, 0 )
+
+[node name="HoldJoint" type="Generic6DOFJoint" parent="RightHandPhysical/WristR"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.05 )
+
+[connection signal="button_pressed" from="Body/ARVROrigin/ARVRController1" to="LeftHandPhysical" method="_on_ARVRController_button_pressed"]
+[connection signal="button_release" from="Body/ARVROrigin/ARVRController1" to="LeftHandPhysical" method="_on_ARVRController_button_release"]
+[connection signal="turn" from="Body/ARVROrigin/ARVRController1" to="Body" method="_on_ARVRController_turn"]
+[connection signal="button_pressed" from="Body/ARVROrigin/ARVRController2" to="RightHandPhysical" method="_on_ARVRController_button_pressed"]
+[connection signal="button_release" from="Body/ARVROrigin/ARVRController2" to="RightHandPhysical" method="_on_ARVRController_button_release"]
+[connection signal="turn" from="Body/ARVROrigin/ARVRController2" to="Body" method="_on_ARVRController_turn"]
+[connection signal="hold" from="LeftHandPhysical" to="Body" method="_on_PhysicalHand_hold"]
+[connection signal="reset_hand" from="LeftHandPhysical" to="Body" method="_on_PhysicalHand_reset_hand"]
+[connection signal="hold" from="RightHandPhysical" to="Body" method="_on_PhysicalHand_hold"]
+[connection signal="reset_hand" from="RightHandPhysical" to="Body" method="_on_PhysicalHand_reset_hand"]
