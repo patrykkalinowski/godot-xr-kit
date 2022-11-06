@@ -67,7 +67,7 @@ func _ready():
 	controller_hand_mesh_material = controller_hand_mesh.get_surface_material(0)
 	
 	# finger collider node and raycasts for collision detection
-	var finger_collider = preload("res://FingerCollider.tscn")
+	var finger_collider = preload("res://addons/godot-xr-physical-movement/scenes/FingerCollider.tscn")
 
 	# Save rest poses and add colliders and collision detection raycasts to every bone in hand
 	for bone_id in controller_skeleton.get_bone_count():
@@ -180,9 +180,9 @@ func process_bones(bone_id, delta):
 		# show controller ghost hand when it's far from physical hand
 		var distance_wrist = (controller_skeleton.global_transform * controller_skeleton.get_bone_global_pose(0)).origin - wrist.global_transform.origin
 		var distance_alpha = clamp((distance_wrist.length() - 0.1), 0, 0.5)
-		var color = controller_hand_mesh_material.get_albedo()
-		color.a = distance_alpha
-		controller_hand_mesh_material.set_albedo(color)
+#		var color = controller_hand_mesh_material.get_albedo()
+#		color.a = distance_alpha
+#		controller_hand_mesh_material.set_albedo(color)
 		
 		# END WRIST PROCESSING
 		

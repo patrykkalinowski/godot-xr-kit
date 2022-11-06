@@ -1,0 +1,31 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=4
+
+[application]
+
+config/name="Xr Movement Kit Testing"
+run/main_scene="res://addons/godot-xr-physical-movement/scenes/Player.tscn"
+config/icon="res://icon.png"
+
+[gdnative]
+
+singletons=[ "res://addons/godot-openxr/config/godot_openxr.gdnlib" ]
+
+[gui]
+
+common/drop_mouse_on_gui_input_disabled=true
+
+[physics]
+
+common/enable_pause_aware_picking=true
+
+[rendering]
+
+environment/default_environment="res://default_env.tres"
