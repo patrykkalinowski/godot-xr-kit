@@ -1,0 +1,68 @@
+[gd_scene load_steps=2 format=3 uid="uid://csmt4dhikwq4i"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_516rb"]
+margin = 0.02
+radius = 0.008
+height = 0.03
+
+[node name="CollisionShape3D" type="CollisionShape3D"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, -0.01)
+shape = SubResource("CapsuleShape3D_516rb")
+
+[node name="RayCasts" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+
+[node name="RayCastDown" type="RayCast3D" parent="RayCasts"]
+transform = Transform3D(1, 0, 0, 0, 1, -2.08616e-07, 0, 2.08616e-07, 1, 0, -6.63102e-06, 0)
+target_position = Vector3(0, -0.01, 0)
+debug_shape_thickness = 1
+
+[node name="RayCastLeftDown" type="RayCast3D" parent="RayCasts"]
+transform = Transform3D(0.707107, 0.707107, -1.47514e-07, -0.707107, 0.707107, -1.47514e-07, 0, 2.08616e-07, 1, 0, -6.63102e-06, 0)
+target_position = Vector3(0, -0.01, 0)
+debug_shape_thickness = 1
+
+[node name="RayCastRightDown" type="RayCast3D" parent="RayCasts"]
+transform = Transform3D(0.707107, -0.707107, 1.47514e-07, 0.707107, 0.707107, -1.47514e-07, 0, 2.08616e-07, 1, 0, -6.63102e-06, 0)
+target_position = Vector3(0, -0.01, 0)
+debug_shape_thickness = 1
+
+[node name="RayCastForward" type="RayCast3D" parent="RayCasts"]
+transform = Transform3D(1, 0, 0, 0, -1.49012e-07, -1, 0, 1, -1.49012e-07, 0, 0, -0.015)
+target_position = Vector3(0, -0.01, 0)
+debug_shape_thickness = 1
+
+[node name="RayCastForwardUp" type="RayCast3D" parent="RayCasts"]
+transform = Transform3D(1, 0, 0, 0, -0.707107, -0.707107, 0, 0.707107, -0.707107, 0, 0, -0.015)
+target_position = Vector3(0, -0.01, 0)
+debug_shape_thickness = 1
+
+[node name="RayCastForwardDown" type="RayCast3D" parent="RayCasts"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, -0.707107, 0, 0.707107, 0.707107, 0, 0, -0.015)
+target_position = Vector3(0, -0.01, 0)
+debug_shape_thickness = 1
+
+[node name="RayCastForwardLeftDown" type="RayCast3D" parent="RayCasts"]
+transform = Transform3D(0.707107, 0.5, 0.5, 0, 0.707107, -0.707107, -0.707107, 0.5, 0.5, 0, 0, -0.015)
+target_position = Vector3(0, -0.01, 0)
+debug_shape_thickness = 1
+
+[node name="RayCastForwardRightDown" type="RayCast3D" parent="RayCasts"]
+transform = Transform3D(0.707107, -0.5, -0.5, 0, 0.707107, -0.707107, 0.707107, 0.5, 0.5, 0, 0, -0.015)
+target_position = Vector3(0, -0.01, 0)
+debug_shape_thickness = 1
+
+[node name="RayCastBackwardDown" type="RayCast3D" parent="RayCasts"]
+transform = Transform3D(-1, 5.96046e-08, 5.96046e-08, 0, 0.707107, -0.707107, -8.9407e-08, -0.707107, -0.707107, 0, 0, 0.015)
+target_position = Vector3(0, -0.01, 0)
+debug_shape_thickness = 1
+
+[node name="RayCastBackwardLeftDown" type="RayCast3D" parent="RayCasts"]
+transform = Transform3D(-0.707107, -0.5, -0.5, 0, 0.707107, -0.707107, 0.707107, -0.5, -0.5, 0, 0, 0.015)
+target_position = Vector3(0, -0.01, 0)
+debug_shape_thickness = 1
+
+[node name="RayCastBackwardRightDown" type="RayCast3D" parent="RayCasts"]
+transform = Transform3D(-0.707107, 0.5, 0.5, 0, 0.707107, -0.707107, -0.707107, -0.5, -0.5, 0, 0, 0.015)
+target_position = Vector3(0, -0.01, 0)
+debug_shape_thickness = 1
