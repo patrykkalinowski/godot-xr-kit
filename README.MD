@@ -31,12 +31,13 @@ Complete XR scene is available in `examples/Playground.tscn`. It should work out
 
 ## Compatibility
 
-Plugin should work with every OpenXR runtime supporting Vulkan.
-I only own HP Reverb G2 and I can confirm it's working.
+Plugin is tested for SteamVR. It should work with every OpenXR runtime supporting Vulkan and using OpenXR hand tracking extension.
 
 | Headset | Runtime | Compatible |
 |---|---|:---:|
 | HP Reverb G2 | SteamVR | Yes |
+| Pico 4 | Standalone | No hand tracking |
+| Meta Quest 2 | Standalone | Hand tracking only (no controllers)
 | Other | ? | ? |
 
 ---
