@@ -1,0 +1,30 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="Godot 4 XR Physical Movement Kit"
+run/main_scene="res://addons/godot-xr-physical-movement-kit/examples/Playground.tscn"
+config/features=PackedStringArray("4.0", "Forward Plus")
+
+[layer_names]
+
+3d_physics/layer_10="Physical Hand Left"
+3d_physics/layer_11="Physical Hand Right"
+3d_physics/layer_12="Head"
+
+[physics]
+
+3d/default_gravity=0.0
+
+[xr]
+
+openxr/enabled=true
+shaders/enabled=true

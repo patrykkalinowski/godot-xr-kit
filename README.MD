@@ -23,9 +23,11 @@ This plugin for Godot 4 provides scripts and scenes for physics-based XR movemen
 
 ## Getting started
 
-Refer to [Godot documentation on XR](https://docs.godotengine.org/en/stable/tutorials/xr/setting_up_xr.html) to setup your Godot project for XR (enable OpenXR and XR shaders).
+Repository contains Godot v4.0.1 project with XR and main scene preconfigured.
 
-Complete XR scene is available in `examples/Playground.tscn`. It should work out of the box after your project is setup for XR.
+1. Download project using [this link](https://github.com/patrykkalinowski/godot-xr-physical-movement-kit/archive/refs/heads/master.zip).
+2. Click `Run Project` or press F5
+3. `Playground` scene from examples folder will be loaded
 
 ---
 
