@@ -176,9 +176,13 @@ func process_bones(bone_id, delta):
 		# potential solution described in this GDC talk at 12:50 mark: https://www.gdcvault.com/play/1024240/It-s-All-in-the
 	physical_bone_collider.transform = physical_bone_collider.transform.interpolate_with(physical_bone_target_transform, 0.4)
 
-	
-	# move physical skeleton bones to physical bones positions, so hand mesh shows physical hand
-	physical_skeleton.set_bone_global_pose_override(bone_id, physical_bone_collider.global_transform.translated(Vector3(0, 0, -0.01)).rotated_local(Vector3.LEFT, deg_to_rad(90)), 1.0, false)
+	# physical skeleton follows Wrist RigidBody and copies controller bones
+	if bone_id == 0:
+		physical_skeleton.set_bone_pose_position(bone_id, wrist.global_transform.origin)
+		physical_skeleton.set_bone_pose_rotation(bone_id, Quaternion(wrist.global_transform.basis))
+	else:
+		physical_skeleton.set_bone_pose_position(bone_id, controller_skeleton.get_bone_pose_position(bone_id))
+		physical_skeleton.set_bone_pose_rotation(bone_id, controller_skeleton.get_bone_pose_rotation(bone_id))
 	
 	# freezing fingers around grabbed objects
 	var bone_raycasts = physical_bone_collider.get_node("RayCasts").get_children()
