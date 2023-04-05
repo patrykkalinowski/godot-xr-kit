@@ -147,7 +147,7 @@ func process_bones(bone_id, delta):
 		var controller_bone_global_transform = controller_skeleton.global_transform * controller_skeleton.get_bone_global_pose(bone_id)
 
 		# calculate acceleration needed to reach controller position in 1 frame
-		wrist_acceleration = 10 * (controller_bone_global_transform.origin - wrist.global_transform.origin) / delta
+		wrist_acceleration = 30 * (controller_bone_global_transform.origin - wrist.global_transform.origin) / delta
 		# multiplier on angular acceleration must be reduced to 5, higher values glitch the hand
 		wrist_angular_acceleration = 5 * (controller_bone_global_transform.basis * wrist.global_transform.basis.inverse()).get_euler()
 		
