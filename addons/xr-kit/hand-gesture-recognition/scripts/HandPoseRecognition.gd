@@ -10,12 +10,6 @@ signal new_pose(pose: String, previouse_pose: String)
 
 func _ready():
 	templates = load_templates()
-
-func _physics_process(delta):
-	var recognized_pose: String = recognize_pose()
-	if recognized_pose != pose:
-		new_pose.emit(recognized_pose, pose)
-		pose = recognized_pose
 	
 func recognize_pose():
 	var best_match_key: String
@@ -44,3 +38,10 @@ func load_templates():
 			return JSON.parse_string(file.get_as_text())
 		else:
 			return {}
+
+
+func _on_timer_timeout():
+	var recognized_pose: String = recognize_pose()
+	if recognized_pose != pose:
+		new_pose.emit(recognized_pose, pose)
+		pose = recognized_pose
