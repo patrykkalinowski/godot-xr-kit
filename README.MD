@@ -43,7 +43,7 @@ Real-time recognition of hand poses based on predefined templates.
 
 Repository contains Godot v4.0.1 project with XR and main scene preconfigured.
 
-1. Download project using [this link](https://github.com/patrykkalinowski/godot-xr-physical-movement-kit/archive/refs/heads/master.zip).
+1. Download project using [this link](https://github.com/patrykkalinowski/godot-xr-kit/archive/refs/heads/master.zip).
 2. Click `Run Project` or press F5
 3. `Playground` scene from examples folder will be loaded
 
@@ -72,7 +72,7 @@ I don't have access to other headset than mine (HP Reverb G2). Compatibility che
 
 ### Code improvements
 
-Source code contains multiple `TODO` comments with known issues and missing features. You can also take a look at existing [Issues](/issues).
+Source code contains multiple `TODO` comments with known issues and missing features. You can also take a look at existing [Issues](https://github.com/patrykkalinowski/godot-xr-kit/issues).
 
 ### Showcase
 
@@ -80,4 +80,4 @@ Build something with the plugin and share an example scene or recorded video
 
 ### Ideas
 
-If you have some ideas how to improve the plugin, don't hesitate to [create an issue](/issues) or message me directly at [patryk@patrykkalinowski.com](mailto:patryk@patrykkalinowski.com).
+If you have some ideas how to improve the plugin, don't hesitate to [create an issue](https://github.com/patrykkalinowski/godot-xr-kit/issues/new) or message me directly at [patryk@patrykkalinowski.com](mailto:patryk@patrykkalinowski.com).
