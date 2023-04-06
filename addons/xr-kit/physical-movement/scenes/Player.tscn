@@ -1,16 +1,17 @@
-[gd_scene load_steps=19 format=3 uid="uid://yx7vpc2bjnlm"]
+[gd_scene load_steps=20 format=3 uid="uid://c7kr1w0unt2ro"]
 
-[ext_resource type="Script" path="res://addons/godot-xr-physical-movement-kit/scripts/Player.gd" id="1_gu00n"]
-[ext_resource type="PackedScene" uid="uid://coeajtcoshcr0" path="res://addons/godot-xr-physical-movement-kit/assets/valve_hand_models/left_hand.glb" id="2_1bl04"]
-[ext_resource type="Script" path="res://addons/godot-xr-physical-movement-kit/scripts/Body.gd" id="2_2fc6a"]
-[ext_resource type="PackedScene" uid="uid://itlaml13o65c" path="res://addons/godot-xr-physical-movement-kit/assets/valve_hand_models/right_hand.glb" id="3_5f03o"]
-[ext_resource type="Script" path="res://addons/godot-xr-physical-movement-kit/scripts/Controller.gd" id="3_45o6y"]
-[ext_resource type="Texture2D" uid="uid://bvrl08m0kcqto" path="res://addons/godot-xr-physical-movement-kit/assets/valve_hand_models/left_hand_file2.png" id="3_f56bg"]
-[ext_resource type="Texture2D" uid="uid://cq8rcglva3oy" path="res://addons/godot-xr-physical-movement-kit/assets/valve_hand_models/right_hand_file2.png" id="4_0c1sf"]
-[ext_resource type="Script" path="res://addons/godot-xr-physical-movement-kit/scripts/Head.gd" id="4_6t6cs"]
-[ext_resource type="Script" path="res://addons/godot-xr-physical-movement-kit/scripts/Chest.gd" id="4_mopvl"]
-[ext_resource type="PackedScene" uid="uid://csmt4dhikwq4i" path="res://addons/godot-xr-physical-movement-kit/scenes/FingerCollider.tscn" id="6_1uvj8"]
-[ext_resource type="Script" path="res://addons/godot-xr-physical-movement-kit/scripts/Hand.gd" id="8_ggkta"]
+[ext_resource type="Script" path="res://addons/xr-kit/physical-movement/scripts/Player.gd" id="1_i7ssh"]
+[ext_resource type="Script" path="res://addons/xr-kit/physical-movement/scripts/Body.gd" id="2_du0ta"]
+[ext_resource type="Script" path="res://addons/xr-kit/physical-movement/scripts/Head.gd" id="3_ecrt7"]
+[ext_resource type="Script" path="res://addons/xr-kit/physical-movement/scripts/Chest.gd" id="4_he44h"]
+[ext_resource type="Script" path="res://addons/xr-kit/physical-movement/scripts/Controller.gd" id="5_1paut"]
+[ext_resource type="Texture2D" uid="uid://bvrl08m0kcqto" path="res://addons/xr-kit/physical-movement/assets/valve_hand_models/left_hand_file2.png" id="6_xvpy5"]
+[ext_resource type="Texture2D" uid="uid://cq8rcglva3oy" path="res://addons/xr-kit/physical-movement/assets/valve_hand_models/right_hand_file2.png" id="7_bve0s"]
+[ext_resource type="Script" path="res://addons/xr-kit/physical-movement/scripts/Hand.gd" id="8_wf6ub"]
+[ext_resource type="PackedScene" uid="uid://csmt4dhikwq4i" path="res://addons/xr-kit/physical-movement/scenes/FingerCollider.tscn" id="9_skcr2"]
+[ext_resource type="PackedScene" uid="uid://dehbw425mmajg" path="res://addons/xr-kit/hand-gesture-recognition/scenes/HandPoseRecognition.tscn" id="11_hqvgg"]
+[ext_resource type="PackedScene" uid="uid://coeajtcoshcr0" path="res://addons/xr-kit/physical-movement/assets/valve_hand_models/left_hand.glb" id="12_v55rm"]
+[ext_resource type="PackedScene" uid="uid://itlaml13o65c" path="res://addons/xr-kit/physical-movement/assets/valve_hand_models/right_hand.glb" id="13_4l8jf"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_ga5er"]
 radius = 0.11
@@ -24,7 +25,7 @@ vertex_color_use_as_albedo = true
 metallic = 0.5
 roughness = 0.748767
 normal_enabled = true
-normal_texture = ExtResource("3_f56bg")
+normal_texture = ExtResource("6_xvpy5")
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_hmifn"]
 resource_name = "left_hand_Mesh001"
@@ -136,7 +137,7 @@ vertex_color_use_as_albedo = true
 metallic = 0.5
 roughness = 0.748767
 normal_enabled = true
-normal_texture = ExtResource("4_0c1sf")
+normal_texture = ExtResource("7_bve0s")
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_yho1f"]
 resource_name = "right_hand_Mesh"
@@ -240,14 +241,14 @@ bind/25/bone = -1
 bind/25/pose = Transform3D(0.083606, -0.0165156, 0.996362, 0.97618, 0.20224, -0.0785601, -0.200207, 0.979197, 0.0330306, 0.00660726, 0.000335467, 0.0515114)
 
 [node name="Player" type="Node3D" node_paths=PackedStringArray("origin", "camera")]
-script = ExtResource("1_gu00n")
+script = ExtResource("1_i7ssh")
 origin = NodePath("Body/XROrigin3D")
 camera = NodePath("Body/XROrigin3D/XRCamera3D")
 
 [node name="Body" type="CharacterBody3D" parent="." node_paths=PackedStringArray("origin", "camera", "physical_hand_left", "physical_hand_right")]
 motion_mode = 1
 platform_on_leave = 2
-script = ExtResource("2_2fc6a")
+script = ExtResource("2_du0ta")
 origin = NodePath("XROrigin3D")
 camera = NodePath("XROrigin3D/XRCamera3D")
 physical_hand_left = NodePath("../PhysicalHand Left")
@@ -260,7 +261,6 @@ current = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7, 0)
 
 [node name="Head" type="RigidBody3D" parent="Body/XROrigin3D/XRCamera3D" node_paths=PackedStringArray("body", "camera")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7, 0)
 collision_layer = 2048
 collision_mask = 3585
 mass = 10.0
@@ -272,7 +272,7 @@ contact_monitor = true
 can_sleep = false
 freeze = true
 freeze_mode = 1
-script = ExtResource("4_6t6cs")
+script = ExtResource("3_ecrt7")
 body = NodePath("../../..")
 camera = NodePath("..")
 
@@ -280,22 +280,26 @@ camera = NodePath("..")
 shape = SubResource("SphereShape3D_ga5er")
 
 [node name="Chest" type="Node3D" parent="Body/XROrigin3D/XRCamera3D" node_paths=PackedStringArray("camera", "left_wrist", "right_wrist")]
-transform = Transform3D(0.997714, 0, 0, 0, 0.997714, 0, 0, 0, 0.997714, 0, -0.3, 0)
-script = ExtResource("4_mopvl")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3, 0)
+script = ExtResource("4_he44h")
 camera = NodePath("..")
 left_wrist = NodePath("../../../../PhysicalHand Left/Wrist Left")
 right_wrist = NodePath("../../../../PhysicalHand Right/Wrist Right")
 
 [node name="XRController3D Left" type="XRController3D" parent="Body/XROrigin3D"]
 tracker = &"left_hand"
-script = ExtResource("3_45o6y")
+script = ExtResource("5_1paut")
 
 [node name="XRController3D Right" type="XRController3D" parent="Body/XROrigin3D"]
 tracker = &"right_hand"
-script = ExtResource("3_45o6y")
+script = ExtResource("5_1paut")
 
 [node name="OpenXRHand Left" type="OpenXRHand" parent="Body/XROrigin3D"]
 hand_skeleton = NodePath("HandModel/Armature001/Skeleton3D")
+
+[node name="HandPoseRecognition" parent="Body/XROrigin3D/OpenXRHand Left" node_paths=PackedStringArray("skeleton", "debug_label") instance=ExtResource("11_hqvgg")]
+skeleton = NodePath("../HandModel/Armature001/Skeleton3D")
+debug_label = NodePath("../../../../PhysicalHand Left/Wrist Left/DebugLabel")
 
 [node name="HandModel" type="Node3D" parent="Body/XROrigin3D/OpenXRHand Left"]
 
@@ -496,6 +500,10 @@ skin = SubResource("Skin_lvfor")
 hand = 1
 hand_skeleton = NodePath("HandModel/Armature/Skeleton3D")
 
+[node name="HandPoseRecognition" parent="Body/XROrigin3D/OpenXRHand Right" node_paths=PackedStringArray("skeleton", "debug_label") instance=ExtResource("11_hqvgg")]
+skeleton = NodePath("../HandModel/Armature/Skeleton3D")
+debug_label = NodePath("../../../../PhysicalHand Right/Wrist Right/DebugLabel")
+
 [node name="HandModel" type="Node3D" parent="Body/XROrigin3D/OpenXRHand Right"]
 
 [node name="Armature" type="Node3D" parent="Body/XROrigin3D/OpenXRHand Right/HandModel"]
@@ -690,7 +698,7 @@ mesh = SubResource("ArrayMesh_yho1f")
 skin = SubResource("Skin_c5byb")
 
 [node name="PhysicalHand Left" type="Node3D" parent="." node_paths=PackedStringArray("origin", "camera", "controller", "physical_skeleton", "controller_skeleton", "wrist", "body", "controller_hand_mesh", "wrist_raycast", "wrist_joint")]
-script = ExtResource("8_ggkta")
+script = ExtResource("8_wf6ub")
 origin = NodePath("../Body/XROrigin3D")
 camera = NodePath("../Body/XROrigin3D/XRCamera3D")
 controller = NodePath("../Body/XROrigin3D/XRController3D Left")
@@ -699,11 +707,11 @@ controller_skeleton = NodePath("../Body/XROrigin3D/OpenXRHand Left/HandModel/Arm
 wrist = NodePath("Wrist Left")
 body = NodePath("../Body")
 controller_hand_mesh = NodePath("../Body/XROrigin3D/OpenXRHand Left/HandModel/Armature001/Skeleton3D/vr_glove_left_slim")
-finger_collider = ExtResource("6_1uvj8")
+finger_collider = ExtResource("9_skcr2")
 wrist_raycast = NodePath("Wrist Left/WristRaycast")
 wrist_joint = NodePath("Wrist Left/Wrist Joint")
 
-[node name="HandModel" parent="PhysicalHand Left" instance=ExtResource("2_1bl04")]
+[node name="HandModel" parent="PhysicalHand Left" instance=ExtResource("12_v55rm")]
 
 [node name="Wrist Left" type="RigidBody3D" parent="PhysicalHand Left"]
 collision_layer = 512
@@ -717,8 +725,15 @@ target_position = Vector3(-0.05, 0, 0)
 
 [node name="Wrist Joint" type="Generic6DOFJoint3D" parent="PhysicalHand Left/Wrist Left"]
 
+[node name="DebugLabel" type="Label3D" parent="PhysicalHand Left/Wrist Left"]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0.1, -0.05, -0.125)
+pixel_size = 0.0001
+text = "rest"
+font_size = 200
+outline_size = 50
+
 [node name="PhysicalHand Right" type="Node3D" parent="." node_paths=PackedStringArray("origin", "camera", "controller", "physical_skeleton", "controller_skeleton", "wrist", "body", "controller_hand_mesh", "wrist_raycast", "wrist_joint")]
-script = ExtResource("8_ggkta")
+script = ExtResource("8_wf6ub")
 origin = NodePath("../Body/XROrigin3D")
 camera = NodePath("../Body/XROrigin3D/XRCamera3D")
 controller = NodePath("../Body/XROrigin3D/XRController3D Right")
@@ -727,11 +742,11 @@ controller_skeleton = NodePath("../Body/XROrigin3D/OpenXRHand Right/HandModel/Ar
 wrist = NodePath("Wrist Right")
 body = NodePath("../Body")
 controller_hand_mesh = NodePath("../Body/XROrigin3D/OpenXRHand Right/HandModel/Armature/Skeleton3D/vr_glove_right_slim")
-finger_collider = ExtResource("6_1uvj8")
+finger_collider = ExtResource("9_skcr2")
 wrist_raycast = NodePath("Wrist Right/WristRaycast")
 wrist_joint = NodePath("Wrist Right/Wrist Joint")
 
-[node name="HandModel" parent="PhysicalHand Right" instance=ExtResource("3_5f03o")]
+[node name="HandModel" parent="PhysicalHand Right" instance=ExtResource("13_4l8jf")]
 
 [node name="Wrist Right" type="RigidBody3D" parent="PhysicalHand Right"]
 collision_layer = 1024
@@ -739,6 +754,13 @@ collision_mask = 513
 gravity_scale = 0.0
 continuous_cd = true
 can_sleep = false
+
+[node name="DebugLabel" type="Label3D" parent="PhysicalHand Right/Wrist Right"]
+transform = Transform3D(1.19249e-08, -1, 0, 1, 1.19249e-08, 0, 0, 0, 1, -0.1, -0.05, -0.125)
+pixel_size = 0.0001
+text = "rest"
+font_size = 200
+outline_size = 50
 
 [node name="WristRaycast" type="RayCast3D" parent="PhysicalHand Right/Wrist Right"]
 transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, -0.08)

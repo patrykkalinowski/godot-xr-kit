@@ -1,10 +1,12 @@
-# Godot XR Physical Movement Kit
+# Godot XR Kit
 
-This plugin for Godot 4 provides scripts and scenes for physics-based XR movement. Player hands collide with environment and can grab or push physics object in realistic manner. Player body can collide with physics objects and be moved around in space.
+Godot XR Kit as a set of modules providing various features for XR development in Godot 4.
 
-*It is still a work in progress, not ready to be dropped in as-is to your game.*
+## Physical Movement
 
-## Features
+Physics-based XR movement. Player hands collide with environment and can grab or push physics object in realistic manner. Player body can collide with physics objects and be moved around in space.
+
+### Features
 
 - Physical hand follows controller and can be blocked by world objects
 - Players can grab and move objects
@@ -19,7 +21,23 @@ This plugin for Godot 4 provides scripts and scenes for physics-based XR movemen
 - Body snap rotation
 - Body rotation around static object using hands (around Y axis)
 
----
+[Read more](/addons/xr-kit/physical-movement/)
+
+
+## Hand Gesture Recognition
+
+Real-time recognition of hand poses based on predefined templates.
+
+### Currently tracked hand poses:
+
+- open
+- rest
+- half_grip
+- full_grip
+- point
+- thumb_up
+
+[Read more](/addons/xr-kit/hand-gesture-recognition/)
 
 ## Getting started
 
@@ -29,11 +47,13 @@ Repository contains Godot v4.0.1 project with XR and main scene preconfigured.
 2. Click `Run Project` or press F5
 3. `Playground` scene from examples folder will be loaded
 
----
+`Playground` scene implements every module in XR Kit.
 
 ## Compatibility
 
-Plugin is tested for SteamVR. It should work with every OpenXR runtime supporting Vulkan and using OpenXR hand tracking extension.
+Plugin should work with every OpenXR runtime supporting Vulkan and using OpenXR hand tracking extension. It works best with SteamVR, as it simulates hand skeleton even when using controllers. In other runtimes, when using controllers hands will not receive skeleton data and they will not work.
+
+For plugin to be fully compatible with all OpenXR runtimes, it needs hand models with animations - which is planned, but not yet implemented.
 
 | Headset | Runtime | Compatible |
 |---|---|:---:|
@@ -42,34 +62,17 @@ Plugin is tested for SteamVR. It should work with every OpenXR runtime supportin
 | Meta Quest 2 | Standalone | Hand tracking only (no controllers)
 | Other | ? | ? |
 
----
-
-## How does it work
-
-OpenXR runtime provides positions of every bone in player's hand, which are then used to position hand mesh. This controller hand mesh is just a visual object which clips through walls and doesn't react to physics in general.
-
-Godot XR Physical Movement Kit introduces a copy of controller hand mesh which is driven by physics-based RigidBody. Physical hand tries to follow controller, but as physics object it reacts to environment and can be stopped by a wall or push other RigidBodies.
-
-To make sure physical hand works in predictable ways, only wrist bone is responsible for physical movement and acts as driving force for the whole hand. Physical fingers are simply colliders for wrist RigidBody and are always following controller fingers. Additionally, finger colliders utilise raycasts to freeze fingers when they touch object surface during grab.
-
-This plugin uses OpenXR convention of 26 joints for hand tracking: 4 joints for the thumb finger, 5 joints for the other four fingers, and the wrist and palm of the hands.
-
-![OpenXR Hands](openxr_hands.png)
-*Source: https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#_conventions_of_hand_joints*
-
----
-
 ## Contributing
 
 If you'd like to improve the plugin, there are few options:
 
 ### Test compatibility with other headsets and runtimes
 
-I am unable to test this plugin on different headset because I don't own them.
+I don't have access to other headset than mine (HP Reverb G2). Compatibility checks with other headsets are more than welcome.
 
 ### Code improvements
 
-Source code contains multiple `TODO` comments with known issues and missing features.
+Source code contains multiple `TODO` comments with known issues and missing features. You can also take a look at existing [Issues](/issues).
 
 ### Showcase
 
@@ -77,10 +80,4 @@ Build something with the plugin and share an example scene or recorded video
 
 ### Ideas
 
-If you have some ideas how to improve the plugin, don't hesitate to [create an issue](https://github.com/patrykkalinowski/godot-xr-physical-movement/issues/new)
-
----
-
-## Godot 3.5
-
-Early version of this plugin developed for Godot 3.5 is available on branch `godot-3.5`
+If you have some ideas how to improve the plugin, don't hesitate to [create an issue](/issues) or message me directly at [patryk@patrykkalinowski.com](mailto:patryk@patrykkalinowski.com).
