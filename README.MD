@@ -23,7 +23,6 @@ Physics-based XR movement. Player hands collide with environment and can grab or
 
 [Read more](/addons/xr-kit/physical-movement/)
 
-
 ## Hand Gesture Recognition
 
 Real-time recognition of hand poses based on predefined templates.
@@ -47,11 +46,11 @@ Repository contains Godot v4.0.1 project with XR and main scene preconfigured.
 2. Click `Run Project` or press F5
 3. `Playground` scene from examples folder will be loaded
 
-`Playground` scene implements every module in XR Kit.
+`Playground` scene implements every module from XR Kit.
 
 ## Compatibility
 
-Plugin should work with every OpenXR runtime supporting Vulkan and using OpenXR hand tracking extension. It works best with SteamVR, as it simulates hand skeleton even when using controllers. In other runtimes, when using controllers hands will not receive skeleton data and they will not work.
+Plugin should work with every OpenXR runtime supporting Vulkan and using OpenXR hand tracking extension. It works best with SteamVR, as it simulates hand skeleton even when using controllers. In other runtimes, when using controllers, hands will not receive skeleton data and they will not work.
 
 For plugin to be fully compatible with all OpenXR runtimes, it needs hand models with animations - which is planned, but not yet implemented.
 
