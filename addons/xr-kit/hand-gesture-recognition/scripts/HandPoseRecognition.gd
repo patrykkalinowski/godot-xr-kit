@@ -22,7 +22,11 @@ func recognize_pose():
 			var distance: float = skeleton.get_bone_global_pose(bone_id).origin.distance_to(skeleton.get_bone_global_pose(0).origin)
 			var template_distance: float = templates[key][String.num_int64(bone_id)]			
 			total_distance += abs(distance - template_distance)
-		
+			
+			# if current template is already worse than best match, we can move to the next one right away
+			if total_distance > best_match_distance:
+				break
+				
 		if total_distance < best_match_distance:
 			best_match_key = key
 			best_match_distance = total_distance
