@@ -267,3 +267,11 @@ func _on_xr_controller_3d_button_released(name):
 		
 	if name == "trigger_click":
 		trigger = false
+
+
+func _on_hand_pose_recognition_new_pose(pose, previouse_pose):
+	if pose in ["half_grip", "full_grip", "thumb_up", "point"]:
+		state.grabbing = true
+	
+	if pose in ["open", "rest"]:
+		state.grabbing = false

@@ -774,6 +774,8 @@ target_position = Vector3(-0.05, 0, 0)
 [connection signal="button_pressed" from="Body/XROrigin3D/XRController3D Right" to="PhysicalHand Right" method="_on_xr_controller_3d_button_pressed"]
 [connection signal="button_released" from="Body/XROrigin3D/XRController3D Right" to="PhysicalHand Right" method="_on_xr_controller_3d_button_released"]
 [connection signal="turned" from="Body/XROrigin3D/XRController3D Right" to="Body" method="_on_turn"]
+[connection signal="new_pose" from="Body/XROrigin3D/OpenXRHand Left/HandPoseRecognition" to="PhysicalHand Left" method="_on_hand_pose_recognition_new_pose"]
+[connection signal="new_pose" from="Body/XROrigin3D/OpenXRHand Right/HandPoseRecognition" to="PhysicalHand Right" method="_on_hand_pose_recognition_new_pose"]
 
 [editable path="PhysicalHand Left/HandModel"]
 [editable path="PhysicalHand Right/HandModel"]
