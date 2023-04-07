@@ -19,7 +19,8 @@ Module checks distance of every bone in skeleton to bone 0 (wrist) and compares 
 
 1. Add `HandPoseRecognition` scene anywhere to your scene where hand skeleton is available. 
 2. Attach your `Skeleton3D` node to `HandPoseRecognition` node. 
-3. When new pose is recognized, `HandPoseRecognition` node will fire `new_pose` signal. 
+3. When new pose is recognized, `HandPoseRecognition` node will fire `new_pose` signal.
+4. Current pose can also be queried from `HandPoseRecognition.pose` variable.
 
 Predefined poses in template file (`hand_pose_templates.json`) were created with skeleton conforming to [OpenXR convention of hand joints](https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#_conventions_of_hand_joints)
 
