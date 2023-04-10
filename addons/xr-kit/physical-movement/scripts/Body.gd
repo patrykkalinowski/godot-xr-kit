@@ -130,10 +130,9 @@ func _on_turn(direction, controller):
 	var t2 = Transform3D()
 	var rot = Transform3D()
 	
-	# if both hands are holding static object, rotate around pivot point
+	# if both hands are holding static object, disable snap turn
 	if physical_hand_left.state.holding && acts_as_static(physical_hand_left.held_object) && physical_hand_right.state.holding && acts_as_static(physical_hand_right.held_object):
-		t1.origin = controller_pivot_point.origin
-		t2.origin = -controller_pivot_point.origin
+		return
 	else:
 		# if only one hand is holding
 		for hand in [physical_hand_left, physical_hand_right]:
