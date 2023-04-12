@@ -4,6 +4,8 @@ Scripts and scenes for physics-based XR movement. Player hands collide with envi
 
 *It is still a work in progress, not ready to be dropped in your game as-is.*
 
+![Godot XR Kit - Physical Movement](showcase.gif)
+
 ## Features
 
 - Physical hand follows controller and can be blocked by world objects

@@ -6,6 +6,8 @@ Godot XR Kit is a set of addons providing various features for XR development in
 
 Physics-based XR movement. Player hands collide with environment and can grab or push physics object in realistic manner. Player body can collide with physics objects and be moved around in space.
 
+![Godot XR Kit - Physical Movement](/addons/xr-kit/physical-movement/showcase.gif)
+
 ### Features
 
 - Physical hand follows controller and can be blocked by world objects
