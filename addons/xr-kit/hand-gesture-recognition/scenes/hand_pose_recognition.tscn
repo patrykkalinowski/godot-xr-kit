@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://dehbw425mmajg"]
+[gd_scene load_steps=2 format=3]
 
-[ext_resource type="Script" path="res://addons/xr-kit/hand-gesture-recognition/scripts/HandPoseRecognition.gd" id="1_qqe5l"]
+[ext_resource type="Script" path="res://addons/xr-kit/hand-gesture-recognition/scripts/hand_pose_recognition.gd" id="1_qqe5l"]
 
 [node name="HandPoseRecognition" type="Node"]
 script = ExtResource("1_qqe5l")

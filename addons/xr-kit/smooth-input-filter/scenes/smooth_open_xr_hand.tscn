@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dqnmcsaa6hvy3"]
+
+[ext_resource type="Script" path="res://addons/xr-kit/smooth-input-filter/scripts/smooth_open_xr_hand.gd" id="1_ql3g2"]
+
+[node name="SmoothOpenXRHand" type="Node"]
+script = ExtResource("1_ql3g2")

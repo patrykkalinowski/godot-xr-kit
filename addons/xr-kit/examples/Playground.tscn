@@ -1,6 +1,6 @@
-[gd_scene load_steps=12 format=3 uid="uid://b67aobjjjdqhh"]
+[gd_scene load_steps=12 format=3]
 
-[ext_resource type="PackedScene" uid="uid://c7kr1w0unt2ro" path="res://addons/xr-kit/physical-movement/scenes/Player.tscn" id="1_4muep"]
+[ext_resource type="PackedScene" path="res://addons/xr-kit/physical-movement/scenes/player.tscn" id="1_4muep"]
 
 [sub_resource type="Environment" id="Environment_64oha"]
 ambient_light_source = 2

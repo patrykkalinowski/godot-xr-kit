@@ -1,7 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://ksnrbnberw48"]
-
-[ext_resource type="Script" path="res://addons/xr-kit/hand-gesture-recognition/scripts/HandPoseSave.gd" id="1_n87gt"]
-
-[node name="HandPoseSave" type="Node"]
-script = ExtResource("1_n87gt")
-pose_name = "custom_pose"

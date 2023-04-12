@@ -1,8 +1,8 @@
 # Godot XR Kit - Physical Movement
 
-This module for Godot XR Kit provides scripts and scenes for physics-based XR movement. Player hands collide with environment and can grab or push physics object in realistic manner. Player body can collide with physics objects and be moved around in space.
+Scripts and scenes for physics-based XR movement. Player hands collide with environment and can grab or push physics object in realistic manner. Player body can collide with physics objects and be moved around in space.
 
-*It is still a work in progress, not ready to be dropped in as-is to your game.*
+*It is still a work in progress, not ready to be dropped in your game as-is.*
 
 ## Features
 
@@ -23,9 +23,9 @@ This module for Godot XR Kit provides scripts and scenes for physics-based XR mo
 
 OpenXR runtime provides positions of every bone in player's hand, which are then used to position hand mesh. This controller hand mesh is just a visual object which clips through walls and doesn't react to physics in general.
 
-This module introduces a copy of controller hand mesh which is driven by physics-based RigidBody. Physical hand tries to follow controller, but as physics object it reacts to environment and can be stopped by a wall or push other RigidBodies.
+This addon introduces a copy of controller hand mesh which is driven by physics-based RigidBody. Physical hand tries to follow controller, but as physics object it reacts to environment and can be stopped by a wall or push other RigidBodies.
 
-To make sure physical hand works in predictable ways, only wrist bone is responsible for physical movement and acts as driving force for the whole hand. Physical fingers are simply colliders for wrist RigidBody and are always following controller fingers. Additionally, finger colliders utilise raycasts to freeze fingers when they touch object surface during grab.
+To make sure physical hand works in predictable ways, only wrist bone is responsible for physical movement and acts as driving force for the whole hand. Physical fingers are simply colliders for wrist RigidBody and are always following controller fingers poses. Additionally, finger colliders utilise raycasts to freeze fingers when they touch object surface during grab.
 
 Provided hand models use OpenXR convention of 26 joints for hand tracking: 4 joints for the thumb finger, 5 joints for the other four fingers, and the wrist and palm of the hands.
 
@@ -38,4 +38,4 @@ Provided hand models use OpenXR convention of 26 joints for hand tracking: 4 joi
 
 ## Godot 3.5
 
-Early version of this module developed for Godot 3.5 is available on branch `godot-3.5`
+Early version of this addon developed for Godot 3.5 is available on branch `godot-3.5`

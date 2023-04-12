@@ -1,6 +1,6 @@
 # Godot XR Kit
 
-Godot XR Kit as a set of modules providing various features for XR development in Godot 4.
+Godot XR Kit is a set of addons providing various features for XR development in Godot 4.
 
 ## Physical Movement
 
@@ -27,6 +27,8 @@ Physics-based XR movement. Player hands collide with environment and can grab or
 
 Real-time recognition of hand poses based on predefined templates.
 
+![Godot XR Kit - Hand Gesture Recognition](/addons/xr-kit/hand-gesture-recognition/showcase.gif)
+
 ### Currently tracked hand poses:
 
 - open
@@ -38,6 +40,19 @@ Real-time recognition of hand poses based on predefined templates.
 
 [Read more](/addons/xr-kit/hand-gesture-recognition/)
 
+## Smooth Input Filter
+
+Applies smoothing to XR hand movement using [1€ filter](https://gery.casiez.net/1euro/). Supports hand and controller tracking. See [1€ filter demo](https://gery.casiez.net/1euro/InteractiveDemo/). Can be used to reduce microstutter or simulate fake weight by increasing hand movement lag.
+
+![Godot XR Kit - Smooth Input Filter](/addons/xr-kit/smooth-input-filter/showcase.gif)
+
+### Features:
+
+- Supports smoothing movement for hand tracking Skeleton3D and Node3D (ex. XRController3D)
+- Reduces jitter while keeping lag to minimum
+
+[Read more](/addons/xr-kit/smooth-input-filter/)
+
 ## Getting started
 
 Repository contains Godot v4.0.1 project with XR and main scene preconfigured.
@@ -46,7 +61,8 @@ Repository contains Godot v4.0.1 project with XR and main scene preconfigured.
 2. Click `Run Project` or press F5
 3. `Playground` scene from examples folder will be loaded
 
-`Playground` scene implements every module from XR Kit.
+`xr-kit/examples/playground.tscn` implements Physical Movement and Hand Gesture Recognition.
+`xr-kit/examples/smooth_input_filter.tscn` implements Smooth Input Filter.
 
 ## Compatibility
 
