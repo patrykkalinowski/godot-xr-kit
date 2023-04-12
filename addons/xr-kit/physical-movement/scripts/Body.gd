@@ -19,7 +19,7 @@ var blended_mass_modifier: float = 1
 func _ready():
 	pass
 
-func _physics_process(delta):
+func _process(delta):
 	physical_pivot_point = Transform3D.IDENTITY
 	controller_pivot_point = Transform3D.IDENTITY
 	physical_transforms = []
@@ -89,23 +89,26 @@ func _physics_process(delta):
 		if controller_transforms.size() == 2 && acts_as_static(physical_hand_left.held_object) && acts_as_static(physical_hand_right.held_object):
 			var t1 = Transform3D()
 			var t2 = Transform3D()
+			var rot = Transform3D()
 			var pivot_angle_x: float
 			var pivot_angle_y: float
 			var pivot_angle_z: float
 			
 			pivot_angle_x = physical_pivot_point.basis.z.signed_angle_to(controller_pivot_point.basis.z, origin.global_transform.basis.x)
 			pivot_angle_y = physical_pivot_point.basis.z.signed_angle_to(controller_pivot_point.basis.z, origin.global_transform.basis.y)
+			
+			# prevent glitching on direction (+-) changes
+			if abs(pivot_angle_y) < 0.01:
+				pivot_angle_y = 0
+			pivot_angle_y /= 10
+			
 			pivot_angle_z = physical_pivot_point.basis.z.signed_angle_to(controller_pivot_point.basis.z, origin.global_transform.basis.z)
+			
 			t1.origin = controller_pivot_point.origin
 			t2.origin = -controller_pivot_point.origin
+			rot = rot.rotated(origin.global_transform.basis.y, -pivot_angle_y) # TODO: Make X and Z rotation work properly
 			
-			origin.global_transform *= t1
-			
-			# TODO: Make X and Z rotation work properly
-#			origin.global_transform = origin.global_transform.rotated(origin.global_transform.basis.x, -pivot_angle_x * delta * 10)
-			origin.global_transform = origin.global_transform.rotated(origin.global_transform.basis.y, -pivot_angle_y * delta * 10)
-#			origin.global_transform = origin.global_transform.rotated(origin.global_transform.basis.z, -pivot_angle_z * delta * 10)
-			origin.global_transform *= t2
+			origin.global_transform *= t1 * rot * t2
 			
 			# TODO: after rotation, controller_pivot_point and physical_pivot_point locations are different, which results in additional lateral movement during fast rotations - figure out how to eliminate this location drift
 
@@ -119,10 +122,11 @@ func _physics_process(delta):
 		velocity += move_vector * blended_mass_modifier
 
 	if physical_transforms.size() == 0:
-		# if player is floating in space, limit maximum velocity to 1
-		velocity = velocity.limit_length(1) 
+		# if player is floating in space, limit maximum velocity to 1 and reduce it by 5% every second
+		velocity = velocity.limit_length(1)
+		velocity *= 1 - (0.05 * delta)
+		
 	move_and_slide() # move body by calculated velocity
-	velocity *= 1 - (0.05 * delta) # reduce velocity by 5% every second
 
 func _on_turn(direction, controller):
 	# turn signal received from controller
