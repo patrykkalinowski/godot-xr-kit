@@ -19,7 +19,7 @@ Scripts and scenes for physics-based XR movement. Player hands collide with envi
 - Players can hit objects with their head and push themselves away
 - Ghost hand appears when controller hand gets far from physical one
 - Body snap rotation
-- Body rotation around static object using hands (around Y axis)
+- Body XYZ rotation around static object using hands
 
 ## How does it work
 

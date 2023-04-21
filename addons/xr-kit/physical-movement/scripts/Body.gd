@@ -67,9 +67,7 @@ func _process(delta):
 		physical_pivot_point.origin /= physical_transforms.size()
 		
 		if physical_transforms.size() == 2:
-			# pivot point faces forward between physical hands (look at right hand and rotate 90 degrees left)
 			physical_pivot_point = physical_pivot_point.looking_at(physical_transforms[1].origin, Vector3.UP)
-			physical_pivot_point = physical_pivot_point.rotated_local(Vector3.UP, deg_to_rad(90))
 		else:
 			physical_pivot_point.basis = physical_transforms[0].basis
 		
@@ -78,39 +76,18 @@ func _process(delta):
 		controller_pivot_point.origin /= controller_transforms.size()
 		
 		if controller_transforms.size() == 2:
-			# pivot point faces forward between controllers (look at right hand and rotate 90 degrees left)
 			controller_pivot_point = controller_pivot_point.looking_at(controller_transforms[1].origin, Vector3.UP)
-			controller_pivot_point = controller_pivot_point.rotated_local(Vector3.UP, deg_to_rad(90))
 		else:
 			controller_pivot_point.basis = controller_transforms[0].basis
 		
 		# rotate body when holding static body with 2 hands
 		# TODO: rotating when holding rigidbody is incorrect and nauseating, how to do it nicely?
 		if controller_transforms.size() == 2 && acts_as_static(physical_hand_left.held_object) && acts_as_static(physical_hand_right.held_object):
-			var t1 = Transform3D()
-			var t2 = Transform3D()
-			var rot = Transform3D()
-			var pivot_angle_x: float
-			var pivot_angle_y: float
-			var pivot_angle_z: float
+			var rotation_difference: Transform3D = physical_pivot_point * controller_pivot_point.inverse()
 			
-			pivot_angle_x = physical_pivot_point.basis.z.signed_angle_to(controller_pivot_point.basis.z, origin.global_transform.basis.x)
-			pivot_angle_y = physical_pivot_point.basis.z.signed_angle_to(controller_pivot_point.basis.z, origin.global_transform.basis.y)
+			origin.global_transform = (rotation_difference * origin.global_transform).orthonormalized() # rotation_difference before original transform - order matters!
 			
-			# prevent glitching on direction (+-) changes
-			if abs(pivot_angle_y) < 0.01:
-				pivot_angle_y = 0
-			pivot_angle_y /= 10
-			
-			pivot_angle_z = physical_pivot_point.basis.z.signed_angle_to(controller_pivot_point.basis.z, origin.global_transform.basis.z)
-			
-			t1.origin = controller_pivot_point.origin
-			t2.origin = -controller_pivot_point.origin
-			rot = rot.rotated(origin.global_transform.basis.y, -pivot_angle_y) # TODO: Make X and Z rotation work properly
-			
-			origin.global_transform *= t1 * rot * t2
-			
-			# TODO: after rotation, controller_pivot_point and physical_pivot_point locations are different, which results in additional lateral movement during fast rotations - figure out how to eliminate this location drift
+			return
 
 		# if player is holding two different objects with different mass, body movement is based on heavier object	
 		# TODO: mass modifier should be separate for every hand
