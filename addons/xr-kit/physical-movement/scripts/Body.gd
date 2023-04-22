@@ -31,9 +31,7 @@ func _process(delta):
 		if !hand.state.holding:
 			pass
 		elif hand.state.holding:
-			# physical_pivot_point is a point in space where physical hand is connected to held object
-			physical_pivot_point = hand.held_object_anchor.global_transform
-			physical_transforms.append(physical_pivot_point)
+			physical_transforms.append(hand.physical_pivot_point)
 			
 			var controller_anchor_point_from_wrist = hand.held_object_anchor.global_transform.origin - hand.wrist.global_transform.origin
 

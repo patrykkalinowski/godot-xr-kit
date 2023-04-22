@@ -18,6 +18,7 @@ var held_object_anchor
 var wrist_acceleration
 var wrist_angular_acceleration
 var trigger
+var physical_pivot_point: Transform3D
 
 var state = {
 	"moving": false,
@@ -114,7 +115,8 @@ func _physics_process(delta):
 				held_object_anchor = Node3D.new()
 				held_object.add_child(held_object_anchor)
 				held_object_anchor.global_transform = wrist.global_transform.translated(wrist_raycast.get_collision_point() - wrist.global_transform.origin)
-
+				physical_pivot_point = held_object_anchor.global_transform
+				
 				# set joint between hand and grabbed object
 				wrist_joint.set_node_a(wrist.get_path())
 				wrist_joint.set_node_b(held_object.get_path())
@@ -122,6 +124,10 @@ func _physics_process(delta):
 				# reduce rotational forces to make holding more natural
 				if held_object.is_class("RigidBody3D"):
 					held_object.set_angular_damp(1)
+					# TODO: center_of_mass when two hands are holding should be at body.physical_pivot_point
+					var center_of_mass = physical_pivot_point.origin - held_object.global_transform.origin
+					held_object.set_center_of_mass_mode(1) # enable custom center of mass
+					held_object.set_center_of_mass(center_of_mass)
 				
 				# held objects are in layer 12 to filter out collisions with player head
 				held_object.set_collision_layer_value(12, true)
@@ -228,6 +234,7 @@ func reset_hand_position():
 		
 		if held_object.is_class("RigidBody3D"):
 			held_object.set_angular_damp(0)
+			held_object.set_center_of_mass_mode(0)
 		held_object.set_collision_layer_value(12, false)
 		held_object = null
 		held_object_anchor.queue_free()
