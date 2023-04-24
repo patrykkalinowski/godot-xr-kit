@@ -21,7 +21,7 @@ var z_filter
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	var OneEuroFilter = load("res://addons/xr-kit/smooth-input-filter/scripts/one_euro_filter.gd")
-	var args: Dictionary = {
+	var args := {
 		"cutoff": allowed_jitter,
 		"beta": lag_reduction,
 	}
@@ -30,7 +30,7 @@ func _ready():
 	z_filter = OneEuroFilter.new(args)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(delta) -> void:
 	if source_skeleton and destination_skeleton:
 		var origin: Vector3 = source_skeleton.global_transform.origin - xr_origin.global_transform.origin
 		var x: float = x_filter.filter(origin.x, delta)

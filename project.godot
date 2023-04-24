@@ -16,8 +16,8 @@ config/features=PackedStringArray("4.0", "Forward Plus")
 
 [layer_names]
 
-3d_physics/layer_10="Physical Hand Left"
-3d_physics/layer_11="Physical Hand Right"
+3d_physics/layer_10="Physics Hand Left"
+3d_physics/layer_11="Physics Hand Right"
 3d_physics/layer_12="Head"
 
 [physics]

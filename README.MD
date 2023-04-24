@@ -2,15 +2,15 @@
 
 Godot XR Kit is a set of addons providing various features for XR development in Godot 4.
 
-## Physical Movement
+## Physics Movement
 
 Physics-based XR movement. Player hands collide with environment and can grab or push physics object in realistic manner. Player body can collide with physics objects and be moved around in space.
 
-![Godot XR Kit - Physical Movement](/addons/xr-kit/physical-movement/showcase.gif)
+![Godot XR Kit - Physics Movement](/addons/xr-kit/physics-movement/showcase.gif)
 
 ### Features
 
-- Physical hand follows controller and can be blocked by world objects
+- Physics hand follows controller and can be blocked by world objects
 - Players can grab and move objects
   - Heavy objects are harder to move
   - Grabbing heavy objects with two hands makes them easier to move
@@ -19,11 +19,11 @@ Physics-based XR movement. Player hands collide with environment and can grab or
   - Heavier objects allow for stronger push
 - Players can move in space with thrusters (button activated)
 - Players can hit objects with their head and push themselves away
-- Ghost hand appears when controller hand gets far from physical one
+- Ghost hand appears when controller hand gets far from physics one
 - Body snap rotation
 - Body XYZ rotation around static object using hands
 
-[Read more](/addons/xr-kit/physical-movement/)
+[Read more](/addons/xr-kit/physics-movement/)
 
 ## Hand Gesture Recognition
 
@@ -63,7 +63,7 @@ Repository contains Godot v4.0.1 project with XR and main scene preconfigured.
 2. Click `Run Project` or press F5
 3. `Playground` scene from examples folder will be loaded
 
-`xr-kit/examples/playground.tscn` implements Physical Movement and Hand Gesture Recognition.
+`xr-kit/examples/playground.tscn` implements Physics Movement and Hand Gesture Recognition.
 `xr-kit/examples/smooth_input_filter.tscn` implements Smooth Input Filter.
 
 ## Compatibility
