@@ -191,6 +191,8 @@ text = "Static
 [node name="Label3D" type="Label3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.658925, -1.49391)
 pixel_size = 0.001
-text = "Press B/Y and A/X keys on controller to move in space
+text = "Press B/Y and A/X keys on controller to enable thrusters and move in space
 
-Try grabbing objects with different weights and rotating yourself around static bodies"
+Try grabbing objects with different weights and see how they influence your movement
+
+Grab static object and hold trigger to rotate around it in XYZ axis. Try with two hands, too"

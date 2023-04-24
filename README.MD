@@ -21,7 +21,7 @@ Physics-based XR movement. Player hands collide with environment and can grab or
 - Players can hit objects with their head and push themselves away
 - Ghost hand appears when controller hand gets far from physics one
 - Body snap rotation
-- Body XYZ rotation around static object using hands
+- Body XYZ rotation around static object using hands (trigger activated)
 
 [Read more](/addons/xr-kit/physics-movement/)
 

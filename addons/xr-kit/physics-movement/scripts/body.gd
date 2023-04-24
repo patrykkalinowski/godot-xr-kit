@@ -46,8 +46,8 @@ func _process(delta) -> void:
 		# TODO: preserve momentum so player body doesn't stop abruptly
 		set_velocity(Vector3.ZERO)
 
-		# rotate body when holding static body with 2 hands (replace with 'or' to be able to fully rotate using only one hand)
-		if acts_as_static(physics_hand_left.held_object) and acts_as_static(physics_hand_right.held_object):
+		# body XYZ rotation when holding static objects, activated by trigger
+		if acts_as_static(physics_hand_left.held_object) and physics_hand_left.trigger_pressed or acts_as_static(physics_hand_right.held_object) and physics_hand_right.trigger_pressed:
 			var rotation_difference: Transform3D = physics_pivot_point * controller_pivot_point.inverse()
 			origin.global_transform = (rotation_difference * origin.global_transform).orthonormalized() # rotation_difference before original transform - order matters!
 			return
