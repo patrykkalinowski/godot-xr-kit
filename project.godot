@@ -14,6 +14,12 @@ config/name="Godot XR Kit"
 run/main_scene="res://addons/xr-kit/examples/playground.tscn"
 config/features=PackedStringArray("4.0", "Forward Plus")
 
+[display]
+
+window/size/viewport_width=1200
+window/size/viewport_height=800
+window/subwindows/embed_subwindows=false
+
 [layer_names]
 
 3d_physics/layer_10="Physics Hand Left"

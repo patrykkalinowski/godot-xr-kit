@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=3 uid="uid://b2jji68mjbl3h"]
+
+[ext_resource type="Script" path="res://addons/xr-kit/cinematic-view/scripts/cinematic_view.gd" id="1_bda45"]
+
+[node name="CinematicView" type="Node"]
+script = ExtResource("1_bda45")
+
+[node name="Window" type="Window" parent="."]
+initial_position = 1
+title = "Cinematic View"
+size = Vector2i(1200, 800)
+visible = false
+borderless = true
+always_on_top = true
+
+[node name="Camera3D" type="Camera3D" parent="Window"]
+
+[connection signal="close_requested" from="Window" to="." method="_on_close_requested"]

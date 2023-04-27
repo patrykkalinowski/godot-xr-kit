@@ -1,6 +1,7 @@
-[gd_scene load_steps=20 format=3 uid="uid://kl4nx8ivav56"]
+[gd_scene load_steps=21 format=3 uid="uid://kl4nx8ivav56"]
 
 [ext_resource type="Script" path="res://addons/xr-kit/physics-movement/scripts/player.gd" id="1_i7ssh"]
+[ext_resource type="PackedScene" uid="uid://b2jji68mjbl3h" path="res://addons/xr-kit/cinematic-view/scenes/cinematic_view.tscn" id="2_ao5mr"]
 [ext_resource type="Script" path="res://addons/xr-kit/physics-movement/scripts/body.gd" id="2_du0ta"]
 [ext_resource type="Script" path="res://addons/xr-kit/physics-movement/scripts/head.gd" id="3_ecrt7"]
 [ext_resource type="Script" path="res://addons/xr-kit/physics-movement/scripts/chest.gd" id="4_he44h"]
@@ -244,6 +245,9 @@ bind/25/pose = Transform3D(0.083606, -0.0165156, 0.996362, 0.97618, 0.20224, -0.
 script = ExtResource("1_i7ssh")
 origin = NodePath("Body/XROrigin3D")
 camera = NodePath("Body/XROrigin3D/XRCamera3D")
+
+[node name="CinematicView" parent="." node_paths=PackedStringArray("xr_camera") instance=ExtResource("2_ao5mr")]
+xr_camera = NodePath("../Body/XROrigin3D/XRCamera3D")
 
 [node name="Body" type="CharacterBody3D" parent="." node_paths=PackedStringArray("origin", "camera", "physics_hand_left", "physics_hand_right")]
 motion_mode = 1

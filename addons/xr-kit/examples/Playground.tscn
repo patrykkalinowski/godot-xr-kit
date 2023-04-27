@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://56aru1wu1dca"]
+[gd_scene load_steps=12 format=3 uid="uid://b5lkb7q5glrr1"]
 
 [ext_resource type="PackedScene" uid="uid://kl4nx8ivav56" path="res://addons/xr-kit/physics-movement/scenes/player.tscn" id="1_4muep"]
 

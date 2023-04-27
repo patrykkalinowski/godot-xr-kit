@@ -55,6 +55,23 @@ Applies smoothing to XR hand movement using [1€ filter](https://gery.casiez.ne
 
 [Read more](/addons/xr-kit/smooth-input-filter/)
 
+## Cinematic View
+
+Smooth VR preview for recording in native monitor resolution.
+
+![Godot XR Kit - Cinematic View](/addons/xr-kit/cinematic-view/showcase.gif)
+
+*Raw preview (left) vs Cinematic View*
+
+## Features:
+
+- Full screen VR preview in monitor native resolution
+- Smooth preview can be rendered to another screen
+- Smoothing parameters can be tuned
+- Full range of Godot's camera settings is available 
+
+[Read more](/addons/xr-kit/cinematic-view/)
+
 ## Getting started
 
 Repository contains Godot v4.0.1 project with XR and main scene preconfigured.
