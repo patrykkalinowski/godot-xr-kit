@@ -1,4 +1,4 @@
-extends Node3D
+extends RigidBody3D
 
 signal grabbed(object: Node3D)
 signal dropped_held_object(object: Node3D)
@@ -9,7 +9,6 @@ signal hand_reset(hand: Node3D)
 @export var controller: XRController3D
 @export var physics_skeleton: Skeleton3D # physics hand skeleton node
 @export var controller_skeleton: Skeleton3D # controller hand skeleton node
-@export var wrist: RigidBody3D # physics hand wrist RigidBody node
 @export var body: CharacterBody3D # RigidBody body node
 @export var controller_hand_mesh: MeshInstance3D # controller hand Mesh Instance node
 @export var finger_collider: PackedScene # finger collider node and raycasts for collision detection
@@ -18,8 +17,8 @@ signal hand_reset(hand: Node3D)
 
 var controller_hand_mesh_material: Material
 var held_object: Node3D = null
-var wrist_acceleration: Vector3
-var wrist_angular_acceleration: Vector3
+var acceleration: Vector3
+var angular_acceleration: Vector3
 var trigger_pressed: bool
 var physics_pivot_point: Node3D
 var thruster_forward: bool
@@ -61,14 +60,14 @@ func _ready() -> void:
 		var controller_bone_global_transform = controller_skeleton.global_transform * controller_skeleton.get_bone_global_pose(bone_id)
 		# place physics wrist at controller wrist bone position
 		if bone_id == 0:
-			wrist.global_transform = controller_bone_global_transform
+			global_transform = controller_bone_global_transform
 
 		var collider := finger_collider.instantiate()
 		# collider name is bone_id
 		collider.set_name(String.num_int64(bone_id))
 		# wrist is the driving force for physics hand and only physics object (Rigid Body)
 		# that's why we add all finger colliders to it
-		wrist.add_child(collider)
+		add_child(collider)
 
 
 func _physics_process(delta: float) -> void:
@@ -78,32 +77,21 @@ func _physics_process(delta: float) -> void:
 
 	# physics hand can be bugged or stuck and we need it to be able to reset itself automatically
 	# if physics hand is too far away from controller hand (>0.3m), we reset it back to controller position
-	var distance_to_wrist: Vector3 = (controller_skeleton.global_transform * controller_skeleton.get_bone_global_pose(0)).origin - wrist.global_transform.origin
+	var distance_to_wrist: Vector3 = (controller_skeleton.global_transform * controller_skeleton.get_bone_global_pose(0)).origin - global_transform.origin
 	if distance_to_wrist.length_squared() > 0.09:
 		reset_hand()
+
+	_move(delta)
 
 
 func process_bones(bone_id: int, delta: float) -> void:
 	# wrist (bone 0) is special as it's the driving force behind physics hand
 	if bone_id == 0:
-		# reset movement from previous frame, so hand doesn't overshoot
-		wrist.set_linear_velocity(Vector3.ZERO)
-		wrist.set_angular_velocity(Vector3.ZERO)
 
-		var controller_bone_global_transform = controller_skeleton.global_transform * controller_skeleton.get_bone_global_pose(bone_id)
 
-		# calculate acceleration needed to reach controller position in 1 frame
-		wrist_acceleration = 30 * (controller_bone_global_transform.origin - wrist.global_transform.origin) / delta
-		# multiplier on angular acceleration must be reduced to 5, higher values glitch the hand
-		wrist_angular_acceleration = 5 * (controller_bone_global_transform.basis * wrist.global_transform.basis.inverse()).get_euler()
-
-		# apply calculated forces
-		# we include body's velocity so physics hand can follow controllers when player is moving fast
-		wrist.apply_central_force(wrist_acceleration + body.get_real_velocity() * 10)
-		wrist.apply_torque(wrist_angular_acceleration)
 
 		# show controller ghost hand when it's far from physics hand
-		var distance_wrist = (controller_skeleton.global_transform * controller_skeleton.get_bone_global_pose(0)).origin - wrist.global_transform.origin
+		var distance_wrist = (controller_skeleton.global_transform * controller_skeleton.get_bone_global_pose(0)).origin - global_transform.origin
 		var distance_alpha = clamp((distance_wrist.length() - 0.1), 0, 0.5)
 		var color = controller_hand_mesh_material.get_albedo()
 		color.a = distance_alpha
@@ -119,13 +107,13 @@ func process_bones(bone_id: int, delta: float) -> void:
 		# if player presses grab button quickly, fingers teleport from rest pose to full grab pose in 1 frame, resulting in raycasts not detecting any collisions during grab
 		# it causes fingers going through held object instead of stopping on its surface
 		# potential solution described in this GDC talk at 12:50 mark: https://www.gdcvault.com/play/1024240/It-s-All-in-the
-	var physics_bone_collider := get_node(String(wrist.get_path()) + "/" + String.num_int64(bone_id))
+	var physics_bone_collider := get_node(String(get_path()) + "/" + String.num_int64(bone_id))
 	physics_bone_collider.transform = physics_bone_collider.transform.interpolate_with(physics_bone_target_transform, 0.4)
 
 	# physics skeleton follows Wrist RigidBody and copies controller bones
 	if bone_id == 0:
-		physics_skeleton.set_bone_pose_position(bone_id, wrist.global_transform.origin)
-		physics_skeleton.set_bone_pose_rotation(bone_id, Quaternion(wrist.global_transform.basis))
+		physics_skeleton.set_bone_pose_position(bone_id, global_transform.origin)
+		physics_skeleton.set_bone_pose_rotation(bone_id, Quaternion(global_transform.basis))
 	else:
 		physics_skeleton.set_bone_pose_position(bone_id, controller_skeleton.get_bone_pose_position(bone_id))
 		physics_skeleton.set_bone_pose_rotation(bone_id, controller_skeleton.get_bone_pose_rotation(bone_id))
@@ -158,6 +146,25 @@ func process_bones(bone_id: int, delta: float) -> void:
 			# if one raycast is detecting collision already, we don't need to check others
 			break
 
+func _move(delta: float) -> void:
+	# movement is based on wrist bone
+	var bone_id: int = 0
+	# reset movement from previous frame, so hand doesn't overshoot
+	set_linear_velocity(Vector3.ZERO)
+	set_angular_velocity(Vector3.ZERO)
+
+	var controller_bone_global_transform = controller_skeleton.global_transform * controller_skeleton.get_bone_global_pose(bone_id)
+
+	# calculate acceleration needed to reach controller position in 1 frame
+	acceleration = 30 * (controller_bone_global_transform.origin - global_transform.origin) / delta
+	# multiplier on angular acceleration must be reduced to 5, higher values glitch the hand
+	angular_acceleration = 5 * (controller_bone_global_transform.basis * global_transform.basis.inverse()).get_euler()
+
+	# apply calculated forces
+	# we include body's velocity so physics hand can follow controllers when player is moving fast
+	apply_central_force(acceleration + body.get_real_velocity() * 10)
+	apply_torque(angular_acceleration)
+
 
 func unfreeze_bones() -> void:
 	controller_skeleton.clear_bones_global_pose_override()
@@ -173,9 +180,9 @@ func grab() -> Node3D:
 		held_object = get_node(wrist_raycast.get_collider().get_path())
 		physics_pivot_point = Node3D.new()
 		held_object.add_child(physics_pivot_point)
-		physics_pivot_point.global_transform = wrist.global_transform.translated(wrist_raycast.get_collision_point() - wrist.global_transform.origin)
+		physics_pivot_point.global_transform = global_transform.translated(wrist_raycast.get_collision_point() - global_transform.origin)
 		# set joint between hand and grabbed object
-		wrist_joint.set_node_a(wrist.get_path())
+		wrist_joint.set_node_a(get_path())
 		wrist_joint.set_node_b(held_object.get_path())
 
 		if held_object.is_class("RigidBody3D"):
@@ -214,7 +221,7 @@ func drop_held_object() -> void:
 func reset_hand() -> void:
 	drop_held_object()
 	# move physics hand back to controller position
-	wrist.global_transform.origin = (controller_skeleton.global_transform * controller_skeleton.get_bone_global_pose(0)).origin
+	global_transform.origin = (controller_skeleton.global_transform * controller_skeleton.get_bone_global_pose(0)).origin
 
 	hand_reset.emit(self)
 
