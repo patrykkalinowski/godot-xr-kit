@@ -85,19 +85,6 @@ func _physics_process(delta: float) -> void:
 
 
 func process_bones(bone_id: int, delta: float) -> void:
-	# wrist (bone 0) is special as it's the driving force behind physics hand
-	if bone_id == 0:
-
-
-
-		# show controller ghost hand when it's far from physics hand
-		var distance_wrist = (controller_skeleton.global_transform * controller_skeleton.get_bone_global_pose(0)).origin - global_transform.origin
-		var distance_alpha = clamp((distance_wrist.length() - 0.1), 0, 0.5)
-		var color = controller_hand_mesh_material.get_albedo()
-		color.a = distance_alpha
-		controller_hand_mesh_material.set_albedo(color)
-#	END WRIST PROCESSING
-
 	# every physics bone collider needs to follow its bone relative to RigidBody wrist position
 	# translation to Z=0.01 is needed because collider needs to begin with bone, not in the middle
 	# if we do translation, it messes up with physics mesh so we revert it for physics hand mesh
@@ -108,15 +95,24 @@ func process_bones(bone_id: int, delta: float) -> void:
 		# it causes fingers going through held object instead of stopping on its surface
 		# potential solution described in this GDC talk at 12:50 mark: https://www.gdcvault.com/play/1024240/It-s-All-in-the
 	var physics_bone_collider := get_node(String(get_path()) + "/" + String.num_int64(bone_id))
-	physics_bone_collider.transform = physics_bone_collider.transform.interpolate_with(physics_bone_target_transform, 0.4)
+	physics_bone_collider.transform = physics_bone_target_transform
 
-	# physics skeleton follows Wrist RigidBody and copies controller bones
+	# physics skeleton follows Physics Hand and copies controller bones
 	if bone_id == 0:
-		physics_skeleton.set_bone_pose_position(bone_id, global_transform.origin)
-		physics_skeleton.set_bone_pose_rotation(bone_id, Quaternion(global_transform.basis))
+		# Physics Hand RigidBody is bone 0, so we set physics_skeleton bone 0 right on top of it
+		physics_skeleton.set_bone_pose_position(bone_id, Vector3.ZERO)
+		physics_skeleton.set_bone_pose_rotation(bone_id, Quaternion.IDENTITY)
 	else:
 		physics_skeleton.set_bone_pose_position(bone_id, controller_skeleton.get_bone_pose_position(bone_id))
 		physics_skeleton.set_bone_pose_rotation(bone_id, controller_skeleton.get_bone_pose_rotation(bone_id))
+
+	if bone_id == 0:
+		# show controller ghost hand when it's far from physics hand
+		var distance_wrist = (controller_skeleton.global_transform * controller_skeleton.get_bone_global_pose(0)).origin - global_transform.origin
+		var distance_alpha = clamp((distance_wrist.length() - 0.1), 0, 0.5)
+		var color = controller_hand_mesh_material.get_albedo()
+		color.a = distance_alpha
+		controller_hand_mesh_material.set_albedo(color)
 
 	# freezing fingers around grabbed objects
 	var bone_raycasts: Array[Node] = physics_bone_collider.get_node("RayCasts").get_children()

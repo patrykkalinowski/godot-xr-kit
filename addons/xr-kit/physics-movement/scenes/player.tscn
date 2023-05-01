@@ -8,8 +8,8 @@
 [ext_resource type="Script" path="res://addons/xr-kit/physics-movement/scripts/controller.gd" id="5_1paut"]
 [ext_resource type="Texture2D" uid="uid://g8ny8gqbmsj0" path="res://addons/xr-kit/physics-movement/assets/valve_hand_models/left_hand_file2.png" id="6_xvpy5"]
 [ext_resource type="Texture2D" uid="uid://d4hrfnsl2le5e" path="res://addons/xr-kit/physics-movement/assets/valve_hand_models/right_hand_file2.png" id="7_bve0s"]
-[ext_resource type="Script" path="res://addons/xr-kit/physics-movement/scripts/hand.gd" id="8_wf6ub"]
 [ext_resource type="PackedScene" uid="uid://csmt4dhikwq4i" path="res://addons/xr-kit/physics-movement/scenes/finger_collider.tscn" id="9_skcr2"]
+[ext_resource type="Script" path="res://addons/xr-kit/physics-movement/scripts/physics_hand.gd" id="10_7gjb2"]
 [ext_resource type="PackedScene" path="res://addons/xr-kit/hand-gesture-recognition/scenes/hand_pose_recognition.tscn" id="11_hqvgg"]
 [ext_resource type="Texture2D" uid="uid://gt3jx4tbsre1" path="res://addons/xr-kit/physics-movement/assets/valve_hand_models/left_hand_file3.png" id="12_glx1i"]
 [ext_resource type="Texture2D" uid="uid://c3pr0jnkal1ta" path="res://addons/xr-kit/physics-movement/assets/valve_hand_models/right_hand_file3.png" id="13_c2a8v"]
@@ -919,7 +919,7 @@ collision_layer = 512
 collision_mask = 1025
 gravity_scale = 0.0
 continuous_cd = true
-script = ExtResource("8_wf6ub")
+script = ExtResource("10_7gjb2")
 origin = NodePath("../Body/XROrigin3D")
 camera = NodePath("../Body/XROrigin3D/XRCamera3D")
 controller = NodePath("../Body/XROrigin3D/XRController3D Left")
@@ -1138,7 +1138,7 @@ collision_mask = 513
 gravity_scale = 0.0
 continuous_cd = true
 can_sleep = false
-script = ExtResource("8_wf6ub")
+script = ExtResource("10_7gjb2")
 origin = NodePath("../Body/XROrigin3D")
 camera = NodePath("../Body/XROrigin3D/XRCamera3D")
 controller = NodePath("../Body/XROrigin3D/XRController3D Right")
@@ -1351,8 +1351,14 @@ bones/25/scale = Vector3(1, 1, 1)
 mesh = SubResource("ArrayMesh_8jodk")
 skin = SubResource("Skin_n5id7")
 
+[connection signal="button_pressed" from="Body/XROrigin3D/XRController3D Left" to="PhysicsHandLeft" method="_on_xr_controller_3d_button_pressed"]
+[connection signal="button_released" from="Body/XROrigin3D/XRController3D Left" to="PhysicsHandLeft" method="_on_xr_controller_3d_button_released"]
 [connection signal="turned" from="Body/XROrigin3D/XRController3D Left" to="Body" method="_on_turned"]
+[connection signal="button_pressed" from="Body/XROrigin3D/XRController3D Right" to="PhysicsHandRight" method="_on_xr_controller_3d_button_pressed"]
+[connection signal="button_released" from="Body/XROrigin3D/XRController3D Right" to="PhysicsHandRight" method="_on_xr_controller_3d_button_released"]
 [connection signal="turned" from="Body/XROrigin3D/XRController3D Right" to="Body" method="_on_turned"]
+[connection signal="new_pose" from="Body/XROrigin3D/OpenXRHand Left/HandPoseRecognition" to="PhysicsHandLeft" method="_on_hand_pose_recognition_new_pose"]
+[connection signal="new_pose" from="Body/XROrigin3D/OpenXRHand Right/HandPoseRecognition" to="PhysicsHandRight" method="_on_hand_pose_recognition_new_pose"]
 [connection signal="dropped_held_object" from="PhysicsHandLeft" to="Body" method="_on_hand_dropped_held_object"]
 [connection signal="grabbed" from="PhysicsHandLeft" to="Body" method="_on_physics_hand_grabbed"]
 [connection signal="hand_reset" from="PhysicsHandLeft" to="Body" method="_on_hand_reset"]
