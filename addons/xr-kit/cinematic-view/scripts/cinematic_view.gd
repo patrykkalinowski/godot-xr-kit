@@ -31,18 +31,19 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	# translation
-	var origin: Vector3 = xr_camera.global_transform.origin
-	var x: float = x_filter.filter(origin.x, delta)
-	var y: float = y_filter.filter(origin.y, delta)
-	var z: float = z_filter.filter(origin.z, delta)
-	# rotation
-	var q1 = Quaternion(xr_camera.global_transform.basis)
-	var q2 = Quaternion($Window/Camera3D.global_transform.basis)
-	var dot_product = q1.dot(q2)
-	var rotated_basis = $Window/Camera3D.global_transform.basis.slerp(xr_camera.global_transform.basis, 1 / dot_product - rotation_smoothing)
+	if enabled:
+		# translation
+		var origin: Vector3 = xr_camera.global_transform.origin
+		var x: float = x_filter.filter(origin.x, delta)
+		var y: float = y_filter.filter(origin.y, delta)
+		var z: float = z_filter.filter(origin.z, delta)
+		# rotation
+		var q1 = Quaternion(xr_camera.global_transform.basis)
+		var q2 = Quaternion($Window/Camera3D.global_transform.basis)
+		var dot_product = q1.dot(q2)
+		var rotated_basis = $Window/Camera3D.global_transform.basis.slerp(xr_camera.global_transform.basis, 1 / dot_product - rotation_smoothing)
 
-	$Window/Camera3D.set_global_transform(Transform3D(rotated_basis, Vector3(x, y, z)))
+		$Window/Camera3D.set_global_transform(Transform3D(rotated_basis, Vector3(x, y, z)))
 
 func _on_close_requested() -> void:
 	self.queue_free()
