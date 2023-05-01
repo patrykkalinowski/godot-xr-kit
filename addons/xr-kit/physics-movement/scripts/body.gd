@@ -88,7 +88,7 @@ func set_controller_pivot_point(forced_hand: Node3D = null) -> void:
 			continue
 
 		if hand.held_object:
-			var controller_anchor_point_from_wrist: Vector3 = hand.physics_pivot_point.global_transform.origin - hand.wrist.global_transform.origin
+			var controller_anchor_point_from_wrist: Vector3 = hand.physics_pivot_point.global_transform.origin - hand.global_transform.origin
 
 			controller_pivot_point = (hand.controller_skeleton.global_transform * hand.controller_skeleton.get_bone_global_pose(0)).translated(controller_anchor_point_from_wrist)
 			controller_transforms.append(controller_pivot_point)
@@ -141,33 +141,13 @@ func acts_as_static(object: Node3D) -> bool:
 
 # turn signal received from controller
 func _on_turned(direction: int, controller: Node3D) -> void:
-	var t1 := Transform3D()
-	var t2 := Transform3D()
-	var rot := Transform3D()
-	# if both hands are holding static object, disable snap turn
-	if acts_as_static(physics_hand_left.held_object) and acts_as_static(physics_hand_right.held_object):
-		# TODO: enable snap turn, but account for this rotation in pivot point
-		return
-	else:
-		# if only one hand is holding
-		for hand in [physics_hand_left, physics_hand_right]:
-			# if signal is received from controller of this physics hand
-			# we pivot around this hand anchor
-			if hand.controller == controller:
-				if acts_as_static(hand.held_object):
-					# if holding, we rotate around this hand controller_pivot_point holding the object
-					# object must be Static or behaving like Static
-					t1.origin = controller_pivot_point.origin
-					t2.origin = -controller_pivot_point.origin
-				else:
-					# otherwise, we do rotation around camera
-					# TODO: if other hand is holding, player should be rotated around the other hand's pivot point even when turn signal is coming from hand which is not holding
-					t1.origin = camera.transform.origin
-					t2.origin = -camera.transform.origin
-
 	var angle: float = deg_to_rad(turn_angle_degrees) * direction
-	rot = rot.rotated(Vector3.UP, angle)
-	origin.global_transform *= t1 * rot * t2 # rotate origin (player world)
+	var rotation_difference := Transform3D.IDENTITY.rotated(origin.transform.basis.y, angle)
+	origin.transform = rotation_difference * origin.transform
+	set_physics_pivot_point()
+	set_controller_pivot_point()
+	# when rotating around a point, origin needs to be moved to proper position after rotation
+	origin.global_translate(physics_pivot_point.origin - controller_pivot_point.origin)
 
 	for hand in [physics_hand_left, physics_hand_right]:
 		if !hand.held_object:
