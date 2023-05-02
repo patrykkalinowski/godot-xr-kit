@@ -39,7 +39,8 @@ func _process(delta) -> void:
 				# won't increase movement force to crazy levels
 				var mass_ratio = hand.held_object.get_mass() / body_mass
 				mass_modifier = clamp(mass_ratio, 0.0, 1.0) / 50.0
-				mass_modifiers.append(mass_modifier)
+
+			mass_modifiers.append(mass_modifier)
 
 	if held_objects_count > 0:
 		# when holding an object, we stop the body and it is now moved only by hands
