@@ -2,9 +2,9 @@
 
 Scripts and scenes for physics-based XR movement. Player hands collide with environment and can grab or push physics object in realistic manner. Player body can collide with physics objects and be moved around in space.
 
-*It is still a work in progress, not ready to be dropped in your game as-is.*
+*Physics Movement is in alpha stage.*
 
-![Godot XR Kit - Physics Movement](showcase.gif)
+![Godot XR Kit - Physics Movement](/screenshots/physics_movement.gif)
 
 ## Features
 
@@ -31,12 +31,12 @@ To make sure physics hand works in predictable ways, only wrist bone is responsi
 
 Provided hand models use OpenXR convention of 26 joints for hand tracking: 4 joints for the thumb finger, 5 joints for the other four fingers, and the wrist and palm of the hands.
 
-![OpenXR Hands](openxr_hands.png)
+![OpenXR Hands](/screenshots/openxr_hands.png)
 *Source: https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#_conventions_of_hand_joints*
 
 ## Getting started
 
-`player.tscn` contains everything needed for physics movement, including XR interface initialization.
+`/addons/xr-kit/physics_movement/scenes/player.tscn` contains everything needed for physics movement, including XR interface initialization.
 
 ## Godot 3.5
 

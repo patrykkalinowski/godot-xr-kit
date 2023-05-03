@@ -2,7 +2,7 @@
 
 Applies smoothing to XR hand movement using [1€ filter](https://gery.casiez.net/1euro/). Supports hand and controller tracking. See [1€ filter demo](https://gery.casiez.net/1euro/InteractiveDemo/). Can be used to reduce microstutter or simulate fake weight by increasing hand movement lag.
 
-![Godot XR Kit - Smooth Input Filter](showcase.gif)
+![Godot XR Kit - Smooth Input Filter](/screenshots/smooth_input_filter.gif)
 
 ## Features:
 
@@ -17,7 +17,7 @@ Every axis of source node global_transform's origin (`Vector3`) is passed throug
 
 1. Add `smooth_open_xr_hand.tscn` anywhere to your scene.
 2. You need to duplicate nodes you want to smooth, these duplicates will follow source nodes with filter applied.
-2. If you are using hand tracking, assign `Skeleton3D` controlled by `OpenXRHand` as **Source Skeleton**. Assign `Skeleton3D` you want to have smoothed as **Destination Skeleton**.
+2. If you are using hand tracking, assign `Skeleton3D` node controlled by `OpenXRHand` as **Source Skeleton**. Assign `Skeleton3D` node you want to have smoothed as **Destination Skeleton**.
 3. If you are using controllers or want to smooth out movement of any other 3D node, assign nodes to **Source Node** and **Destination Node**.
 4. Tune filter with **Allowed Jitter** and **Lag Reduction** parameters.
 
