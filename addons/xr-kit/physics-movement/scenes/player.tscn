@@ -469,6 +469,7 @@ origin = NodePath("Body/XROrigin3D")
 camera = NodePath("Body/XROrigin3D/XRCamera3D")
 
 [node name="CinematicView" parent="." node_paths=PackedStringArray("xr_camera") instance=ExtResource("2_ao5mr")]
+enabled = false
 xr_camera = NodePath("../Body/XROrigin3D/XRCamera3D")
 
 [node name="Body" type="CharacterBody3D" parent="." node_paths=PackedStringArray("origin", "camera", "physics_hand_left", "physics_hand_right")]

@@ -28,6 +28,7 @@ window/subwindows/embed_subwindows=false
 
 [physics]
 
+common/physics_ticks_per_second=90
 3d/default_gravity=0.0
 
 [xr]
