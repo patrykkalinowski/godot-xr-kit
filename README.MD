@@ -63,7 +63,7 @@ Smooth VR preview for recording in native monitor resolution.
 
 *Raw preview (left) vs Cinematic View*
 
-## Features:
+### Features:
 
 - Full screen VR preview in monitor native resolution
 - Smooth preview can be rendered to another screen
