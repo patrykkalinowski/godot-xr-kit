@@ -15,10 +15,17 @@ signal hand_reset(hand: Node3D)
 @export var wrist_raycast: RayCast3D # wrist raycasts detect objects to grab
 @export var wrist_joint: Generic6DOFJoint3D # joint is holding objects
 
+@export_group("PID Controller Linear")
+@export var Kp: float = 1800
+@export var Ki: float = 1
+@export var Kd: float = 10
+@export var integral_limit: float = 100
+@export var derivative_limit: float = 100
+
+var pid_controller_linear: PIDController
+var pid_controller_angular: PIDController
 var controller_hand_mesh_material: Material
 var held_object: Node3D = null
-var acceleration: Vector3
-var angular_acceleration: Vector3
 var trigger_pressed: bool
 var physics_pivot_point: Node3D
 var thruster_forward: bool
@@ -68,6 +75,21 @@ func _ready() -> void:
 		# wrist is the driving force for physics hand and only physics object (Rigid Body)
 		# that's why we add all finger colliders to it
 		add_child(collider)
+
+	pid_controller_linear = PIDController.new({
+		Kp = Kp,
+		Ki = Ki,
+		Kd = Kd,
+		integral_limit = integral_limit,
+		derivative_limit = derivative_limit
+	})
+	pid_controller_angular = PIDController.new({
+		Kp = 10, # must not exceed 10, higher values glitch physics
+		Ki = 0,
+		Kd = 0,
+		integral_limit = 1,
+		derivative_limit = 1
+	})
 
 
 func _physics_process(delta: float) -> void:
@@ -143,22 +165,16 @@ func process_bones(bone_id: int, delta: float) -> void:
 			break
 
 func _move(delta: float) -> void:
-	# movement is based on wrist bone
-	var bone_id: int = 0
-	# reset movement from previous frame, so hand doesn't overshoot
+	# reset movement from previous frame, for some reason this prevents ghosting
 	set_linear_velocity(Vector3.ZERO)
 	set_angular_velocity(Vector3.ZERO)
-
-	var controller_bone_global_transform = controller_skeleton.global_transform * controller_skeleton.get_bone_global_pose(bone_id)
-
-	# calculate acceleration needed to reach controller position in 1 frame
-	acceleration = 30 * (controller_bone_global_transform.origin - global_transform.origin) / delta
-	# multiplier on angular acceleration must be reduced to 5, higher values glitch the hand
-	angular_acceleration = 5 * (controller_bone_global_transform.basis * global_transform.basis.inverse()).get_euler()
+	# target is controller wrist bone
+	var target = controller_skeleton.global_transform * controller_skeleton.get_bone_global_pose(0)
+	var linear_acceleration: Vector3 = pid_controller_linear.calculate(target.origin, global_transform.origin, delta)
+	var angular_acceleration: Vector3 = pid_controller_angular.calculate((target.basis * global_transform.basis.inverse()).get_euler(), Vector3.ZERO, delta)
 
 	# apply calculated forces
-	# we include body's velocity so physics hand can follow controllers when player is moving fast
-	apply_central_force(acceleration + body.get_real_velocity() * 10)
+	apply_central_force(linear_acceleration)
 	apply_torque(angular_acceleration)
 
 
@@ -187,6 +203,22 @@ func grab() -> Node3D:
 			held_object.set_center_of_mass_mode(1) # enable custom center of mass
 			held_object.set_center_of_mass(center_of_mass)
 
+			# update PID controller inputs for better feeling
+			pid_controller_linear.update({
+				Kp = Kp,
+				Ki = Ki,
+				Kd = held_object.get_mass() * 2,
+				integral_limit = integral_limit,
+				derivative_limit = derivative_limit
+			})
+			pid_controller_angular.update({
+				Kp = 10,
+				Ki = 5,
+				Kd = 5,
+				integral_limit = 1,
+				derivative_limit = 1
+			})
+
 		held_object.set_collision_layer_value(12, true) # held objects are in layer 12 to filter out collisions with player head
 
 		grabbed.emit(held_object)
@@ -205,6 +237,21 @@ func drop_held_object() -> void:
 		if held_object.is_class("RigidBody3D"):
 			held_object.set_angular_damp(0)
 			held_object.set_center_of_mass_mode(0)
+
+			pid_controller_linear.update({
+				Kp = Kp,
+				Ki = Ki,
+				Kd = 10,
+				integral_limit = integral_limit,
+				derivative_limit = derivative_limit
+			})
+			pid_controller_angular.update({
+				Kp = 10,
+				Ki = 0,
+				Kd = 0,
+				integral_limit = 1,
+				derivative_limit = 1
+			})
 
 		dropped_held_object.emit(held_object)
 
@@ -256,3 +303,46 @@ func _on_hand_pose_recognition_new_pose(previous_pose: StringName, pose: StringN
 
 	if pose in ["open", "rest"]:
 		drop_held_object()
+
+
+class PIDController:
+	var Kp: float
+	var Ki: float
+	var Kd: float
+	var error: Vector3
+	var proportional: Vector3
+	var previous_error: Vector3
+	var integral: Vector3
+	var integral_limit: float
+	var derivative: Vector3
+	var derivative_limit: float
+	var output: Vector3
+
+	func _init(args) -> void:
+		Kp = args.Kp
+		Ki = args.Ki
+		Kd = args.Kd
+		integral_limit = args.integral_limit
+		derivative_limit = args.derivative_limit
+		previous_error = Vector3(0, 0, 0)
+		integral = Vector3(0, 0, 0)
+
+	func update(args) -> void:
+		Kp = args.Kp
+		Ki = args.Ki
+		Kd = args.Kd
+		integral_limit = args.integral_limit
+		derivative_limit = args.derivative_limit
+
+
+	func calculate(target: Vector3, current: Vector3, delta: float) -> Vector3:
+		error = target - current
+		proportional = error
+		integral += error * delta
+		integral.limit_length(integral_limit)
+		derivative = (error - previous_error) / delta
+		derivative.limit_length(derivative_limit)
+		previous_error = error
+		output = Kp * proportional + Ki * integral + Kd * derivative
+
+		return output
