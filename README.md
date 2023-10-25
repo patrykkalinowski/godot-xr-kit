@@ -4,6 +4,8 @@ This plugin for Godot 3 provides scripts and scenes for physics-based XR movemen
 
 [Watch the showcase video](https://github.com/patrykkalinowski/godot-xr-physical-movement/blob/master/img/showcase.mp4)
 
+**This version is no longer developed and plugin was migrated to Godot 4, available on [master branch](https://github.com/patrykkalinowski/godot-xr-kit/tree/master)**
+
 ## Features
 
 - Physical hand follows controller and can be blocked by world objects
@@ -42,8 +44,3 @@ Example scenes in `/addons/godot-xr-physical-movement/examples` folder and main 
 
 ![OpenXR Hands](img/openxr_hands.png)
 *Source: https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#_conventions_of_hand_joints*
-
-## Godot 4.0
-
-Currently I am unable to port this plugin to Godot 4 as I can’t get my headset (Reverb G2) to work with any of 4.0 versions.
-
