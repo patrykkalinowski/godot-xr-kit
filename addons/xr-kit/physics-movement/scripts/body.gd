@@ -22,10 +22,10 @@ func _process(delta) -> void:
 	for hand in [physics_hand_left, physics_hand_right]:
 		if hand.thruster_forward:
 			# TODO: increase force when players tries to stop while moving fast in opposite direction
-			velocity += -hand.controller.global_transform.basis.z.normalized() * delta / 10
+			velocity += -camera.global_transform.basis.z.normalized() * delta / 10
 
 		if hand.thruster_backward:
-			velocity += hand.controller.global_transform.basis.z.normalized() * delta / 10
+			velocity += camera.global_transform.basis.z.normalized() * delta / 10
 
 		# body movement dependent on held object mass
 		if hand.held_object:
