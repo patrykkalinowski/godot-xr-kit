@@ -125,7 +125,7 @@ func process_bones(bone_id: int, delta: float) -> void:
 		physics_skeleton.set_bone_pose_position(bone_id, Vector3.ZERO)
 		physics_skeleton.set_bone_pose_rotation(bone_id, Quaternion.IDENTITY)
 	else:
-		physics_skeleton.set_bone_pose_position(bone_id, controller_skeleton.get_bone_pose_position(bone_id))
+		# every bone is attached to previous one, so we only need to update rotation here
 		physics_skeleton.set_bone_pose_rotation(bone_id, controller_skeleton.get_bone_pose_rotation(bone_id))
 
 	if bone_id == 0:
