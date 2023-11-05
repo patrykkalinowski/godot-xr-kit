@@ -73,8 +73,8 @@ func _process(delta) -> void:
 		velocity += move_vector * blended_mass_modifier
 
 	if held_objects_count == 0:
-		# if player is floating in space, limit maximum velocity to 1 and reduce it by 5% every second
-		velocity = velocity.limit_length(1)
+		# if player is floating in space, keep reducing maximum velocity until it reaches 1 (reduce more the faster current velocity), then reduce it further by 5% every second
+		velocity = velocity.limit_length(maxf(1.0, velocity - ((velocity - sqrt(velocity)) * delta)))
 		velocity *= 1 - (0.05 * delta)
 
 	move_and_slide() # move body by calculated velocity
