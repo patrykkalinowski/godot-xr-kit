@@ -74,7 +74,7 @@ Smooth VR preview for recording in native monitor resolution.
 
 ## Getting started
 
-Repository contains Godot 4.0.2 project with XR and main scene preconfigured. Releases are reduced to addon files only.
+Repository contains Godot 4.2 project with XR and main scene preconfigured. Releases are reduced to addon files only.
 
 Latest release is available in Godot's Asset Library under the name [XR Kit](https://godotengine.org/asset-library/asset/1870) or on [releases page](https://github.com/patrykkalinowski/godot-xr-kit/releases/latest).
 

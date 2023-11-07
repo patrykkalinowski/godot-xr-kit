@@ -1,4 +1,4 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene load_steps=2 format=3 uid="uid://c55ye36xc38vm"]
 
 [ext_resource type="Script" path="res://addons/xr-kit/hand-gesture-recognition/scripts/hand_pose_save.gd" id="1_n87gt"]
 

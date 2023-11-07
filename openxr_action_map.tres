@@ -450,7 +450,7 @@ action = SubResource("OpenXRAction_tvv34")
 paths = PackedStringArray("/user/hand/left/output/haptic", "/user/hand/right/output/haptic")
 
 [sub_resource type="OpenXRInteractionProfile" id="OpenXRInteractionProfile_qhmn5"]
-interaction_profile_path = "/interaction_profiles/pico/neo3_controller"
+interaction_profile_path = "/interaction_profiles/bytedance/pico_neo3_controller"
 bindings = [SubResource("OpenXRIPBinding_5wdim"), SubResource("OpenXRIPBinding_hn8jc"), SubResource("OpenXRIPBinding_l4ltb"), SubResource("OpenXRIPBinding_3ubua"), SubResource("OpenXRIPBinding_jxjeu"), SubResource("OpenXRIPBinding_7asw7"), SubResource("OpenXRIPBinding_p73eq"), SubResource("OpenXRIPBinding_66fmy"), SubResource("OpenXRIPBinding_thc6y"), SubResource("OpenXRIPBinding_emq2n"), SubResource("OpenXRIPBinding_ngige"), SubResource("OpenXRIPBinding_5e4ac"), SubResource("OpenXRIPBinding_ny642"), SubResource("OpenXRIPBinding_xbhj7"), SubResource("OpenXRIPBinding_2t48n"), SubResource("OpenXRIPBinding_i141y"), SubResource("OpenXRIPBinding_003vh"), SubResource("OpenXRIPBinding_vpcby"), SubResource("OpenXRIPBinding_0ja11")]
 
 [sub_resource type="OpenXRIPBinding" id="OpenXRIPBinding_bx87h"]
