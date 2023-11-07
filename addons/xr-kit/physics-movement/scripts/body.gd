@@ -74,7 +74,7 @@ func _process(delta) -> void:
 
 	if held_objects_count == 0:
 		# if player is floating in space, keep reducing maximum velocity until it reaches 1 (reduce more the faster current velocity), then reduce it further by 5% every second
-		velocity = velocity.limit_length(maxf(1.0, velocity - ((velocity - sqrt(velocity)) * delta)))
+		velocity = velocity.limit_length(maxf(1.0, velocity.length() - ((velocity.length() - sqrt(velocity.length())) * delta)))
 		velocity *= 1 - (0.05 * delta)
 
 	move_and_slide() # move body by calculated velocity
