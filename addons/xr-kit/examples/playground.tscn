@@ -1,11 +1,15 @@
-[gd_scene load_steps=12 format=3 uid="uid://b5lkb7q5glrr1"]
+[gd_scene load_steps=14 format=3 uid="uid://b5lkb7q5glrr1"]
 
 [ext_resource type="PackedScene" uid="uid://kl4nx8ivav56" path="res://addons/xr-kit/physics-movement/scenes/player.tscn" id="1_4muep"]
 
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_bcjol"]
+
+[sub_resource type="Sky" id="Sky_atmsh"]
+sky_material = SubResource("ProceduralSkyMaterial_bcjol")
+
 [sub_resource type="Environment" id="Environment_64oha"]
-ambient_light_source = 2
-ambient_light_color = Color(1, 1, 1, 1)
-ambient_light_energy = 0.2
+background_mode = 2
+sky = SubResource("Sky_atmsh")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_5q7sa"]
 size = Vector3(0.3, 0.3, 0.3)
@@ -191,8 +195,10 @@ text = "Static
 [node name="Label3D" type="Label3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.658925, -1.49391)
 pixel_size = 0.001
-text = "Press B/Y and A/X keys on controller to enable thrusters and move in space
+alpha_antialiasing_mode = 1
+texture_filter = 5
+text = "Move left joystick on controller to enable thrusters and move in space. Click joystick to brake.
 
-Try grabbing objects with different weights and see how they influence your movement
+Try grabbing objects with different weights and see how they influence your movement.
 
-Grab static object and hold trigger to rotate around it in XYZ axis. Try with two hands, too"
+Grab static object and hold trigger to rotate around it in XYZ axis. Try with two hands, too."

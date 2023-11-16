@@ -17,11 +17,14 @@ Physics-based XR movement. Player hands collide with environment and can grab or
   - Fingers curl around grabbed objects geometry
 - Players can move themselves by pushing away from objects
   - Heavier objects allow for stronger push
-- Players can move in space with thrusters (button activated)
+- Players can move in space with thrusters
+- Players can brake in space with thruster brake
 - Players can hit objects with their head and push themselves away
 - Ghost hand appears when controller hand gets far from physics one
+- Physics hand is teleported to controller position if it gets too far from it (ex. hand got stuck)
 - Body snap rotation
 - Body XYZ rotation around static object using hands (trigger activated)
+- Fingers wiggle a little when hand is moving
 
 [Read more](/addons/xr-kit/physics-movement/)
 
@@ -92,6 +95,7 @@ For plugin to be fully compatible with all OpenXR runtimes, it needs hand models
 
 | Headset | Runtime | Compatible |
 |---|---|:---:|
+| Meta Quest 3 | SteamVR | Yes |
 | HP Reverb G2 | SteamVR | Yes |
 | Pico 4 | Standalone | No hand tracking |
 | Meta Quest 2 | Standalone | Hand tracking only (no controllers)

@@ -1,5 +1,6 @@
 extends RigidBody3D
 
+@export_group("Nodes")
 @export var body: CharacterBody3D
 @export var camera: XRCamera3D
 

@@ -15,11 +15,14 @@ Scripts and scenes for physics-based XR movement. Player hands collide with envi
   - Fingers curl around grabbed objects geometry
 - Players can move themselves by pushing away from objects
   - Heavier objects allow for stronger push
-- Players can move in space with thrusters (button activated)
+- Players can move in space with thrusters
+- Players can brake in space with thruster brake
 - Players can hit objects with their head and push themselves away
 - Ghost hand appears when controller hand gets far from physics one
+- Physics hand is teleported to controller position if it gets too far from it (ex. hand got stuck)
 - Body snap rotation
 - Body XYZ rotation around static object using hands (trigger activated)
+- Fingers wiggle a little when hand is moving
 
 ## How does it work
 
@@ -33,6 +36,8 @@ Provided hand models use OpenXR convention of 26 joints for hand tracking: 4 joi
 
 ![OpenXR Hands](/screenshots/openxr_hands.png)
 *Source: https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#_conventions_of_hand_joints*
+
+Custom OpenXR Action Map is provided for control scheme used by Physics Movement, you can find it in `addons/xr-kit/physics-movement` folder.
 
 ## Getting started
 

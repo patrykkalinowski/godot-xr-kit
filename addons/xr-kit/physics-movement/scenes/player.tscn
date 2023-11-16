@@ -495,13 +495,13 @@ collision_layer = 2048
 collision_mask = 3585
 mass = 10.0
 gravity_scale = 0.0
+can_sleep = false
+freeze = true
+freeze_mode = 1
 custom_integrator = true
 continuous_cd = true
 max_contacts_reported = 1
 contact_monitor = true
-can_sleep = false
-freeze = true
-freeze_mode = 1
 script = ExtResource("3_ecrt7")
 body = NodePath("../../..")
 camera = NodePath("..")
@@ -1136,12 +1136,47 @@ bones/25/scale = Vector3(1, 1, 1)
 mesh = SubResource("ArrayMesh_u3sx3")
 skin = SubResource("Skin_v5ql8")
 
+[node name="ThumbFingerIK" type="SkeletonIK3D" parent="PhysicsHandLeft/Skeleton3D"]
+process_priority = 1
+root_bone = &"Thumb_Proximal_L"
+tip_bone = &"Thumb_Tip_L"
+override_tip_basis = false
+min_distance = 0.001
+
+[node name="IndexFingerIK" type="SkeletonIK3D" parent="PhysicsHandLeft/Skeleton3D"]
+process_priority = 1
+root_bone = &"Index_Proximal_L"
+tip_bone = &"Index_Tip_L"
+override_tip_basis = false
+min_distance = 0.001
+
+[node name="MiddleFingerIK" type="SkeletonIK3D" parent="PhysicsHandLeft/Skeleton3D"]
+process_priority = 1
+root_bone = &"Middle_Proximal_L"
+tip_bone = &"Middle_Tip_L"
+override_tip_basis = false
+min_distance = 0.001
+
+[node name="RingFingerIK" type="SkeletonIK3D" parent="PhysicsHandLeft/Skeleton3D"]
+process_priority = 1
+root_bone = &"Ring_Proximal_L"
+tip_bone = &"Ring_Tip_L"
+override_tip_basis = false
+min_distance = 0.001
+
+[node name="LittleFingerIK" type="SkeletonIK3D" parent="PhysicsHandLeft/Skeleton3D"]
+process_priority = 1
+root_bone = &"Little_Proximal_L"
+tip_bone = &"Little_Tip_L"
+override_tip_basis = false
+min_distance = 0.001
+
 [node name="PhysicsHandRight" type="RigidBody3D" parent="." node_paths=PackedStringArray("origin", "camera", "controller", "physics_skeleton", "controller_skeleton", "body", "controller_hand_mesh", "wrist_raycast", "wrist_joint")]
 collision_layer = 1024
 collision_mask = 513
 gravity_scale = 0.0
-continuous_cd = true
 can_sleep = false
+continuous_cd = true
 script = ExtResource("10_7gjb2")
 origin = NodePath("../Body/XROrigin3D")
 camera = NodePath("../Body/XROrigin3D/XRCamera3D")
@@ -1355,12 +1390,50 @@ bones/25/scale = Vector3(1, 1, 1)
 mesh = SubResource("ArrayMesh_8jodk")
 skin = SubResource("Skin_n5id7")
 
-[connection signal="button_pressed" from="Body/XROrigin3D/XRController3D Left" to="PhysicsHandLeft" method="_on_xr_controller_3d_button_pressed"]
-[connection signal="button_released" from="Body/XROrigin3D/XRController3D Left" to="PhysicsHandLeft" method="_on_xr_controller_3d_button_released"]
-[connection signal="turned" from="Body/XROrigin3D/XRController3D Left" to="Body" method="_on_turned"]
-[connection signal="button_pressed" from="Body/XROrigin3D/XRController3D Right" to="PhysicsHandRight" method="_on_xr_controller_3d_button_pressed"]
-[connection signal="button_released" from="Body/XROrigin3D/XRController3D Right" to="PhysicsHandRight" method="_on_xr_controller_3d_button_released"]
-[connection signal="turned" from="Body/XROrigin3D/XRController3D Right" to="Body" method="_on_turned"]
+[node name="ThumbFingerIK" type="SkeletonIK3D" parent="PhysicsHandRight/Skeleton3D"]
+process_priority = 1
+root_bone = &"Thumb_Metacarpal_R"
+tip_bone = &"Thumb_Distal_R"
+min_distance = 0.001
+
+[node name="IndexFingerIK" type="SkeletonIK3D" parent="PhysicsHandRight/Skeleton3D"]
+process_priority = 1
+root_bone = &"Index_Metacarpal_R"
+tip_bone = &"Index_Distal_R"
+min_distance = 0.001
+
+[node name="MiddleFingerIK" type="SkeletonIK3D" parent="PhysicsHandRight/Skeleton3D"]
+process_priority = 1
+root_bone = &"Middle_Metacarpal_R"
+tip_bone = &"Middle_Distal_R"
+min_distance = 0.001
+
+[node name="RingFingerIK" type="SkeletonIK3D" parent="PhysicsHandRight/Skeleton3D"]
+process_priority = 1
+root_bone = &"Ring_Metacarpal_R"
+tip_bone = &"Ring_Distal_R"
+min_distance = 0.001
+
+[node name="LittleFingerIK" type="SkeletonIK3D" parent="PhysicsHandRight/Skeleton3D"]
+process_priority = 1
+root_bone = &"Little_Metacarpal_R"
+tip_bone = &"Little_Distal_R"
+min_distance = 0.001
+
+[connection signal="button_pressed" from="Body/XROrigin3D/XRController3D Left" to="Body/XROrigin3D/XRController3D Left" method="_on_button_pressed"]
+[connection signal="button_released" from="Body/XROrigin3D/XRController3D Left" to="Body/XROrigin3D/XRController3D Left" method="_on_button_released"]
+[connection signal="grab" from="Body/XROrigin3D/XRController3D Left" to="PhysicsHandLeft" method="_on_grab"]
+[connection signal="input_vector2_changed" from="Body/XROrigin3D/XRController3D Left" to="Body/XROrigin3D/XRController3D Left" method="_on_input_vector_2_changed"]
+[connection signal="thruster" from="Body/XROrigin3D/XRController3D Left" to="Body" method="_on_thruster"]
+[connection signal="thruster_brake" from="Body/XROrigin3D/XRController3D Left" to="Body" method="_on_thruster_brake"]
+[connection signal="turned_x" from="Body/XROrigin3D/XRController3D Left" to="Body" method="_on_turned_x"]
+[connection signal="button_pressed" from="Body/XROrigin3D/XRController3D Right" to="Body/XROrigin3D/XRController3D Right" method="_on_button_pressed"]
+[connection signal="button_released" from="Body/XROrigin3D/XRController3D Right" to="Body/XROrigin3D/XRController3D Right" method="_on_button_released"]
+[connection signal="grab" from="Body/XROrigin3D/XRController3D Right" to="PhysicsHandRight" method="_on_grab"]
+[connection signal="input_vector2_changed" from="Body/XROrigin3D/XRController3D Right" to="Body/XROrigin3D/XRController3D Right" method="_on_input_vector_2_changed"]
+[connection signal="thruster" from="Body/XROrigin3D/XRController3D Right" to="Body" method="_on_thruster"]
+[connection signal="thruster_brake" from="Body/XROrigin3D/XRController3D Right" to="Body" method="_on_thruster_brake"]
+[connection signal="turned_x" from="Body/XROrigin3D/XRController3D Right" to="Body" method="_on_turned_x"]
 [connection signal="new_pose" from="Body/XROrigin3D/OpenXRHand Left/HandPoseRecognition" to="PhysicsHandLeft" method="_on_hand_pose_recognition_new_pose"]
 [connection signal="new_pose" from="Body/XROrigin3D/OpenXRHand Right/HandPoseRecognition" to="PhysicsHandRight" method="_on_hand_pose_recognition_new_pose"]
 [connection signal="dropped_held_object" from="PhysicsHandLeft" to="Body" method="_on_hand_dropped_held_object"]

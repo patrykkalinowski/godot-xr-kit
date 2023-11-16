@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://b700ov8sanfbn"]
+[gd_scene load_steps=16 format=3 uid="uid://b700ov8sanfbn"]
 
 [ext_resource type="Script" path="res://addons/xr-kit/physics-movement/scripts/player.gd" id="1_egmgq"]
 [ext_resource type="PackedScene" uid="uid://dqnmcsaa6hvy3" path="res://addons/xr-kit/smooth-input-filter/scenes/smooth_open_xr_hand.tscn" id="5_2qybv"]
@@ -261,7 +261,14 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_qpdn8"]
+
+[sub_resource type="Sky" id="Sky_554u1"]
+sky_material = SubResource("ProceduralSkyMaterial_qpdn8")
+
 [sub_resource type="Environment" id="Environment_xj8r2"]
+background_mode = 2
+sky = SubResource("Sky_554u1")
 
 [node name="Player" type="Node3D" node_paths=PackedStringArray("origin", "camera")]
 script = ExtResource("1_egmgq")
@@ -282,13 +289,7 @@ tracker = &"left_hand"
 tracker = &"right_hand"
 
 [node name="OpenXRHand Left" type="OpenXRHand" parent="XROrigin3D"]
-_import_path = NodePath("")
-unique_name_in_owner = false
-process_mode = 0
-process_priority = 0
-editor_description = ""
 hand_skeleton = NodePath("Skeleton3D")
-script = null
 
 [node name="Skeleton3D" type="Skeleton3D" parent="XROrigin3D/OpenXRHand Left"]
 bones/0/name = "Wrist_L"
@@ -674,14 +675,8 @@ mesh = SubResource("ArrayMesh_j33p5")
 skin = SubResource("Skin_lvfor")
 
 [node name="OpenXRHand Right" type="OpenXRHand" parent="XROrigin3D"]
-_import_path = NodePath("")
-unique_name_in_owner = false
-process_mode = 0
-process_priority = 0
-editor_description = ""
 hand = 1
 hand_skeleton = NodePath("Skeleton3D")
-script = null
 
 [node name="Skeleton3D" type="Skeleton3D" parent="XROrigin3D/OpenXRHand Right"]
 bones/0/name = "Wrist_R"

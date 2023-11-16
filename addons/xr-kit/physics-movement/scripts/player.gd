@@ -1,6 +1,7 @@
 extends Node3D
 
 var interface: XRInterface
+@export_group("Nodes")
 @export var origin: XROrigin3D
 @export var camera: XRCamera3D
 

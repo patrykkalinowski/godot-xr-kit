@@ -19,6 +19,7 @@ config/features=PackedStringArray("4.2", "Forward Plus")
 window/size/viewport_width=1200
 window/size/viewport_height=800
 window/subwindows/embed_subwindows=false
+window/vsync/vsync_mode=0
 
 [layer_names]
 
@@ -28,10 +29,11 @@ window/subwindows/embed_subwindows=false
 
 [physics]
 
-common/physics_ticks_per_second=90
+common/physics_ticks_per_second=144
 3d/default_gravity=0.0
 
 [xr]
 
 openxr/enabled=true
+openxr/default_action_map="res://addons/xr-kit/physics-movement/openxr_action_map.tres"
 shaders/enabled=true

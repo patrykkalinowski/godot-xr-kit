@@ -4,6 +4,7 @@ signal grabbed(object: Node3D)
 signal dropped_held_object(object: Node3D)
 signal hand_reset(hand: Node3D)
 
+@export_group("Nodes")
 @export var origin: XROrigin3D # XROrigin3D node
 @export var camera: XRCamera3D # ARVRCamera node
 @export var controller: XRController3D
@@ -48,6 +49,8 @@ var finger_bones := {
 var finger_from_bone := {} # 0: "Wrist", 1: "Thumb", 2: "Thumb", (...)
 # default rest poses will be saved here on launch
 var bone_rest_poses := {}
+var reset_transform := Transform3D.IDENTITY
+var resetting_hand := false
 
 
 func _ready() -> void:
@@ -93,6 +96,13 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
+	# if reset hand was called, we teleport physics hand to reset transform
+	if resetting_hand:
+		set_global_transform(reset_transform)
+		# reset values to default
+		reset_transform = Transform3D.IDENTITY
+		resetting_hand = false
+
 	# process every bone in hand
 	for bone_id in controller_skeleton.get_bone_count():
 		process_bones(bone_id, delta)
@@ -103,7 +113,9 @@ func _physics_process(delta: float) -> void:
 	if distance_to_wrist.length_squared() > 0.09:
 		reset_hand()
 
-	_move(delta)
+	var linear_velocity = move(delta)
+
+	finger_micromovement(linear_velocity)
 
 
 func process_bones(bone_id: int, delta: float) -> void:
@@ -164,7 +176,7 @@ func process_bones(bone_id: int, delta: float) -> void:
 			# if one raycast is detecting collision already, we don't need to check others
 			break
 
-func _move(delta: float) -> void:
+func move(delta: float) -> Vector3:
 	# reset movement from previous frame, for some reason this prevents ghosting
 	set_linear_velocity(Vector3.ZERO)
 	set_angular_velocity(Vector3.ZERO)
@@ -176,6 +188,8 @@ func _move(delta: float) -> void:
 	# apply calculated forces
 	apply_central_force(linear_acceleration)
 	apply_torque(angular_acceleration)
+
+	return linear_acceleration
 
 
 func unfreeze_bones() -> void:
@@ -261,40 +275,41 @@ func drop_held_object() -> void:
 		unfreeze_bones()
 
 
+func finger_micromovement(linear_velocity) -> void:
+	# add inverse kinematics micro movement to fingers when hand is being moved
+	# makes the hand feel a little less stiff and more natural
+	# TODO: move nodes setup to _ready() and only update target transform here
+	# TODO: rotational force should also be taken into account
+	# TODO: fingers should react when hand is pushing on an object
+	var ik_nodes: Array = physics_skeleton.get_children()
+	# set target transform for every IK node (finger) in physics hand
+	for ik_node in ik_nodes:
+		# if node is not SkeletonIK3D, we skip it
+		if !(ik_node is SkeletonIK3D):
+			continue
+
+		# IK target vector is taken from physics hand velocity, flipped and greatly reduced
+		var target_vector: Vector3 = -linear_velocity.limit_length(10) / 10000
+		var tip_bone_index: int = physics_skeleton.find_bone(ik_node.get_tip_bone())
+		var tip_bone_pose: Transform3D = physics_skeleton.get_bone_global_pose_no_override(tip_bone_index)
+
+		ik_node.set_target_transform(physics_skeleton.global_transform * tip_bone_pose.translated(target_vector))
+		ik_node.start()
+
+
 func reset_hand() -> void:
 	drop_held_object()
-	# move physics hand back to controller position
-	global_transform.origin = (controller_skeleton.global_transform * controller_skeleton.get_bone_global_pose(0)).origin
-
+	# teleport physics hand back to controller position
+	# value of reset_transform will be read on the next physics frame
+	reset_transform = (controller_skeleton.global_transform * controller_skeleton.get_bone_global_pose(0))
+	resetting_hand = true
 	hand_reset.emit(self)
 
-
-func _on_xr_controller_3d_button_pressed(name: StringName) -> void:
-	if name == "grip_click":
+func _on_grab(grab: bool) -> void:
+	if grab:
 		grab()
-
-	if name == "by_button":
-		thruster_forward = true
-
-	if name == "ax_button":
-		thruster_backward = true
-
-	if name == "trigger_click":
-		trigger_pressed = true
-
-
-func _on_xr_controller_3d_button_released(name: StringName) -> void:
-	if name == "grip_click":
+	else:
 		drop_held_object()
-
-	if name == "by_button":
-		thruster_forward = false
-
-	if name == "ax_button":
-		thruster_backward = false
-
-	if name == "trigger_click":
-		trigger_pressed = false
 
 
 func _on_hand_pose_recognition_new_pose(previous_pose: StringName, pose: StringName) -> void:

@@ -1,32 +1,54 @@
 extends CharacterBody3D
 
+@export_group("Nodes")
 @export var origin: XROrigin3D
 @export var camera: XRCamera3D
-@export var turn_angle_degrees: int = 30 # angle to rotate player body using controller joystick
 @export var physics_hand_left: Node3D
 @export var physics_hand_right: Node3D
+
+@export_group("")
+@export var turn_angle_degrees: int = 30 # angle to rotate player body using controller joystick
 @export var body_mass: int = 80
 
 var physics_pivot_point := Transform3D.IDENTITY
 var controller_pivot_point := Transform3D.IDENTITY
 var held_objects_count: int = 0
+var thruster := Vector2(0,0)
+var thruster_brake := false
+var rotated_transform_x := Transform3D.IDENTITY
+var player_rotating_x := false
 
-
-func _process(delta) -> void:
+func _physics_process(delta) -> void:
 	var mass_modifiers := []
 	var blended_mass_modifier = 1.0
+
+
+	if player_rotating_x:
+		origin.transform = rotated_transform_x
+		set_physics_pivot_point()
+		set_controller_pivot_point()
+		# when rotating around a point, origin needs to be moved to proper position after rotation
+		global_translate(physics_pivot_point.origin - controller_pivot_point.origin)
+
+		for hand in [physics_hand_left, physics_hand_right]:
+			if !hand.held_object:
+				hand.reset_hand()
+
+		player_rotating_x = false
+
 
 	set_physics_pivot_point()
 	set_controller_pivot_point()
 
+	# apply thruster input
+	velocity += -camera.global_transform.basis.z.normalized() * delta * thruster.y / 10
+	velocity += camera.global_transform.basis.x.normalized() * delta * thruster.x / 10
+
+	if thruster_brake:
+		velocity *= 1 - (2 * delta)
+
+
 	for hand in [physics_hand_left, physics_hand_right]:
-		if hand.thruster_forward:
-			# TODO: increase force when players tries to stop while moving fast in opposite direction
-			velocity += -camera.global_transform.basis.z.normalized() * delta / 10
-
-		if hand.thruster_backward:
-			velocity += camera.global_transform.basis.z.normalized() * delta / 10
-
 		# body movement dependent on held object mass
 		if hand.held_object:
 			# if held object is lighter than player body,
@@ -48,7 +70,7 @@ func _process(delta) -> void:
 		set_velocity(Vector3.ZERO)
 
 		# body XYZ rotation when holding static objects, activated by trigger
-		if acts_as_static(physics_hand_left.held_object) and physics_hand_left.trigger_pressed or acts_as_static(physics_hand_right.held_object) and physics_hand_right.trigger_pressed:
+		if acts_as_static(physics_hand_left.held_object) and physics_hand_left.controller.free_rotation or acts_as_static(physics_hand_right.held_object) and physics_hand_right.controller.free_rotation:
 			var rotation_difference: Transform3D = physics_pivot_point * controller_pivot_point.inverse()
 			origin.global_transform = (rotation_difference * origin.global_transform).orthonormalized() # rotation_difference before original transform - order matters!
 			return
@@ -141,9 +163,18 @@ func acts_as_static(object: Node3D) -> bool:
 
 
 # turn signal received from controller
-func _on_turned(direction: int, controller: Node3D) -> void:
+func _on_turned_x(direction: int, controller: Node3D) -> void:
 	var angle: float = deg_to_rad(turn_angle_degrees) * direction
 	var rotation_difference := Transform3D.IDENTITY.rotated(origin.transform.basis.y, angle)
+	rotated_transform_x = rotation_difference * origin.transform
+	# rotation will be applied on next physics frame
+	player_rotating_x = true
+
+
+# TODO: up/down rotation doesn't work correctly, needs to be fixed
+func _on_turned_y(direction: int, controller: Node3D) -> void:
+	var angle: float = deg_to_rad(turn_angle_degrees) * direction
+	var rotation_difference := Transform3D.IDENTITY.rotated(camera.transform.basis.x, angle)
 	origin.transform = rotation_difference * origin.transform
 	set_physics_pivot_point()
 	set_controller_pivot_point()
@@ -170,3 +201,10 @@ func _on_hand_reset(hand: Node3D) -> void:
 
 func _on_hand_dropped_held_object(held_object: Node3D) -> void:
 	set_physics_pivot_point()
+
+
+func _on_thruster(value):
+	thruster = value
+
+func _on_thruster_brake(value):
+	thruster_brake = value
