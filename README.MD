@@ -23,7 +23,7 @@ Physics-based XR movement. Player hands collide with environment and can grab or
 - Ghost hand appears when controller hand gets far from physics one
 - Physics hand is teleported to controller position if it gets too far from it (ex. hand got stuck)
 - Body snap rotation
-- Body XYZ rotation around static object using hands (trigger activated)
+- Body smooth XYZ rotation around static object using hands (trigger activated)
 - Fingers wiggle a little when hand is moving
 
 [Read more](/addons/xr-kit/physics-movement/)
@@ -89,7 +89,9 @@ To get most recent version of the whole project, [download from master branch](h
 
 ## Compatibility
 
-Plugin should work with every OpenXR runtime supporting Vulkan and using OpenXR hand tracking extension. It works best with SteamVR, as it simulates hand skeleton even when using controllers. In other runtimes, when using controllers, hands will not receive skeleton data and they will not work.
+XR Kit requires both hand tracking and controller tracking at the same time. Hand models use hand tracking data to animate skeleton, while controllers provide inputs such as body rotation and thrusters movement.
+
+Currently, only SteamVR provides this functionality, as it simulates hand skeleton while using controllers. Other runtimes will either work with hand tracking only (and limited interactions due to lack of input controls) or controllers only (where hands do not work due to not having skeleton data provided)
 
 For plugin to be fully compatible with all OpenXR runtimes, it needs hand models with animations - which is planned, but not yet implemented.
 
