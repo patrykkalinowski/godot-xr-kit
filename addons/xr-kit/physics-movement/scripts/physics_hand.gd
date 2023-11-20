@@ -281,15 +281,11 @@ func finger_micromovement(linear_velocity) -> void:
 	# TODO: move nodes setup to _ready() and only update target transform here
 	# TODO: rotational force should also be taken into account
 	# TODO: fingers should react when hand is pushing on an object
-	var ik_nodes: Array = physics_skeleton.get_children()
+	var ik_nodes: Array[Node] = physics_skeleton.get_children().filter(func(node): return node is SkeletonIK3D)
 	# set target transform for every IK node (finger) in physics hand
 	for ik_node in ik_nodes:
-		# if node is not SkeletonIK3D, we skip it
-		if !(ik_node is SkeletonIK3D):
-			continue
-
 		# IK target vector is taken from physics hand velocity, flipped and greatly reduced
-		var target_vector: Vector3 = -linear_velocity.limit_length(10) / 10000
+		var target_vector: Vector3 = -linear_velocity.limit_length(100) / 100000
 		var tip_bone_index: int = physics_skeleton.find_bone(ik_node.get_tip_bone())
 		var tip_bone_pose: Transform3D = physics_skeleton.get_bone_global_pose_no_override(tip_bone_index)
 
