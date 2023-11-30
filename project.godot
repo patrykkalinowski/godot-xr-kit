@@ -21,6 +21,10 @@ window/size/viewport_height=800
 window/subwindows/embed_subwindows=false
 window/vsync/vsync_mode=0
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/godotopenxrvendors/plugin.cfg")
+
 [layer_names]
 
 3d_physics/layer_10="Physics Hand Left"
@@ -31,6 +35,10 @@ window/vsync/vsync_mode=0
 
 common/physics_ticks_per_second=144
 3d/default_gravity=0.0
+
+[rendering]
+
+textures/vram_compression/import_etc2_astc=true
 
 [xr]
 

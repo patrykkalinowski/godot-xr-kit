@@ -15,6 +15,7 @@ signal hand_reset(hand: Node3D)
 @export var finger_collider: PackedScene # finger collider node and raycasts for collision detection
 @export var wrist_raycast: RayCast3D # wrist raycasts detect objects to grab
 @export var wrist_joint: Generic6DOFJoint3D # joint is holding objects
+@export var grab_area: ShapeCast3D
 
 @export_group("PID Controller Linear")
 @export var Kp: float = 1800
@@ -31,24 +32,6 @@ var trigger_pressed: bool
 var physics_pivot_point: Node3D
 var thruster_forward: bool
 var thruster_backward: bool
-# Variables for freezing fingers on grab collisions
-var freezed_poses := {}
-# OpenXR specification requires 25 bones per hand
-# https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#_conventions_of_hand_joints
-var finger_bones := {
-	"Wrist": [0],
-	"Thumb": [1,2,3,4,5],
-	"Index": [0,5,6,7,8,9],
-	"Middle": [0,10,11,12,13,14],
-	"Ring": [0,15,16,17,18,19],
-	"Little": [0,20,21,22,23,24],
-	"Palm": [25]
-}
-# reversed finger_bones, keys are bone_ids and values are bone names
-# populated on script initialization
-var finger_from_bone := {} # 0: "Wrist", 1: "Thumb", 2: "Thumb", (...)
-# default rest poses will be saved here on launch
-var bone_rest_poses := {}
 var reset_transform := Transform3D.IDENTITY
 var resetting_hand := false
 
@@ -62,10 +45,6 @@ func _ready() -> void:
 		if bone_id in [4, 9, 14, 19, 24]:
 			pass
 
-		# save current bone skeleton pose as rest pose
-		bone_rest_poses[bone_id] = controller_skeleton.get_bone_global_pose(bone_id)
-		# save information to which finger current bone belongs
-		finger_from_bone[bone_id] = controller_skeleton.get_bone_name(bone_id).split("_")[0]
 		# get global transform of bone
 		var controller_bone_global_transform = controller_skeleton.global_transform * controller_skeleton.get_bone_global_pose(bone_id)
 		# place physics wrist at controller wrist bone position
@@ -117,17 +96,14 @@ func _physics_process(delta: float) -> void:
 
 	finger_micromovement(linear_velocity)
 
+	if held_object:
+		finger_procedural_grab_ik()
 
 func process_bones(bone_id: int, delta: float) -> void:
 	# every physics bone collider needs to follow its bone relative to RigidBody wrist position
 	# translation to Z=0.01 is needed because collider needs to begin with bone, not in the middle
 	# if we do translation, it messes up with physics mesh so we revert it for physics hand mesh
 	var physics_bone_target_transform: Transform3D = (controller_skeleton.get_bone_global_pose(0).inverse() * controller_skeleton.get_bone_global_pose(bone_id)).translated(Vector3(0, 0, 0.01)).rotated_local(Vector3.LEFT, deg_to_rad(-90))
-	# we add short lag to physics collider following controller bones, so raycasts can detect collisions
-	# TODO: Controller fingers do not follow natural path like real ones, but instead OpenXR runtime only sends current fingers location frame by frame
-		# if player presses grab button quickly, fingers teleport from rest pose to full grab pose in 1 frame, resulting in raycasts not detecting any collisions during grab
-		# it causes fingers going through held object instead of stopping on its surface
-		# potential solution described in this GDC talk at 12:50 mark: https://www.gdcvault.com/play/1024240/It-s-All-in-the
 	var physics_bone_collider := get_node(String(get_path()) + "/" + String.num_int64(bone_id))
 	physics_bone_collider.transform = physics_bone_target_transform
 
@@ -148,33 +124,6 @@ func process_bones(bone_id: int, delta: float) -> void:
 		color.a = distance_alpha
 		controller_hand_mesh_material.set_albedo(color)
 
-	# freezing fingers around grabbed objects
-	var bone_raycasts: Array[Node] = physics_bone_collider.get_node("RayCasts").get_children()
-	# for every raycast in physics bone
-	for raycast in bone_raycasts:
-		# check if any of them is detecting collision
-		raycast.force_raycast_update()
-		if raycast.get_collider():
-			# if yes, we will freeze this bone and backward bones
-			# first, we check which finger this bone belongs to
-			var finger: String = finger_from_bone[bone_id]
-
-			# we iterate through every bone in this finger
-			for finger_bone in finger_bones[finger]:
-				# only process bones which are backwards from colliding bone (or the colliding bone itself)
-				if finger_bone <= bone_id:
-					# check if we already have frozen pose for this bone
-					if !freezed_poses.has(finger_bone):
-						# if not, save current bone pose to freezed poses
-						freezed_poses[finger_bone] = controller_skeleton.get_bone_global_pose(finger_bone)
-
-					# if player is grabbing, only then we freeze fingers on previously detected collision points
-					if held_object:
-						# apply freezed pose to current bone
-						controller_skeleton.set_bone_global_pose_override(finger_bone, freezed_poses[finger_bone], 1.0, true)
-
-			# if one raycast is detecting collision already, we don't need to check others
-			break
 
 func move(delta: float) -> Vector3:
 	# reset movement from previous frame, for some reason this prevents ghosting
@@ -192,21 +141,20 @@ func move(delta: float) -> Vector3:
 	return linear_acceleration
 
 
-func unfreeze_bones() -> void:
-	controller_skeleton.clear_bones_global_pose_override()
-	freezed_poses.clear()
-
-
 func grab() -> Node3D:
 	if held_object:
 		return held_object
 
-	if wrist_raycast.get_collider():
+	# TODO: compare objects in grab_area for controller and physics hand and only if they match, grab this object
+	# TODO: highlight object which will be grabbed when hand is close to it
+	# TODO: select object closest to grab_area center (or palm)
+	grab_area.force_shapecast_update()
+	if grab_area.is_colliding():
 		# get object we just grabbed
-		held_object = get_node(wrist_raycast.get_collider().get_path())
+		held_object = grab_area.get_collider(0)
 		physics_pivot_point = Node3D.new()
 		held_object.add_child(physics_pivot_point)
-		physics_pivot_point.global_transform = global_transform.translated(wrist_raycast.get_collision_point() - global_transform.origin)
+		physics_pivot_point.global_transform = global_transform.translated(grab_area.get_collision_point(0) - global_transform.origin)
 		# set joint between hand and grabbed object
 		wrist_joint.set_node_a(get_path())
 		wrist_joint.set_node_b(held_object.get_path())
@@ -271,8 +219,7 @@ func drop_held_object() -> void:
 
 		held_object = null
 		physics_pivot_point.free()
-
-		unfreeze_bones()
+		physics_skeleton.set_show_rest_only(false)
 
 
 func finger_micromovement(linear_velocity) -> void:
@@ -293,8 +240,25 @@ func finger_micromovement(linear_velocity) -> void:
 		ik_node.start()
 
 
+func finger_procedural_grab_ik() -> void:
+	var fingers := ["Thumb", "Index", "Middle", "Ring", "Little"]
+
+	# lock hand bones to rest pose, so IK is not fighting with animation
+	physics_skeleton.set_show_rest_only(true)
+
+	for finger in fingers:
+		var raycast = get_node("Skeleton3D/Wrist/" + finger + "DistalRaycast")
+		var ik = get_node("Skeleton3D/" + finger + "FingerIK")
+
+		raycast.force_raycast_update()
+		if raycast.get_collider() == held_object:
+			ik.target = Transform3D.IDENTITY.translated(raycast.get_collision_point())
+			ik.start()
+
+
 func reset_hand() -> void:
 	drop_held_object()
+	physics_skeleton.set_show_rest_only(false)
 	# teleport physics hand back to controller position
 	# value of reset_transform will be read on the next physics frame
 	reset_transform = (controller_skeleton.global_transform * controller_skeleton.get_bone_global_pose(0))

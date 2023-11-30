@@ -89,27 +89,11 @@ To get most recent version of the whole project, [download from master branch](h
 
 ## Compatibility
 
-XR Kit requires both hand tracking and controller tracking at the same time. Hand models use hand tracking data to animate skeleton, while controllers provide inputs such as body rotation and thrusters movement.
-
-Currently, only SteamVR provides this functionality, as it simulates hand skeleton while using controllers. Other runtimes will either work with hand tracking only (and limited interactions due to lack of input controls) or controllers only (where hands do not work due to not having skeleton data provided)
-
-For plugin to be fully compatible with all OpenXR runtimes, it needs hand models with animations - which is planned, but not yet implemented.
-
-| Headset | Runtime | Compatible |
-|---|---|:---:|
-| Meta Quest 3 | SteamVR | Yes |
-| HP Reverb G2 | SteamVR | Yes |
-| Pico 4 | Standalone | No hand tracking |
-| Meta Quest 2 | Standalone | Hand tracking only (no controllers)
-| Other | ? | ? |
+XR Kit has been tested with SteamVR and Oculus (PC and standalone) using Meta Quest 3. 
 
 ## Contributing
 
 If you'd like to improve the plugin, there are few options:
-
-### Test compatibility with other headsets and runtimes
-
-I don't have access to other headset than mine (HP Reverb G2). Compatibility checks with other headsets are more than welcome.
 
 ### Code improvements
 
