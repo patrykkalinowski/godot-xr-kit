@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://kl4nx8ivav56"]
+[gd_scene load_steps=27 format=3 uid="uid://kl4nx8ivav56"]
 
 [ext_resource type="Script" path="res://addons/xr-kit/physics-movement/scripts/player.gd" id="1_i7ssh"]
 [ext_resource type="PackedScene" uid="uid://b2jji68mjbl3h" path="res://addons/xr-kit/cinematic-view/scenes/cinematic_view.tscn" id="2_ao5mr"]
@@ -6,14 +6,12 @@
 [ext_resource type="Script" path="res://addons/xr-kit/physics-movement/scripts/head.gd" id="3_ecrt7"]
 [ext_resource type="Script" path="res://addons/xr-kit/physics-movement/scripts/chest.gd" id="4_he44h"]
 [ext_resource type="Script" path="res://addons/xr-kit/physics-movement/scripts/controller.gd" id="5_1paut"]
-[ext_resource type="Texture2D" uid="uid://g8ny8gqbmsj0" path="res://addons/xr-kit/physics-movement/assets/valve_hand_models/left_hand_file2.png" id="6_xvpy5"]
-[ext_resource type="Texture2D" uid="uid://d4hrfnsl2le5e" path="res://addons/xr-kit/physics-movement/assets/valve_hand_models/right_hand_file2.png" id="7_bve0s"]
+[ext_resource type="Texture2D" uid="uid://djb1jvsia1ht2" path="res://addons/xr-kit/physics-movement/assets/valve_hand_models/textures/vr_glove_normal.png" id="7_mov64"]
 [ext_resource type="PackedScene" uid="uid://csmt4dhikwq4i" path="res://addons/xr-kit/physics-movement/scenes/finger_collider.tscn" id="9_skcr2"]
 [ext_resource type="Script" path="res://addons/xr-kit/physics-movement/scripts/physics_hand.gd" id="10_7gjb2"]
 [ext_resource type="PackedScene" uid="uid://7c0k8oiqssl5" path="res://addons/xr-kit/hand-gesture-recognition/scenes/hand_pose_recognition.tscn" id="11_hqvgg"]
 [ext_resource type="PackedScene" uid="uid://bilvqj7qyd5br" path="res://addons/xr-kit/physics-movement/scenes/controller_animation_tree.tscn" id="11_j5hkn"]
-[ext_resource type="Texture2D" uid="uid://gt3jx4tbsre1" path="res://addons/xr-kit/physics-movement/assets/valve_hand_models/left_hand_file3.png" id="12_glx1i"]
-[ext_resource type="Texture2D" uid="uid://c3pr0jnkal1ta" path="res://addons/xr-kit/physics-movement/assets/valve_hand_models/right_hand_file3.png" id="13_c2a8v"]
+[ext_resource type="Texture2D" uid="uid://dm5gmsh1vgqxw" path="res://addons/xr-kit/physics-movement/assets/valve_hand_models/textures/vr_glove_color_red.jpg" id="12_0ewhw"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_ga5er"]
 radius = 0.11
@@ -27,7 +25,7 @@ vertex_color_use_as_albedo = true
 metallic = 0.5
 roughness = 0.748767
 normal_enabled = true
-normal_texture = ExtResource("6_xvpy5")
+normal_texture = ExtResource("7_mov64")
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_hmifn"]
 resource_name = "left_hand_Mesh001"
@@ -140,7 +138,7 @@ vertex_color_use_as_albedo = true
 metallic = 0.5
 roughness = 0.748767
 normal_enabled = true
-normal_texture = ExtResource("7_bve0s")
+normal_texture = ExtResource("7_mov64")
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_yho1f"]
 resource_name = "right_hand_Mesh"
@@ -248,11 +246,11 @@ bind/25/pose = Transform3D(0.083606, -0.0165156, 0.996362, 0.97618, 0.20224, -0.
 resource_name = "glove"
 cull_mode = 2
 vertex_color_use_as_albedo = true
-albedo_texture = ExtResource("12_glx1i")
+albedo_texture = ExtResource("12_0ewhw")
 metallic = 0.5
 roughness = 0.748767
 normal_enabled = true
-normal_texture = ExtResource("6_xvpy5")
+normal_texture = ExtResource("7_mov64")
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_u3sx3"]
 resource_name = "left_hand_Mesh001"
@@ -364,11 +362,11 @@ height = 0.100927
 resource_name = "blinn1"
 cull_mode = 2
 vertex_color_use_as_albedo = true
-albedo_texture = ExtResource("13_c2a8v")
+albedo_texture = ExtResource("12_0ewhw")
 metallic = 0.5
 roughness = 0.748767
 normal_enabled = true
-normal_texture = ExtResource("7_bve0s")
+normal_texture = ExtResource("7_mov64")
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_8jodk"]
 resource_name = "right_hand_Mesh"
