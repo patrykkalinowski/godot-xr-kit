@@ -34,6 +34,7 @@ var thruster_forward: bool
 var thruster_backward: bool
 var reset_transform := Transform3D.IDENTITY
 var resetting_hand := false
+var is_controller_tracking: bool
 
 
 func _ready() -> void:
@@ -273,6 +274,10 @@ func _on_grab(grab: bool) -> void:
 
 
 func _on_hand_pose_recognition_new_pose(previous_pose: StringName, pose: StringName) -> void:
+	# do not grab/drop based on hand poses when we receive data from controller
+	if is_controller_tracking:
+		return
+
 	if pose in ["half_grip", "full_grip", "thumb_up", "point"] and previous_pose in ["open", "rest"]:
 		grab()
 
@@ -321,3 +326,7 @@ class PIDController:
 		output = Kp * proportional + Ki * integral + Kd * derivative
 
 		return output
+
+
+func _on_controller_tracking_changed(tracking: bool) -> void:
+	is_controller_tracking = tracking
