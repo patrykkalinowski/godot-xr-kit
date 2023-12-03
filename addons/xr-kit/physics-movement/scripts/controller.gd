@@ -32,6 +32,9 @@ func _ready() -> void:
 		# return to rest pose
 		controller_skeleton.reset_bone_poses()
 
+	# emit current state of tracking
+	tracking_changed.emit(get_has_tracking_data())
+
 
 func turn_x(joystick: float):
 	if (joystick < 0.1 and joystick > -0.1):
