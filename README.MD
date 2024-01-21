@@ -11,19 +11,19 @@ Physics-based XR movement. Player hands collide with environment and can grab or
 ### Features
 
 - Physics hand follows controller and can be blocked by world objects
-- Players can grab and move objects
+- Player can grab and move objects
   - Heavy objects are harder to move
   - Grabbing heavy objects with two hands makes them easier to move
   - Fingers curl around grabbed objects geometry
-- Players can move themselves by pushing away from objects
+- Player can move themselves by pushing away from objects
   - Heavier objects allow for stronger push
-- Players can move in space with thrusters
-- Players can brake in space with thruster brake
-- Players can hit objects with their head and push themselves away
+- Player can move in space with thrusters
+- Player can brake in space with thruster brake
+- Player can hit objects with their head and push themselves away
 - Ghost hand appears when controller hand gets far from physics one
-- Physics hand is teleported to controller position if it gets too far from it (ex. hand got stuck)
-- Body snap rotation
-- Body smooth XYZ rotation around static object using hands (trigger activated)
+- Physics hand is reset to controller position if it gets too far from it (ex. hand got stuck)
+- Joystick snap rotation
+- Smooth 6 degrees of freedom rotation around grabbed static object (trigger activated)
 - Fingers wiggle a little when hand is moving
 
 [Read more](/addons/xr-kit/physics-movement/)
@@ -34,7 +34,7 @@ Real-time recognition of hand poses based on predefined templates.
 
 ![Godot XR Kit - Hand Gesture Recognition](/screenshots/hand_gesture_recognition.gif)
 
-### Poses tracked by default:
+## Poses tracked by default:
 
 - open
 - rest
@@ -90,6 +90,12 @@ To get most recent version of the whole project, [download from master branch](h
 `/addons/xr-kit/examples/playground.tscn` implements Physics Movement, Hand Gesture Recognition and Cinematic View.
 
 `/addons/xr-kit/examples/smooth_input_filter.tscn` implements Smooth Input Filter.
+
+If you are on Quest, make sure your hardware is configured properly:
+
+- Enable "Developer Runtime Features" in Oculus PCVR app (Settings -> Beta)
+- Enable Developer Mode in Meta Quest app on your phone
+
 
 ## Compatibility
 
