@@ -1,19 +1,21 @@
-[gd_scene load_steps=27 format=3 uid="uid://kl4nx8ivav56"]
+[gd_scene load_steps=28 format=3 uid="uid://kl4nx8ivav56"]
 
 [ext_resource type="Script" path="res://addons/xr-kit/physics-movement/scripts/player.gd" id="1_i7ssh"]
 [ext_resource type="PackedScene" uid="uid://b2jji68mjbl3h" path="res://addons/xr-kit/cinematic-view/scenes/cinematic_view.tscn" id="2_ao5mr"]
 [ext_resource type="Script" path="res://addons/xr-kit/physics-movement/scripts/body.gd" id="2_du0ta"]
-[ext_resource type="Script" path="res://addons/xr-kit/physics-movement/scripts/head.gd" id="3_ecrt7"]
 [ext_resource type="Script" path="res://addons/xr-kit/physics-movement/scripts/chest.gd" id="4_he44h"]
 [ext_resource type="Script" path="res://addons/xr-kit/physics-movement/scripts/controller.gd" id="5_1paut"]
 [ext_resource type="Texture2D" uid="uid://djb1jvsia1ht2" path="res://addons/xr-kit/physics-movement/assets/valve_hand_models/textures/vr_glove_normal.png" id="7_mov64"]
+[ext_resource type="PackedScene" uid="uid://c55ye36xc38vm" path="res://addons/xr-kit/hand-gesture-recognition/scenes/hand_pose_save.tscn" id="9_dmrsn"]
 [ext_resource type="PackedScene" uid="uid://csmt4dhikwq4i" path="res://addons/xr-kit/physics-movement/scenes/finger_collider.tscn" id="9_skcr2"]
 [ext_resource type="Script" path="res://addons/xr-kit/physics-movement/scripts/physics_hand.gd" id="10_7gjb2"]
 [ext_resource type="PackedScene" uid="uid://7c0k8oiqssl5" path="res://addons/xr-kit/hand-gesture-recognition/scenes/hand_pose_recognition.tscn" id="11_hqvgg"]
 [ext_resource type="PackedScene" uid="uid://bilvqj7qyd5br" path="res://addons/xr-kit/physics-movement/scenes/controller_animation_tree.tscn" id="11_j5hkn"]
 [ext_resource type="Texture2D" uid="uid://dm5gmsh1vgqxw" path="res://addons/xr-kit/physics-movement/assets/valve_hand_models/textures/vr_glove_color_red.jpg" id="12_0ewhw"]
+[ext_resource type="PackedScene" uid="uid://c2obhfn7ss62o" path="res://addons/xr-kit/physics-movement/scenes/grab_joint.tscn" id="13_htrok"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_ga5er"]
+margin = 0.01
 radius = 0.11
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_17n1d"]
@@ -472,71 +474,57 @@ bind/25/pose = Transform3D(0.083606, -0.0165156, 0.996362, 0.97618, 0.20224, -0.
 
 [node name="Player" type="Node3D" node_paths=PackedStringArray("origin", "camera")]
 script = ExtResource("1_i7ssh")
-origin = NodePath("Body/XROrigin3D")
-camera = NodePath("Body/XROrigin3D/XRCamera3D")
+origin = NodePath("Body/Origin")
+camera = NodePath("Body/Origin/Camera")
 
 [node name="CinematicView" parent="." node_paths=PackedStringArray("xr_camera") instance=ExtResource("2_ao5mr")]
 enabled = false
-xr_camera = NodePath("../Body/XROrigin3D/XRCamera3D")
+xr_camera = NodePath("../Body/Origin/Camera")
 
-[node name="Body" type="CharacterBody3D" parent="." node_paths=PackedStringArray("origin", "camera", "physics_hand_left", "physics_hand_right")]
+[node name="Body" type="CharacterBody3D" parent="."]
+unique_name_in_owner = true
 motion_mode = 1
 platform_on_leave = 2
 script = ExtResource("2_du0ta")
-origin = NodePath("XROrigin3D")
-camera = NodePath("XROrigin3D/XRCamera3D")
-physics_hand_left = NodePath("../PhysicsHandLeft")
-physics_hand_right = NodePath("../PhysicsHandRight")
 
-[node name="XROrigin3D" type="XROrigin3D" parent="Body"]
-current = true
-
-[node name="XRCamera3D" type="XRCamera3D" parent="Body/XROrigin3D"]
+[node name="HeadCollider" type="CollisionShape3D" parent="Body"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7, 0)
-
-[node name="Head" type="RigidBody3D" parent="Body/XROrigin3D/XRCamera3D" node_paths=PackedStringArray("body", "camera")]
-collision_layer = 2048
-collision_mask = 3585
-mass = 10.0
-gravity_scale = 0.0
-can_sleep = false
-freeze = true
-freeze_mode = 1
-custom_integrator = true
-continuous_cd = true
-max_contacts_reported = 1
-contact_monitor = true
-script = ExtResource("3_ecrt7")
-body = NodePath("../../..")
-camera = NodePath("..")
-
-[node name="Head Collider" type="CollisionShape3D" parent="Body/XROrigin3D/XRCamera3D/Head"]
 shape = SubResource("SphereShape3D_ga5er")
 
-[node name="Chest" type="Node3D" parent="Body/XROrigin3D/XRCamera3D" node_paths=PackedStringArray("origin", "camera", "left_wrist", "right_wrist")]
+[node name="Origin" type="XROrigin3D" parent="Body"]
+unique_name_in_owner = true
+current = true
+
+[node name="Camera" type="XRCamera3D" parent="Body/Origin"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7, 0)
+current = true
+
+[node name="Chest" type="Node3D" parent="Body/Origin/Camera" node_paths=PackedStringArray("left_wrist", "right_wrist")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3, 0)
 script = ExtResource("4_he44h")
-origin = NodePath("../..")
-camera = NodePath("..")
 left_wrist = NodePath("../../../../PhysicsHandLeft")
 right_wrist = NodePath("../../../../PhysicsHandRight")
 
-[node name="XRController3D Left" type="XRController3D" parent="Body/XROrigin3D" node_paths=PackedStringArray("controller_skeleton", "openxr_hand")]
+[node name="ControllerLeft" type="XRController3D" parent="Body/Origin" node_paths=PackedStringArray("controller_skeleton", "openxr_hand")]
+unique_name_in_owner = true
 tracker = &"left_hand"
 script = ExtResource("5_1paut")
-controller_skeleton = NodePath("../OpenXRHand Left/Controller Skeleton3D Left")
-openxr_hand = NodePath("../OpenXRHand Left")
+controller_skeleton = NodePath("../OpenXRHandLeft/ControllerSkeletonLeft")
+openxr_hand = NodePath("../OpenXRHandLeft")
 
-[node name="XRController3D Right" type="XRController3D" parent="Body/XROrigin3D" node_paths=PackedStringArray("controller_skeleton", "openxr_hand")]
+[node name="ControllerRight" type="XRController3D" parent="Body/Origin" node_paths=PackedStringArray("controller_skeleton", "openxr_hand")]
+unique_name_in_owner = true
 tracker = &"right_hand"
 script = ExtResource("5_1paut")
-controller_skeleton = NodePath("../OpenXRHand Right/Controller Skeleton3D Right")
-openxr_hand = NodePath("../OpenXRHand Right")
+controller_skeleton = NodePath("../OpenXRHandRight/ControllerSkeletonRight")
+openxr_hand = NodePath("../OpenXRHandRight")
 
-[node name="OpenXRHand Left" type="OpenXRHand" parent="Body/XROrigin3D"]
-hand_skeleton = NodePath("Controller Skeleton3D Left")
+[node name="OpenXRHandLeft" type="OpenXRHand" parent="Body/Origin"]
+hand_skeleton = NodePath("ControllerSkeletonLeft")
 
-[node name="Controller Skeleton3D Left" type="Skeleton3D" parent="Body/XROrigin3D/OpenXRHand Left"]
+[node name="ControllerSkeletonLeft" type="Skeleton3D" parent="Body/Origin/OpenXRHandLeft"]
+unique_name_in_owner = true
 bones/0/name = "Wrist_L"
 bones/0/parent = -1
 bones/0/rest = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
@@ -720,36 +708,81 @@ bones/25/position = Vector3(0.0082902, 0.00927313, -0.0510244)
 bones/25/rotation = Quaternion(0.101224, -0.0124619, -0.0407884, 0.993949)
 bones/25/scale = Vector3(1, 1, 1)
 
-[node name="vr_glove_left_slim" type="MeshInstance3D" parent="Body/XROrigin3D/OpenXRHand Left/Controller Skeleton3D Left"]
+[node name="vr_glove_left_slim" type="MeshInstance3D" parent="Body/Origin/OpenXRHandLeft/ControllerSkeletonLeft"]
 gi_mode = 0
 mesh = SubResource("ArrayMesh_hmifn")
 skin = SubResource("Skin_lvfor")
 
-[node name="AnimationTree" parent="Body/XROrigin3D/OpenXRHand Left/Controller Skeleton3D Left" instance=ExtResource("11_j5hkn")]
+[node name="AnimationTree" parent="Body/Origin/OpenXRHandLeft/ControllerSkeletonLeft" instance=ExtResource("11_j5hkn")]
 
-[node name="Palm" type="BoneAttachment3D" parent="Body/XROrigin3D/OpenXRHand Left/Controller Skeleton3D Left"]
+[node name="Palm" type="BoneAttachment3D" parent="Body/Origin/OpenXRHandLeft/ControllerSkeletonLeft"]
 transform = Transform3D(0.996362, 0.0785603, -0.0330305, -0.0836061, 0.97618, -0.200206, 0.0165155, 0.20224, 0.979197, 0.0082902, 0.00927313, -0.0510244)
 bone_name = "Palm_L"
 bone_idx = 25
 
-[node name="Wrist" type="BoneAttachment3D" parent="Body/XROrigin3D/OpenXRHand Left/Controller Skeleton3D Left"]
+[node name="Palm Pose" type="Node3D" parent="Body/Origin/OpenXRHandLeft/ControllerSkeletonLeft/Palm"]
+transform = Transform3D(-7.35745e-08, 1, 0, -1, -4.6799e-08, 0, 0, 0, 1, 4.65661e-10, -0.0369767, -0.00953961)
+
+[node name="Wrist" type="BoneAttachment3D" parent="Body/Origin/OpenXRHandLeft/ControllerSkeletonLeft"]
 bone_name = "Wrist_L"
 bone_idx = 0
 
-[node name="Grip Pose" type="CSGBox3D" parent="Body/XROrigin3D/OpenXRHand Left/Controller Skeleton3D Left/Wrist"]
+[node name="GripPose" type="CSGBox3D" parent="Body/Origin/OpenXRHandLeft/ControllerSkeletonLeft/Wrist"]
 transform = Transform3D(0.0193006, 0.473416, -0.880628, -0.998094, -0.0425153, -0.0447307, -0.0586168, 0.879812, 0.471694, -0.00144383, -0.0223164, -0.0836568)
 visible = false
 size = Vector3(0.01, 0.01, 0.5)
 
-[node name="HandPoseRecognition" parent="Body/XROrigin3D/OpenXRHand Left" node_paths=PackedStringArray("skeleton", "debug_label") instance=ExtResource("11_hqvgg")]
-skeleton = NodePath("../Controller Skeleton3D Left")
+[node name="ThumbDistal" type="BoneAttachment3D" parent="Body/Origin/OpenXRHandLeft/ControllerSkeletonLeft"]
+transform = Transform3D(0.21025, 0.520199, -0.827761, -0.911324, 0.410822, 0.0267033, 0.353954, 0.748743, 0.560446, 0.0716159, -0.0363011, -0.0814991)
+bone_name = "Thumb_Distal_L"
+bone_idx = 3
+
+[node name="Touch" type="Node3D" parent="Body/Origin/OpenXRHandLeft/ControllerSkeletonLeft/ThumbDistal"]
+transform = Transform3D(1, -2.23517e-08, -2.98023e-08, -3.72529e-09, 1, 7.45058e-09, 2.98023e-08, -1.49012e-08, 1, 0, -0.0137826, -0.0135852)
+
+[node name="IndexDistal" type="BoneAttachment3D" parent="Body/Origin/OpenXRHandLeft/ControllerSkeletonLeft"]
+transform = Transform3D(0.944565, 0.0515952, -0.324244, -0.0877001, 0.991341, -0.0977355, 0.316393, 0.120754, 0.940911, 0.0567251, 0.0124995, -0.154457)
+bone_name = "Index_Distal_L"
+bone_idx = 8
+
+[node name="Touch" type="Node3D" parent="Body/Origin/OpenXRHandLeft/ControllerSkeletonLeft/IndexDistal"]
+transform = Transform3D(1, -2.23517e-08, 0, 0, 1, 0, -1.49012e-08, 0, 1, -1.19209e-07, -0.00832665, -0.0135852)
+
+[node name="MiddleDistal" type="BoneAttachment3D" parent="Body/Origin/OpenXRHandLeft/ControllerSkeletonLeft"]
+transform = Transform3D(0.893711, 0.386272, -0.228196, -0.399801, 0.916488, -0.0144304, 0.203565, 0.10413, 0.973508, 0.0223921, 0.0140099, -0.160818)
+bone_name = "Middle_Distal_L"
+bone_idx = 13
+
+[node name="Touch" type="Node3D" parent="Body/Origin/OpenXRHandLeft/ControllerSkeletonLeft/MiddleDistal"]
+transform = Transform3D(1, 9.31323e-10, 7.45058e-09, 0, 1, -2.98023e-08, -3.72529e-09, 0, 1, -4.17233e-07, -0.00977743, -0.0233366)
+
+[node name="RingDistal" type="BoneAttachment3D" parent="Body/Origin/OpenXRHandLeft/ControllerSkeletonLeft"]
+transform = Transform3D(0.985479, 0.115492, -0.124468, -0.095745, 0.983361, 0.154379, 0.140227, -0.14022, 0.98014, -0.00552747, 0.00716149, -0.149654)
+bone_name = "Ring_Distal_L"
+bone_idx = 18
+
+[node name="Touch" type="Node3D" parent="Body/Origin/OpenXRHandLeft/ControllerSkeletonLeft/RingDistal"]
+transform = Transform3D(1, -2.79397e-09, 6.51926e-09, 0, 1, -2.98023e-08, -3.72529e-09, 0, 1, -2.98023e-07, -0.0105623, -0.0190609)
+
+[node name="LittleDistal" type="BoneAttachment3D" parent="Body/Origin/OpenXRHandLeft/ControllerSkeletonLeft"]
+transform = Transform3D(0.983498, -0.139315, -0.115414, 0.154043, 0.979416, 0.13043, 0.0948674, -0.146057, 0.984716, -0.0368573, -0.00985881, -0.122218)
+bone_name = "Little_Distal_L"
+bone_idx = 23
+
+[node name="Touch" type="Node3D" parent="Body/Origin/OpenXRHandLeft/ControllerSkeletonLeft/LittleDistal"]
+transform = Transform3D(1, 0, 0, 1.19209e-07, 1, -2.98023e-08, 0, 2.98023e-08, 1, -2.01166e-07, -0.00835991, -0.012575)
+
+[node name="HandPoseRecognition" parent="Body/Origin/OpenXRHandLeft" node_paths=PackedStringArray("camera", "skeleton", "debug_label") instance=ExtResource("11_hqvgg")]
+camera = NodePath("../../Camera")
+skeleton = NodePath("../ControllerSkeletonLeft")
 debug_label = NodePath("../../../../PhysicsHandLeft/DebugLabel")
 
-[node name="OpenXRHand Right" type="OpenXRHand" parent="Body/XROrigin3D"]
+[node name="OpenXRHandRight" type="OpenXRHand" parent="Body/Origin"]
 hand = 1
-hand_skeleton = NodePath("Controller Skeleton3D Right")
+hand_skeleton = NodePath("ControllerSkeletonRight")
 
-[node name="Controller Skeleton3D Right" type="Skeleton3D" parent="Body/XROrigin3D/OpenXRHand Right"]
+[node name="ControllerSkeletonRight" type="Skeleton3D" parent="Body/Origin/OpenXRHandRight"]
+unique_name_in_owner = true
 bones/0/name = "Wrist_R"
 bones/0/parent = -1
 bones/0/rest = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
@@ -809,7 +842,7 @@ bones/7/scale = Vector3(1, 1, 1)
 bones/8/name = "Index_Distal_R"
 bones/8/parent = 7
 bones/8/rest = Transform3D(0.999997, 0.000115875, -0.00232981, 0.000240702, 0.988308, 0.152468, 0.00232024, -0.152468, 0.988306, 1.74279e-07, -4.84116e-07, -0.0282749)
-bones/8/enabled = true
+bones/8/enabled = false
 bones/8/position = Vector3(1.74279e-07, -4.84116e-07, -0.0282749)
 bones/8/rotation = Quaternion(0.0134095, -0.022824, 0.00185046, 0.999648)
 bones/8/scale = Vector3(1, 1, 1)
@@ -933,49 +966,98 @@ bones/25/position = Vector3(-0.00829025, 0.00927338, -0.0510245)
 bones/25/rotation = Quaternion(0.101224, 0.012462, 0.0407884, 0.993949)
 bones/25/scale = Vector3(1, 1, 1)
 
-[node name="vr_glove_right_slim" type="MeshInstance3D" parent="Body/XROrigin3D/OpenXRHand Right/Controller Skeleton3D Right"]
+[node name="vr_glove_right_slim" type="MeshInstance3D" parent="Body/Origin/OpenXRHandRight/ControllerSkeletonRight"]
 gi_mode = 0
 mesh = SubResource("ArrayMesh_yho1f")
 skin = SubResource("Skin_c5byb")
 
-[node name="AnimationTree" parent="Body/XROrigin3D/OpenXRHand Right/Controller Skeleton3D Right" instance=ExtResource("11_j5hkn")]
+[node name="AnimationTree" parent="Body/Origin/OpenXRHandRight/ControllerSkeletonRight" instance=ExtResource("11_j5hkn")]
 
-[node name="Palm" type="BoneAttachment3D" parent="Body/XROrigin3D/OpenXRHand Right/Controller Skeleton3D Right"]
+[node name="Palm" type="BoneAttachment3D" parent="Body/Origin/OpenXRHandRight/ControllerSkeletonRight"]
 transform = Transform3D(0.996362, -0.0785603, 0.0330307, 0.0836061, 0.97618, -0.200206, -0.0165157, 0.20224, 0.979197, -0.00829025, 0.00927338, -0.0510245)
 bone_name = "Palm_R"
 bone_idx = 25
 
-[node name="Wrist" type="BoneAttachment3D" parent="Body/XROrigin3D/OpenXRHand Right/Controller Skeleton3D Right"]
+[node name="Palm Pose" type="Node3D" parent="Body/Origin/OpenXRHandRight/ControllerSkeletonRight/Palm"]
+transform = Transform3D(-2.49129e-08, -1, 7.45058e-09, 1, -3.58559e-08, 0, 0, -3.72529e-09, 1, -9.31323e-10, -0.0345119, -0.00953961)
+
+[node name="Wrist" type="BoneAttachment3D" parent="Body/Origin/OpenXRHandRight/ControllerSkeletonRight"]
 bone_name = "Wrist_R"
 bone_idx = 0
 
-[node name="Grip Pose" type="CSGBox3D" parent="Body/XROrigin3D/OpenXRHand Right/Controller Skeleton3D Right/Wrist"]
+[node name="GripPose" type="CSGBox3D" parent="Body/Origin/OpenXRHandRight/ControllerSkeletonRight/Wrist"]
 transform = Transform3D(-0.0203586, -0.470737, 0.88204, 0.998094, 0.0418326, 0.0453632, -0.0582521, 0.881281, 0.468989, -0.0014438, -0.0223164, -0.0836568)
 visible = false
 size = Vector3(0.01, 0.01, 0.5)
 
-[node name="HandPoseRecognition" parent="Body/XROrigin3D/OpenXRHand Right" node_paths=PackedStringArray("skeleton", "debug_label") instance=ExtResource("11_hqvgg")]
-skeleton = NodePath("../Controller Skeleton3D Right")
+[node name="ThumbDistal" type="BoneAttachment3D" parent="Body/Origin/OpenXRHandRight/ControllerSkeletonRight"]
+transform = Transform3D(-0.175464, -0.524289, 0.833267, 0.927957, 0.1946, 0.317845, -0.328797, 0.829006, 0.452371, -0.0716715, -0.0392382, -0.0804074)
+bone_name = "Thumb_Distal_R"
+bone_idx = 3
+
+[node name="Touch" type="Node3D" parent="Body/Origin/OpenXRHandRight/ControllerSkeletonRight/ThumbDistal"]
+transform = Transform3D(1, -2.6077e-08, 2.98023e-08, -7.45058e-09, 1, 0, -2.98023e-08, 1.49012e-08, 1, -2.38419e-07, -0.0146961, -0.0135852)
+
+[node name="IndexDistal" type="BoneAttachment3D" parent="Body/Origin/OpenXRHandRight/ControllerSkeletonRight"]
+transform = Transform3D(0.954386, -0.284289, 0.0912455, 0.281416, 0.958612, 0.0432152, -0.0997546, -0.015566, 0.994891, -0.0463653, 0.0144965, -0.156487)
+bone_name = "Index_Distal_R"
+bone_idx = 8
+
+[node name="Touch" type="Node3D" parent="Body/Origin/OpenXRHandRight/ControllerSkeletonRight/IndexDistal"]
+transform = Transform3D(1, -2.23517e-08, 0, 0, 1, 0, -1.49012e-08, 0, 1, -1.19209e-07, -0.00832665, -0.0135852)
+
+[node name="MiddleDistal" type="BoneAttachment3D" parent="Body/Origin/OpenXRHandRight/ControllerSkeletonRight"]
+transform = Transform3D(0.954037, 0.231398, -0.190438, -0.244754, 0.968318, -0.0495586, 0.172937, 0.0938914, 0.980447, 0.00120391, 0.0159896, -0.161209)
+bone_name = "Middle_Distal_R"
+bone_idx = 13
+
+[node name="Touch" type="Node3D" parent="Body/Origin/OpenXRHandRight/ControllerSkeletonRight/MiddleDistal"]
+transform = Transform3D(1, -2.79397e-09, 6.51926e-09, 0, 1, -2.98023e-08, -3.72529e-09, 0, 1, -2.98023e-07, -0.0105623, -0.0190609)
+
+[node name="RingDistal" type="BoneAttachment3D" parent="Body/Origin/OpenXRHandRight/ControllerSkeletonRight"]
+transform = Transform3D(0.929784, 0.216356, -0.297812, -0.171024, 0.970318, 0.170977, 0.325965, -0.108039, 0.939188, 0.0336322, 0.00605624, -0.146927)
+bone_name = "Ring_Distal_R"
+bone_idx = 18
+
+[node name="Touch" type="Node3D" parent="Body/Origin/OpenXRHandRight/ControllerSkeletonRight/RingDistal"]
+transform = Transform3D(1, -2.79397e-09, 6.51926e-09, 0, 1, -2.98023e-08, -3.72529e-09, 0, 1, -2.98023e-07, -0.0105623, -0.0190609)
+
+[node name="LittleDistal" type="BoneAttachment3D" parent="Body/Origin/OpenXRHandRight/ControllerSkeletonRight"]
+transform = Transform3D(0.725366, 0.413792, -0.550109, -0.288532, 0.908332, 0.302792, 0.624973, -0.0609116, 0.778266, 0.0599054, -0.0158275, -0.115066)
+bone_name = "Little_Distal_R"
+bone_idx = 23
+
+[node name="Touch" type="Node3D" parent="Body/Origin/OpenXRHandRight/ControllerSkeletonRight/LittleDistal"]
+transform = Transform3D(1, 0, 0, 1.19209e-07, 1, -2.98023e-08, 0, 2.98023e-08, 1, -2.01166e-07, -0.00835991, -0.012575)
+
+[node name="HandPoseRecognition" parent="Body/Origin/OpenXRHandRight" node_paths=PackedStringArray("camera", "skeleton", "debug_label") instance=ExtResource("11_hqvgg")]
+camera = NodePath("../../Camera")
+skeleton = NodePath("../ControllerSkeletonRight")
 debug_label = NodePath("../../../../PhysicsHandRight/DebugLabel")
 
-[node name="PhysicsHandLeft" type="RigidBody3D" parent="." node_paths=PackedStringArray("origin", "camera", "controller", "physics_skeleton", "controller_skeleton", "body", "controller_hand_mesh", "wrist_joint", "grab_area")]
+[node name="HandPoseSave" parent="Body/Origin/OpenXRHandRight/HandPoseRecognition" node_paths=PackedStringArray("camera", "skeleton") instance=ExtResource("9_dmrsn")]
+camera = NodePath("../../../Camera")
+skeleton = NodePath("../../ControllerSkeletonRight")
+pose_name = &"thumb_down"
+
+[node name="PhysicsHandLeft" type="RigidBody3D" parent="." node_paths=PackedStringArray("controller", "physics_skeleton", "controller_skeleton", "controller_hand_mesh", "grab_joint", "grab_area")]
+unique_name_in_owner = true
 collision_layer = 512
 collision_mask = 1025
 gravity_scale = 0.0
+inertia = Vector3(0.01, 0.01, 0.01)
+can_sleep = false
 continuous_cd = true
+max_contacts_reported = 1
+contact_monitor = true
 script = ExtResource("10_7gjb2")
-origin = NodePath("../Body/XROrigin3D")
-camera = NodePath("../Body/XROrigin3D/XRCamera3D")
-controller = NodePath("../Body/XROrigin3D/XRController3D Left")
-physics_skeleton = NodePath("Skeleton3D")
-controller_skeleton = NodePath("../Body/XROrigin3D/OpenXRHand Left/Controller Skeleton3D Left")
-body = NodePath("../Body")
-controller_hand_mesh = NodePath("../Body/XROrigin3D/OpenXRHand Left/Controller Skeleton3D Left/vr_glove_left_slim")
+controller = NodePath("../Body/Origin/ControllerLeft")
+physics_skeleton = NodePath("PhysicsSkeletonLeft")
+controller_skeleton = NodePath("../Body/Origin/OpenXRHandLeft/ControllerSkeletonLeft")
+controller_hand_mesh = NodePath("../Body/Origin/OpenXRHandLeft/ControllerSkeletonLeft/vr_glove_left_slim")
 finger_collider = ExtResource("9_skcr2")
-wrist_joint = NodePath("GrabJoint")
-grab_area = NodePath("Skeleton3D/Palm/GrabArea")
-
-[node name="GrabJoint" type="Generic6DOFJoint3D" parent="PhysicsHandLeft"]
+grab_joint = NodePath("PhysicsSkeletonLeft/Palm/GrabJoint")
+grab_area = NodePath("PhysicsSkeletonLeft/Palm/GrabArea")
 
 [node name="DebugLabel" type="Label3D" parent="PhysicsHandLeft"]
 transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0.1, -0.05, -0.125)
@@ -984,7 +1066,7 @@ text = "rest"
 font_size = 200
 outline_size = 50
 
-[node name="Skeleton3D" type="Skeleton3D" parent="PhysicsHandLeft"]
+[node name="PhysicsSkeletonLeft" type="Skeleton3D" parent="PhysicsHandLeft"]
 bones/0/name = "Wrist_L"
 bones/0/parent = -1
 bones/0/rest = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
@@ -1168,97 +1250,117 @@ bones/25/position = Vector3(0.0082902, 0.00927313, -0.0510244)
 bones/25/rotation = Quaternion(0.101224, -0.0124619, -0.0407884, 0.993949)
 bones/25/scale = Vector3(1, 1, 1)
 
-[node name="vr_glove_left_slim" type="MeshInstance3D" parent="PhysicsHandLeft/Skeleton3D"]
+[node name="vr_glove_left_slim" type="MeshInstance3D" parent="PhysicsHandLeft/PhysicsSkeletonLeft"]
 mesh = SubResource("ArrayMesh_u3sx3")
 skin = SubResource("Skin_v5ql8")
 
-[node name="ThumbFingerIK" type="SkeletonIK3D" parent="PhysicsHandLeft/Skeleton3D"]
+[node name="ThumbIK" type="SkeletonIK3D" parent="PhysicsHandLeft/PhysicsSkeletonLeft"]
 process_priority = 1
 root_bone = &"Thumb_Proximal_L"
-tip_bone = &"Thumb_Tip_L"
-override_tip_basis = false
-min_distance = 0.001
+tip_bone = &"Thumb_Distal_L"
 
-[node name="IndexFingerIK" type="SkeletonIK3D" parent="PhysicsHandLeft/Skeleton3D"]
+[node name="IndexIK" type="SkeletonIK3D" parent="PhysicsHandLeft/PhysicsSkeletonLeft"]
 process_priority = 1
 root_bone = &"Index_Proximal_L"
-tip_bone = &"Index_Tip_L"
-override_tip_basis = false
-min_distance = 0.001
+tip_bone = &"Index_Distal_L"
 
-[node name="MiddleFingerIK" type="SkeletonIK3D" parent="PhysicsHandLeft/Skeleton3D"]
+[node name="MiddleIK" type="SkeletonIK3D" parent="PhysicsHandLeft/PhysicsSkeletonLeft"]
 process_priority = 1
 root_bone = &"Middle_Proximal_L"
-tip_bone = &"Middle_Tip_L"
-override_tip_basis = false
-min_distance = 0.001
+tip_bone = &"Middle_Distal_L"
 
-[node name="RingFingerIK" type="SkeletonIK3D" parent="PhysicsHandLeft/Skeleton3D"]
+[node name="RingIK" type="SkeletonIK3D" parent="PhysicsHandLeft/PhysicsSkeletonLeft"]
 process_priority = 1
 root_bone = &"Ring_Proximal_L"
-tip_bone = &"Ring_Tip_L"
-override_tip_basis = false
-min_distance = 0.001
+tip_bone = &"Ring_Distal_L"
 
-[node name="LittleFingerIK" type="SkeletonIK3D" parent="PhysicsHandLeft/Skeleton3D"]
+[node name="LittleIK" type="SkeletonIK3D" parent="PhysicsHandLeft/PhysicsSkeletonLeft"]
 process_priority = 1
 root_bone = &"Little_Proximal_L"
-tip_bone = &"Little_Tip_L"
-override_tip_basis = false
-min_distance = 0.001
+tip_bone = &"Little_Distal_L"
 
-[node name="Palm" type="BoneAttachment3D" parent="PhysicsHandLeft/Skeleton3D"]
+[node name="Palm" type="BoneAttachment3D" parent="PhysicsHandLeft/PhysicsSkeletonLeft"]
 transform = Transform3D(0.996362, 0.0785603, -0.0330305, -0.0836061, 0.97618, -0.200206, 0.0165155, 0.20224, 0.979197, 0.0082902, 0.00927313, -0.0510244)
 bone_name = "Palm_L"
 bone_idx = 25
 
-[node name="GrabArea" type="ShapeCast3D" parent="PhysicsHandLeft/Skeleton3D/Palm"]
+[node name="GrabArea" type="ShapeCast3D" parent="PhysicsHandLeft/PhysicsSkeletonLeft/Palm"]
 transform = Transform3D(1, 3.72529e-09, 0, 0, 5.89062e-08, -1, 3.72529e-09, 1, -4.51691e-08, 0.0053278, -0.0514623, -0.0283869)
 enabled = false
 shape = SubResource("CapsuleShape3D_swoqk")
 target_position = Vector3(0, 0, 0)
 
-[node name="Wrist" type="BoneAttachment3D" parent="PhysicsHandLeft/Skeleton3D"]
+[node name="GrabJoint" parent="PhysicsHandLeft/PhysicsSkeletonLeft/Palm" instance=ExtResource("13_htrok")]
+linear_limit_spring_y/enabled = false
+angular_limit_x/lower = 0.0
+
+[node name="Wrist" type="BoneAttachment3D" parent="PhysicsHandLeft/PhysicsSkeletonLeft"]
 bone_name = "Wrist_R"
 bone_idx = 0
 
-[node name="ThumbDistalRaycast" type="RayCast3D" parent="PhysicsHandLeft/Skeleton3D/Wrist"]
-transform = Transform3D(0.511622, 0.849173, 0.13095, -0.825891, 0.444005, 0.34751, 0.236954, -0.285944, 0.928487, 0.0601131, -0.0394405, -0.0851188)
-target_position = Vector3(0, -0.1, 0)
+[node name="RayCast3D" type="RayCast3D" parent="PhysicsHandLeft/PhysicsSkeletonLeft"]
+enabled = false
+target_position = Vector3(0, 0, 0)
+hit_from_inside = true
 
-[node name="IndexDistalRaycast" type="RayCast3D" parent="PhysicsHandLeft/Skeleton3D/Wrist"]
+[node name="ThumbDistal" type="BoneAttachment3D" parent="PhysicsHandLeft/PhysicsSkeletonLeft"]
+transform = Transform3D(0.0184909, 0.991216, 0.13095, -0.937245, -0.0284256, 0.347509, 0.34818, -0.129158, 0.928488, 0.0601131, -0.0394405, -0.0851188)
+bone_name = "Thumb_Distal_L"
+bone_idx = 3
+
+[node name="Touch" type="Node3D" parent="PhysicsHandLeft/PhysicsSkeletonLeft/ThumbDistal"]
+transform = Transform3D(1, -2.23517e-08, -2.98023e-08, -3.72529e-09, 1, 7.45058e-09, 2.98023e-08, -1.49012e-08, 1, 0, -0.0137826, -0.0135852)
+
+[node name="IndexDistal" type="BoneAttachment3D" parent="PhysicsHandLeft/PhysicsSkeletonLeft"]
 transform = Transform3D(0.977075, 0.19881, 0.0761529, -0.19221, 0.669965, 0.717079, 0.0915426, -0.715277, 0.692819, 0.03731, -0.0183923, -0.149581)
-target_position = Vector3(0, -0.1, 0)
+bone_name = "Index_Distal_L"
+bone_idx = 8
 
-[node name="MiddleDistalRaycast" type="RayCast3D" parent="PhysicsHandLeft/Skeleton3D/Wrist"]
+[node name="Touch" type="Node3D" parent="PhysicsHandLeft/PhysicsSkeletonLeft/IndexDistal"]
+transform = Transform3D(1, -2.23517e-08, 0, 0, 1, 0, -1.49012e-08, 0, 1, -1.19209e-07, -0.00832665, -0.0135852)
+
+[node name="MiddleDistal" type="BoneAttachment3D" parent="PhysicsHandLeft/PhysicsSkeletonLeft"]
 transform = Transform3D(0.996576, 0.0648169, 0.0513262, -0.0812012, 0.650531, 0.755126, 0.0155557, -0.756708, 0.653567, 0.00790305, -0.0127199, -0.155316)
-target_position = Vector3(0, -0.1, 0)
+bone_name = "Middle_Distal_L"
+bone_idx = 13
 
-[node name="RingDistalRaycast" type="RayCast3D" parent="PhysicsHandLeft/Skeleton3D/Wrist"]
-transform = Transform3D(0.98335, -0.154228, 0.0961054, 0.030437, 0.661177, 0.749611, -0.179154, -0.734205, 0.654863, -0.023206, -0.0180304, -0.142863)
-target_position = Vector3(0, -0.1, 0)
+[node name="Touch" type="Node3D" parent="PhysicsHandLeft/PhysicsSkeletonLeft/MiddleDistal"]
+transform = Transform3D(1, 9.31323e-10, 7.45058e-09, 0, 1, -2.98023e-08, -3.72529e-09, 0, 1, -4.17233e-07, -0.00977743, -0.0233366)
 
-[node name="LittleDistalRaycast" type="RayCast3D" parent="PhysicsHandLeft/Skeleton3D/Wrist"]
-transform = Transform3D(0.941218, -0.335934, 0.0354307, 0.244294, 0.749372, 0.615435, -0.233297, -0.570604, 0.78739, -0.04562, -0.0161682, -0.119905)
-target_position = Vector3(0, -0.1, 0)
+[node name="RingDistal" type="BoneAttachment3D" parent="PhysicsHandLeft/PhysicsSkeletonLeft"]
+transform = Transform3D(0.98335, -0.154228, 0.0961054, 0.030437, 0.661178, 0.749611, -0.179154, -0.734205, 0.654863, -0.023206, -0.0180304, -0.142863)
+bone_name = "Ring_Distal_L"
+bone_idx = 18
 
-[node name="PhysicsHandRight" type="RigidBody3D" parent="." node_paths=PackedStringArray("origin", "camera", "controller", "physics_skeleton", "controller_skeleton", "body", "controller_hand_mesh", "wrist_joint", "grab_area")]
+[node name="Touch" type="Node3D" parent="PhysicsHandLeft/PhysicsSkeletonLeft/RingDistal"]
+transform = Transform3D(1, -2.79397e-09, 6.51926e-09, 0, 1, -2.98023e-08, -3.72529e-09, 0, 1, -2.98023e-07, -0.0105623, -0.0190609)
+
+[node name="LittleDistal" type="BoneAttachment3D" parent="PhysicsHandLeft/PhysicsSkeletonLeft"]
+transform = Transform3D(0.941219, -0.335934, 0.0354307, 0.244294, 0.749373, 0.615435, -0.233297, -0.570604, 0.787391, -0.04562, -0.0161682, -0.119905)
+bone_name = "Little_Distal_L"
+bone_idx = 23
+
+[node name="Touch" type="Node3D" parent="PhysicsHandLeft/PhysicsSkeletonLeft/LittleDistal"]
+transform = Transform3D(1, 0, 0, 1.19209e-07, 1, -2.98023e-08, 0, 2.98023e-08, 1, -2.01166e-07, -0.00835991, -0.012575)
+
+[node name="PhysicsHandRight" type="RigidBody3D" parent="." node_paths=PackedStringArray("controller", "physics_skeleton", "controller_skeleton", "controller_hand_mesh", "grab_joint", "grab_area")]
+unique_name_in_owner = true
 collision_layer = 1024
 collision_mask = 513
 gravity_scale = 0.0
+inertia = Vector3(0.01, 0.01, 0.01)
 can_sleep = false
 continuous_cd = true
+max_contacts_reported = 1
+contact_monitor = true
 script = ExtResource("10_7gjb2")
-origin = NodePath("../Body/XROrigin3D")
-camera = NodePath("../Body/XROrigin3D/XRCamera3D")
-controller = NodePath("../Body/XROrigin3D/XRController3D Right")
-physics_skeleton = NodePath("Skeleton3D")
-controller_skeleton = NodePath("../Body/XROrigin3D/OpenXRHand Right/Controller Skeleton3D Right")
-body = NodePath("../Body")
-controller_hand_mesh = NodePath("../Body/XROrigin3D/OpenXRHand Right/Controller Skeleton3D Right/vr_glove_right_slim")
+controller = NodePath("../Body/Origin/ControllerRight")
+physics_skeleton = NodePath("PhysicsSkeletonRight")
+controller_skeleton = NodePath("../Body/Origin/OpenXRHandRight/ControllerSkeletonRight")
+controller_hand_mesh = NodePath("../Body/Origin/OpenXRHandRight/ControllerSkeletonRight/vr_glove_right_slim")
 finger_collider = ExtResource("9_skcr2")
-wrist_joint = NodePath("GrabJoint")
-grab_area = NodePath("Skeleton3D/Palm/GrabArea")
+grab_joint = NodePath("PhysicsSkeletonRight/Palm/GrabJoint")
+grab_area = NodePath("PhysicsSkeletonRight/Palm/GrabArea")
 
 [node name="DebugLabel" type="Label3D" parent="PhysicsHandRight"]
 transform = Transform3D(1.19249e-08, -1, 0, 1, 1.19249e-08, 0, 0, 0, 1, -0.1, -0.05, -0.125)
@@ -1267,9 +1369,7 @@ text = "rest"
 font_size = 200
 outline_size = 50
 
-[node name="GrabJoint" type="Generic6DOFJoint3D" parent="PhysicsHandRight"]
-
-[node name="Skeleton3D" type="Skeleton3D" parent="PhysicsHandRight"]
+[node name="PhysicsSkeletonRight" type="Skeleton3D" parent="PhysicsHandRight"]
 bones/0/name = "Wrist_R"
 bones/0/parent = -1
 bones/0/rest = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
@@ -1453,107 +1553,140 @@ bones/25/position = Vector3(-0.00829025, 0.00927338, -0.0510245)
 bones/25/rotation = Quaternion(0.101224, 0.012462, 0.0407884, 0.993949)
 bones/25/scale = Vector3(1, 1, 1)
 
-[node name="vr_glove_right_slim" type="MeshInstance3D" parent="PhysicsHandRight/Skeleton3D"]
+[node name="vr_glove_right_slim" type="MeshInstance3D" parent="PhysicsHandRight/PhysicsSkeletonRight"]
 mesh = SubResource("ArrayMesh_8jodk")
 skin = SubResource("Skin_n5id7")
 
-[node name="ThumbFingerIK" type="SkeletonIK3D" parent="PhysicsHandRight/Skeleton3D"]
+[node name="ThumbIK" type="SkeletonIK3D" parent="PhysicsHandRight/PhysicsSkeletonRight"]
 process_priority = 1
-root_bone = &"Thumb_Metacarpal_R"
-tip_bone = &"Thumb_Tip_R"
-override_tip_basis = false
+root_bone = &"Thumb_Proximal_R"
+tip_bone = &"Thumb_Distal_R"
 min_distance = 0.001
+max_iterations = 20
 
-[node name="IndexFingerIK" type="SkeletonIK3D" parent="PhysicsHandRight/Skeleton3D"]
+[node name="IndexIK" type="SkeletonIK3D" parent="PhysicsHandRight/PhysicsSkeletonRight"]
 process_priority = 1
-root_bone = &"Index_Metacarpal_R"
-tip_bone = &"Index_Tip_R"
-override_tip_basis = false
+root_bone = &"Index_Proximal_R"
+tip_bone = &"Index_Distal_R"
 min_distance = 0.001
+max_iterations = 20
 
-[node name="MiddleFingerIK" type="SkeletonIK3D" parent="PhysicsHandRight/Skeleton3D"]
+[node name="MiddleIK" type="SkeletonIK3D" parent="PhysicsHandRight/PhysicsSkeletonRight"]
 process_priority = 1
-root_bone = &"Middle_Metacarpal_R"
-tip_bone = &"Middle_Tip_R"
+root_bone = &"Middle_Proximal_R"
+tip_bone = &"Middle_Distal_R"
 min_distance = 0.001
+max_iterations = 20
 
-[node name="RingFingerIK" type="SkeletonIK3D" parent="PhysicsHandRight/Skeleton3D"]
+[node name="RingIK" type="SkeletonIK3D" parent="PhysicsHandRight/PhysicsSkeletonRight"]
 process_priority = 1
-root_bone = &"Ring_Metacarpal_R"
-tip_bone = &"Ring_Tip_R"
+root_bone = &"Ring_Proximal_R"
+tip_bone = &"Ring_Distal_R"
 min_distance = 0.001
+max_iterations = 20
 
-[node name="LittleFingerIK" type="SkeletonIK3D" parent="PhysicsHandRight/Skeleton3D"]
+[node name="LittleIK" type="SkeletonIK3D" parent="PhysicsHandRight/PhysicsSkeletonRight"]
 process_priority = 1
-root_bone = &"Little_Metacarpal_R"
-tip_bone = &"Little_Tip_R"
+root_bone = &"Little_Proximal_R"
+tip_bone = &"Little_Distal_R"
 min_distance = 0.001
+max_iterations = 20
 
-[node name="Wrist" type="BoneAttachment3D" parent="PhysicsHandRight/Skeleton3D"]
+[node name="Wrist" type="BoneAttachment3D" parent="PhysicsHandRight/PhysicsSkeletonRight"]
 bone_name = "Wrist_R"
 bone_idx = 0
 
-[node name="ThumbDistalRaycast" type="RayCast3D" parent="PhysicsHandRight/Skeleton3D/Wrist"]
-transform = Transform3D(0.713971, -0.687821, -0.130948, 0.682832, 0.642633, 0.34751, -0.154873, -0.337528, 0.928488, -0.0601133, -0.0394406, -0.0851177)
-target_position = Vector3(0, -0.1, 0)
-
-[node name="IndexDistalRaycast" type="RayCast3D" parent="PhysicsHandRight/Skeleton3D/Wrist"]
-transform = Transform3D(0.977075, -0.19881, -0.0761532, 0.19221, 0.669965, 0.717079, -0.0915425, -0.715277, 0.692819, -0.0373099, -0.0183927, -0.149582)
-target_position = Vector3(0, -0.1, 0)
-
-[node name="MiddleDistalRaycast" type="RayCast3D" parent="PhysicsHandRight/Skeleton3D/Wrist"]
-transform = Transform3D(0.996576, -0.0648171, -0.0513262, 0.0812013, 0.650531, 0.755126, -0.0155558, -0.756708, 0.653567, -0.00790306, -0.0127199, -0.155315)
-target_position = Vector3(0, -0.1, 0)
-
-[node name="RingDistalRaycast" type="RayCast3D" parent="PhysicsHandRight/Skeleton3D/Wrist"]
-transform = Transform3D(0.98335, 0.154228, -0.0961053, -0.030437, 0.661178, 0.749611, 0.179153, -0.734205, 0.654864, 0.023206, -0.01803, -0.142862)
-target_position = Vector3(0, -0.1, 0)
-
-[node name="LittleDistalRaycast" type="RayCast3D" parent="PhysicsHandRight/Skeleton3D/Wrist"]
-transform = Transform3D(0.941219, 0.335933, -0.0354292, -0.244295, 0.749372, 0.615435, 0.233295, -0.570604, 0.787391, 0.0456195, -0.0161674, -0.119904)
-target_position = Vector3(0, -0.1, 0)
-
-[node name="Palm" type="BoneAttachment3D" parent="PhysicsHandRight/Skeleton3D"]
+[node name="Palm" type="BoneAttachment3D" parent="PhysicsHandRight/PhysicsSkeletonRight"]
 transform = Transform3D(0.996362, -0.0785603, 0.0330307, 0.0836061, 0.97618, -0.200206, -0.0165157, 0.20224, 0.979197, -0.00829025, 0.00927338, -0.0510245)
 bone_name = "Palm_R"
 bone_idx = 25
 
-[node name="GrabArea" type="ShapeCast3D" parent="PhysicsHandRight/Skeleton3D/Palm"]
+[node name="GrabArea" type="ShapeCast3D" parent="PhysicsHandRight/PhysicsSkeletonRight/Palm"]
 transform = Transform3D(1, 3.72529e-09, 0, 0, 5.89062e-08, -1, 3.72529e-09, 1, -4.51691e-08, 0.0053278, -0.0514623, -0.0283869)
 enabled = false
 shape = SubResource("CapsuleShape3D_swoqk")
 target_position = Vector3(0, 0, 0)
 
-[connection signal="button_pressed" from="Body/XROrigin3D/XRController3D Left" to="Body/XROrigin3D/XRController3D Left" method="_on_button_pressed"]
-[connection signal="button_released" from="Body/XROrigin3D/XRController3D Left" to="Body/XROrigin3D/XRController3D Left" method="_on_button_released"]
-[connection signal="grab" from="Body/XROrigin3D/XRController3D Left" to="PhysicsHandLeft" method="_on_grab"]
-[connection signal="grip" from="Body/XROrigin3D/XRController3D Left" to="Body/XROrigin3D/OpenXRHand Left/Controller Skeleton3D Left/AnimationTree" method="_on_grip"]
-[connection signal="input_float_changed" from="Body/XROrigin3D/XRController3D Left" to="Body/XROrigin3D/XRController3D Left" method="_on_input_float_changed"]
-[connection signal="input_vector2_changed" from="Body/XROrigin3D/XRController3D Left" to="Body/XROrigin3D/XRController3D Left" method="_on_input_vector_2_changed"]
-[connection signal="thruster" from="Body/XROrigin3D/XRController3D Left" to="Body" method="_on_thruster"]
-[connection signal="thruster_brake" from="Body/XROrigin3D/XRController3D Left" to="Body" method="_on_thruster_brake"]
-[connection signal="tracking_changed" from="Body/XROrigin3D/XRController3D Left" to="Body/XROrigin3D/XRController3D Left" method="_on_tracking_changed"]
-[connection signal="tracking_changed" from="Body/XROrigin3D/XRController3D Left" to="Body/XROrigin3D/OpenXRHand Left/Controller Skeleton3D Left/AnimationTree" method="_on_controller_tracking_changed"]
-[connection signal="tracking_changed" from="Body/XROrigin3D/XRController3D Left" to="PhysicsHandLeft" method="_on_controller_tracking_changed"]
-[connection signal="trigger" from="Body/XROrigin3D/XRController3D Left" to="Body/XROrigin3D/OpenXRHand Left/Controller Skeleton3D Left/AnimationTree" method="_on_trigger"]
-[connection signal="turned_x" from="Body/XROrigin3D/XRController3D Left" to="Body" method="_on_turned_x"]
-[connection signal="button_pressed" from="Body/XROrigin3D/XRController3D Right" to="Body/XROrigin3D/XRController3D Right" method="_on_button_pressed"]
-[connection signal="button_released" from="Body/XROrigin3D/XRController3D Right" to="Body/XROrigin3D/XRController3D Right" method="_on_button_released"]
-[connection signal="grab" from="Body/XROrigin3D/XRController3D Right" to="PhysicsHandRight" method="_on_grab"]
-[connection signal="grip" from="Body/XROrigin3D/XRController3D Right" to="Body/XROrigin3D/OpenXRHand Right/Controller Skeleton3D Right/AnimationTree" method="_on_grip"]
-[connection signal="input_float_changed" from="Body/XROrigin3D/XRController3D Right" to="Body/XROrigin3D/XRController3D Right" method="_on_input_float_changed"]
-[connection signal="input_vector2_changed" from="Body/XROrigin3D/XRController3D Right" to="Body/XROrigin3D/XRController3D Right" method="_on_input_vector_2_changed"]
-[connection signal="thruster" from="Body/XROrigin3D/XRController3D Right" to="Body" method="_on_thruster"]
-[connection signal="thruster_brake" from="Body/XROrigin3D/XRController3D Right" to="Body" method="_on_thruster_brake"]
-[connection signal="tracking_changed" from="Body/XROrigin3D/XRController3D Right" to="Body/XROrigin3D/XRController3D Right" method="_on_tracking_changed"]
-[connection signal="tracking_changed" from="Body/XROrigin3D/XRController3D Right" to="Body/XROrigin3D/OpenXRHand Right/Controller Skeleton3D Right/AnimationTree" method="_on_controller_tracking_changed"]
-[connection signal="trigger" from="Body/XROrigin3D/XRController3D Right" to="Body/XROrigin3D/OpenXRHand Right/Controller Skeleton3D Right/AnimationTree" method="_on_trigger"]
-[connection signal="turned_x" from="Body/XROrigin3D/XRController3D Right" to="Body" method="_on_turned_x"]
-[connection signal="new_pose" from="Body/XROrigin3D/OpenXRHand Left/HandPoseRecognition" to="PhysicsHandLeft" method="_on_hand_pose_recognition_new_pose"]
-[connection signal="new_pose" from="Body/XROrigin3D/OpenXRHand Right/HandPoseRecognition" to="PhysicsHandRight" method="_on_hand_pose_recognition_new_pose"]
+[node name="GrabJoint" parent="PhysicsHandRight/PhysicsSkeletonRight/Palm" instance=ExtResource("13_htrok")]
+transform = Transform3D(0.996362, 0.0836061, -0.0165157, -0.0785603, 0.97618, 0.20224, 0.0330307, -0.200206, 0.979197, 0.00664208, 0.000615404, 0.0520935)
+
+[node name="RayCast3D" type="RayCast3D" parent="PhysicsHandRight/PhysicsSkeletonRight"]
+enabled = false
+target_position = Vector3(-9.83998e-05, 5.91986e-05, 0.000371099)
+hit_from_inside = true
+
+[node name="ThumbDistal" type="BoneAttachment3D" parent="PhysicsHandRight/PhysicsSkeletonRight"]
+transform = Transform3D(0.0184909, -0.991217, -0.130948, 0.937245, -0.028425, 0.34751, -0.34818, -0.129157, 0.928488, -0.0601133, -0.0394406, -0.0851177)
+bone_name = "Thumb_Distal_R"
+bone_idx = 3
+
+[node name="Touch" type="Node3D" parent="PhysicsHandRight/PhysicsSkeletonRight/ThumbDistal"]
+transform = Transform3D(1, -2.6077e-08, 2.98023e-08, -7.45058e-09, 1, 0, -2.98023e-08, 1.49012e-08, 1, -2.38419e-07, -0.0146961, -0.0135852)
+
+[node name="IndexDistal" type="BoneAttachment3D" parent="PhysicsHandRight/PhysicsSkeletonRight"]
+transform = Transform3D(0.977075, -0.19881, -0.0761531, 0.19221, 0.669965, 0.717079, -0.0915425, -0.715277, 0.692819, -0.0373099, -0.0183927, -0.149582)
+bone_name = "Index_Distal_R"
+bone_idx = 8
+
+[node name="Touch" type="Node3D" parent="PhysicsHandRight/PhysicsSkeletonRight/IndexDistal"]
+transform = Transform3D(1, -2.23517e-08, 0, 0, 1, 0, -1.49012e-08, 0, 1, -1.19209e-07, -0.00832665, -0.0135852)
+
+[node name="MiddleDistal" type="BoneAttachment3D" parent="PhysicsHandRight/PhysicsSkeletonRight"]
+transform = Transform3D(0.996576, -0.0648171, -0.0513262, 0.0812013, 0.650531, 0.755126, -0.0155558, -0.756708, 0.653567, -0.00790306, -0.0127199, -0.155315)
+bone_name = "Middle_Distal_R"
+bone_idx = 13
+
+[node name="Touch" type="Node3D" parent="PhysicsHandRight/PhysicsSkeletonRight/MiddleDistal"]
+transform = Transform3D(1, -2.79397e-09, 6.51926e-09, 0, 1, -2.98023e-08, -3.72529e-09, 0, 1, -2.98023e-07, -0.0105623, -0.0190609)
+
+[node name="RingDistal" type="BoneAttachment3D" parent="PhysicsHandRight/PhysicsSkeletonRight"]
+transform = Transform3D(0.98335, 0.154228, -0.0961053, -0.0304371, 0.661178, 0.749611, 0.179154, -0.734205, 0.654864, 0.023206, -0.01803, -0.142862)
+bone_name = "Ring_Distal_R"
+bone_idx = 18
+
+[node name="Touch" type="Node3D" parent="PhysicsHandRight/PhysicsSkeletonRight/RingDistal"]
+transform = Transform3D(1, -2.79397e-09, 6.51926e-09, 0, 1, -2.98023e-08, -3.72529e-09, 0, 1, -2.98023e-07, -0.0105623, -0.0190609)
+
+[node name="LittleDistal" type="BoneAttachment3D" parent="PhysicsHandRight/PhysicsSkeletonRight"]
+transform = Transform3D(0.941219, 0.335933, -0.0354292, -0.244295, 0.749373, 0.615435, 0.233295, -0.570604, 0.787391, 0.0456195, -0.0161674, -0.119904)
+bone_name = "Little_Distal_R"
+bone_idx = 23
+
+[node name="Touch" type="Node3D" parent="PhysicsHandRight/PhysicsSkeletonRight/LittleDistal"]
+transform = Transform3D(1, 0, 0, 1.19209e-07, 1, -2.98023e-08, 0, 2.98023e-08, 1, -2.01166e-07, -0.00835991, -0.012575)
+
+[connection signal="button_pressed" from="Body/Origin/ControllerLeft" to="Body/Origin/ControllerLeft" method="_on_button_pressed"]
+[connection signal="button_released" from="Body/Origin/ControllerLeft" to="Body/Origin/ControllerLeft" method="_on_button_released"]
+[connection signal="grab" from="Body/Origin/ControllerLeft" to="PhysicsHandLeft" method="_on_grab"]
+[connection signal="grip" from="Body/Origin/ControllerLeft" to="Body/Origin/OpenXRHandLeft/ControllerSkeletonLeft/AnimationTree" method="_on_grip"]
+[connection signal="input_float_changed" from="Body/Origin/ControllerLeft" to="Body/Origin/ControllerLeft" method="_on_input_float_changed"]
+[connection signal="input_vector2_changed" from="Body/Origin/ControllerLeft" to="Body/Origin/ControllerLeft" method="_on_input_vector_2_changed"]
+[connection signal="thruster" from="Body/Origin/ControllerLeft" to="Body" method="_on_thruster"]
+[connection signal="thruster_brake" from="Body/Origin/ControllerLeft" to="Body" method="_on_thruster_brake"]
+[connection signal="tracking_changed" from="Body/Origin/ControllerLeft" to="Body/Origin/ControllerLeft" method="_on_tracking_changed"]
+[connection signal="tracking_changed" from="Body/Origin/ControllerLeft" to="Body/Origin/OpenXRHandLeft/ControllerSkeletonLeft/AnimationTree" method="_on_controller_tracking_changed"]
+[connection signal="tracking_changed" from="Body/Origin/ControllerLeft" to="PhysicsHandLeft" method="_on_controller_tracking_changed"]
+[connection signal="trigger" from="Body/Origin/ControllerLeft" to="Body/Origin/OpenXRHandLeft/ControllerSkeletonLeft/AnimationTree" method="_on_trigger"]
+[connection signal="turned_x" from="Body/Origin/ControllerLeft" to="Body" method="_on_turned_x"]
+[connection signal="button_pressed" from="Body/Origin/ControllerRight" to="Body/Origin/ControllerRight" method="_on_button_pressed"]
+[connection signal="button_released" from="Body/Origin/ControllerRight" to="Body/Origin/ControllerRight" method="_on_button_released"]
+[connection signal="grab" from="Body/Origin/ControllerRight" to="PhysicsHandRight" method="_on_grab"]
+[connection signal="grip" from="Body/Origin/ControllerRight" to="Body/Origin/OpenXRHandRight/ControllerSkeletonRight/AnimationTree" method="_on_grip"]
+[connection signal="input_float_changed" from="Body/Origin/ControllerRight" to="Body/Origin/ControllerRight" method="_on_input_float_changed"]
+[connection signal="input_vector2_changed" from="Body/Origin/ControllerRight" to="Body/Origin/ControllerRight" method="_on_input_vector_2_changed"]
+[connection signal="thruster" from="Body/Origin/ControllerRight" to="Body" method="_on_thruster"]
+[connection signal="thruster_brake" from="Body/Origin/ControllerRight" to="Body" method="_on_thruster_brake"]
+[connection signal="tracking_changed" from="Body/Origin/ControllerRight" to="Body/Origin/ControllerRight" method="_on_tracking_changed"]
+[connection signal="tracking_changed" from="Body/Origin/ControllerRight" to="Body/Origin/OpenXRHandRight/ControllerSkeletonRight/AnimationTree" method="_on_controller_tracking_changed"]
+[connection signal="trigger" from="Body/Origin/ControllerRight" to="Body/Origin/OpenXRHandRight/ControllerSkeletonRight/AnimationTree" method="_on_trigger"]
+[connection signal="turned_x" from="Body/Origin/ControllerRight" to="Body" method="_on_turned_x"]
+[connection signal="new_pose" from="Body/Origin/OpenXRHandLeft/HandPoseRecognition" to="PhysicsHandLeft" method="_on_hand_pose_recognition_new_pose"]
+[connection signal="new_pose" from="Body/Origin/OpenXRHandRight/HandPoseRecognition" to="PhysicsHandRight" method="_on_hand_pose_recognition_new_pose"]
+[connection signal="controller_hand_reset_animation" from="PhysicsHandLeft" to="Body/Origin/OpenXRHandLeft/ControllerSkeletonLeft/AnimationTree" method="_on_reset"]
 [connection signal="dropped_held_object" from="PhysicsHandLeft" to="Body" method="_on_hand_dropped_held_object"]
 [connection signal="grabbed" from="PhysicsHandLeft" to="Body" method="_on_physics_hand_grabbed"]
 [connection signal="hand_reset" from="PhysicsHandLeft" to="Body" method="_on_hand_reset"]
+[connection signal="controller_hand_reset_animation" from="PhysicsHandRight" to="Body/Origin/OpenXRHandRight/ControllerSkeletonRight/AnimationTree" method="_on_reset"]
 [connection signal="dropped_held_object" from="PhysicsHandRight" to="Body" method="_on_hand_dropped_held_object"]
 [connection signal="grabbed" from="PhysicsHandRight" to="Body" method="_on_physics_hand_grabbed"]
 [connection signal="hand_reset" from="PhysicsHandRight" to="Body" method="_on_hand_reset"]

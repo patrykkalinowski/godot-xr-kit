@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://c2obhfn7ss62o"]
+
+[node name="GrabJoint" type="JoltGeneric6DOFJoint3D"]
+linear_limit_spring_y/enabled = true
+linear_limit_spring_y/frequency = 20.0
+linear_limit_spring_y/damping = 1000.0
+angular_limit_x/upper = 0.0872665
+angular_limit_x/lower = -0.0872665
+angular_limit_y/upper = 0.0872665
+angular_limit_y/lower = -0.0872665
+angular_limit_z/upper = 0.0872665
+angular_limit_z/lower = -0.0872665
+angular_spring_x/enabled = true
+angular_spring_x/frequency = 5.0
+angular_spring_x/damping = 20.0
+angular_spring_y/enabled = true
+angular_spring_y/frequency = 5.0
+angular_spring_y/damping = 20.0
+angular_spring_z/enabled = true
+angular_spring_z/frequency = 5.0
+angular_spring_z/damping = 20.0

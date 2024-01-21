@@ -34,14 +34,18 @@ Real-time recognition of hand poses based on predefined templates.
 
 ![Godot XR Kit - Hand Gesture Recognition](/screenshots/hand_gesture_recognition.gif)
 
-### Currently tracked hand poses:
+### Poses tracked by default:
 
 - open
 - rest
-- half_grip
-- full_grip
-- point
+- fist
 - thumb_up
+- one
+- two
+- three
+- four
+- five
+- middle_finger
 
 [Read more](/addons/xr-kit/hand-gesture-recognition/)
 

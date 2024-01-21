@@ -6,8 +6,9 @@
 script = ExtResource("1_bda45")
 
 [node name="Window" type="Window" parent="."]
-initial_position = 1
+mode = 3
 title = "Cinematic View"
+initial_position = 1
 size = Vector2i(1200, 800)
 visible = false
 borderless = true

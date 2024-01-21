@@ -21,12 +21,15 @@ var free_rotation: bool = false
 
 func _ready() -> void:
 	# setup controllers for Oculus
+	if !XRServer.primary_interface:
+		return
+
 	var runtime = XRServer.primary_interface.get_system_info()['XRRuntimeName']
 	if runtime == "Oculus":
-		set_pose_name("grip")
+		set_pose_name("palm_pose")
 
-		# rotate controller hand skeleton to match controller grip pose
-		var difference: Transform3D = global_transform * controller_skeleton.get_node("Wrist/Grip Pose").global_transform.inverse()
+		# rotate controller hand skeleton to match controller palm pose
+		var difference: Transform3D = global_transform * controller_skeleton.get_node("Palm/Palm Pose").global_transform.inverse()
 		# difference before original transform - order matters!
 		controller_skeleton.set_bone_rest(0, (difference * controller_skeleton.get_bone_pose(0)).orthonormalized())
 		# return to rest pose
@@ -145,3 +148,6 @@ func _on_tracking_changed(tracking: bool) -> void:
 		controller_skeleton.reparent(openxr_hand, false)
 		controller_skeleton.reset_bone_poses()
 
+func _on_trigger_haptic(type: String):
+	if type == "drop_held_object":
+		trigger_haptic_pulse("haptic", 50, 1.0, 0.5, 0.0)

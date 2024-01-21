@@ -34,6 +34,7 @@ enabled=PackedStringArray("res://addons/godotopenxrvendors/plugin.cfg")
 [physics]
 
 common/physics_ticks_per_second=144
+3d/physics_engine="JoltPhysics3D"
 3d/default_gravity=0.0
 
 [rendering]

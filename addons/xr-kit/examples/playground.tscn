@@ -54,16 +54,16 @@ linear_damp = 1.0
 angular_damp = 1.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="200kg"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.739132)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.0416334)
 shape = SubResource("BoxShape3D_5q7sa")
 
 [node name="CSGBox3D" type="CSGBox3D" parent="200kg"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.739132)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.0416334)
 size = Vector3(0.3, 0.3, 0.3)
 material = SubResource("StandardMaterial3D_chlyv")
 
 [node name="Label3D" type="Label3D" parent="200kg"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.577303)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.120196)
 pixel_size = 0.001
 text = "200kg"
 
@@ -76,16 +76,16 @@ linear_damp = 0.1
 angular_damp = 0.1
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="50kg"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.739132)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.0416334)
 shape = SubResource("BoxShape3D_5q7sa")
 
 [node name="CSGBox3D" type="CSGBox3D" parent="50kg"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.739132)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.0416334)
 size = Vector3(0.3, 0.3, 0.3)
 material = SubResource("StandardMaterial3D_60vkx")
 
 [node name="Label3D" type="Label3D" parent="50kg"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.577303)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.120196)
 pixel_size = 0.001
 text = "50kg"
 
@@ -98,16 +98,16 @@ linear_damp = 0.1
 angular_damp = 0.1
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="20kg"]
-transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0.697499)
 shape = SubResource("CylinderShape3D_2khjg")
 
 [node name="Label3D" type="Label3D" parent="20kg"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.0524026)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.749901)
 pixel_size = 0.001
 text = "20kg"
 
 [node name="CSGCylinder3D" type="CSGCylinder3D" parent="20kg"]
-transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0.697499)
 radius = 0.05
 sides = 32
 material = SubResource("StandardMaterial3D_4hanl")
@@ -121,34 +121,55 @@ linear_damp = 0.1
 angular_damp = 0.1
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="10kg"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.739132)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.0416334)
 shape = SubResource("BoxShape3D_5q7sa")
 
 [node name="CSGBox3D" type="CSGBox3D" parent="10kg"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.739132)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.0416334)
 size = Vector3(0.3, 0.3, 0.3)
 material = SubResource("StandardMaterial3D_0o3g5")
 
 [node name="Label3D" type="Label3D" parent="10kg"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.577303)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.120196)
 pixel_size = 0.001
 text = "10kg"
+
+[node name="1kg" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0338651, 1.5, -0.63919)
+collision_mask = 1537
+gravity_scale = 0.0
+linear_damp = 0.1
+angular_damp = 0.1
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="1kg"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.0416334)
+shape = SubResource("BoxShape3D_5q7sa")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="1kg"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.0416334)
+size = Vector3(0.3, 0.3, 0.3)
+material = SubResource("StandardMaterial3D_0o3g5")
+
+[node name="Label3D" type="Label3D" parent="1kg"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.120196)
+pixel_size = 0.001
+text = "1kg"
 
 [node name="Static" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -1)
 collision_mask = 1537
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Static"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.739132)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.0416334)
 shape = SubResource("BoxShape3D_5q7sa")
 
 [node name="CSGBox3D" type="CSGBox3D" parent="Static"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.739132)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.0416334)
 size = Vector3(0.3, 0.3, 0.3)
 material = SubResource("StandardMaterial3D_trtr3")
 
 [node name="Label3D" type="Label3D" parent="Static"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.577303)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.120196)
 pixel_size = 0.001
 text = "Static"
 
@@ -157,16 +178,16 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -1)
 collision_mask = 1537
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Static2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.739132)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.0416334)
 shape = SubResource("BoxShape3D_5q7sa")
 
 [node name="CSGBox3D" type="CSGBox3D" parent="Static2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.739132)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.0416334)
 size = Vector3(0.3, 0.3, 0.3)
 material = SubResource("StandardMaterial3D_trtr3")
 
 [node name="Label3D" type="Label3D" parent="Static2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.577303)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.120196)
 pixel_size = 0.001
 text = "Static"
 
@@ -193,7 +214,8 @@ text = "Static
 "
 
 [node name="Label3D" type="Label3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.658925, -1.49391)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.658925, -0.796411)
+visible = false
 pixel_size = 0.001
 alpha_antialiasing_mode = 1
 texture_filter = 5

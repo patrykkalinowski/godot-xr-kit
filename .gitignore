@@ -18,3 +18,5 @@ mono_crash.*.json
 # Android build files
 addons/godotopenxrvendors
 android/
+
+.tmp

@@ -9,19 +9,19 @@ Scripts and scenes for physics-based XR movement. Player hands collide with envi
 ## Features
 
 - Physics hand follows controller and can be blocked by world objects
-- Players can grab and move objects
+- Player can grab and move objects
   - Heavy objects are harder to move
   - Grabbing heavy objects with two hands makes them easier to move
   - Fingers curl around grabbed objects geometry
-- Players can move themselves by pushing away from objects
+- Player can move themselves by pushing away from objects
   - Heavier objects allow for stronger push
-- Players can move in space with thrusters
-- Players can brake in space with thruster brake
-- Players can hit objects with their head and push themselves away
+- Player can move in space with thrusters
+- Player can brake in space with thruster brake
+- Player can hit objects with their head and push themselves away
 - Ghost hand appears when controller hand gets far from physics one
-- Physics hand is teleported to controller position if it gets too far from it (ex. hand got stuck)
-- Body snap rotation
-- Body smooth XYZ rotation around static object using hands (trigger activated)
+- Physics hand is reset to controller position if it gets too far from it (ex. hand got stuck)
+- Joystick snap rotation
+- Smooth 6 degrees of freedom rotation around grabbed static object (trigger activated)
 - Fingers wiggle a little when hand is moving
 
 ## How does it work
@@ -43,13 +43,18 @@ Custom OpenXR Action Map is provided for control scheme used by Physics Movement
 
 ## Getting started
 
+Physics Movement requires [Jolt Physics engine](https://github.com/godot-jolt/godot-jolt). It is already included in this repository.
+
 `/addons/xr-kit/physics_movement/scenes/player.tscn` contains everything needed for physics movement, including XR interface initialization.
 
 `/addons/xr-kit/examples/playground.tscn` implements `player.tscn` with some additional objects to interact with.
 
 ## Known issues
 
-Provided hand models (valve_hand_models) were designed for SteamVR and have some issues with finger placement in Oculus runtime. In the end, you should replace them with your own hand models.
+- Provided hand models (valve_hand_models) were designed for SteamVR where hands have fixed size. Oculus hand tracking changes skeleton size based on user hands, which messes up the mesh due to incorrect mesh skinning
+- Free rotation (when you press trigger while holding an object) has several rotation bugs
+- Joystick rotation around static object applies incorrect rotation value depending on angle
+- Body does not retain momentum during grab (grabbing when moving will stop body, pushback and thrusters don't work when holding an object)
 
 ## Godot 3.5
 
