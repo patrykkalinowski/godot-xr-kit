@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://b5lkb7q5glrr1"]
+[gd_scene load_steps=8 format=3 uid="uid://b5lkb7q5glrr1"]
 
 [ext_resource type="PackedScene" uid="uid://kl4nx8ivav56" path="res://addons/xr-kit/physics-movement/scenes/player.tscn" id="1_6aq2f"]
 [ext_resource type="PackedScene" uid="uid://cd60ps1ohbmfp" path="res://addons/xr-kit/examples/playground/scenes/rounded_cube_static.tscn" id="3_77gbh"]
+[ext_resource type="Script" path="res://addons/xr-kit/examples/playground/credit_cards.gd" id="3_gucy0"]
 [ext_resource type="PackedScene" uid="uid://bwcm3a0f2ujiy" path="res://addons/xr-kit/examples/playground/scenes/credit_card_rigid.tscn" id="3_mp4mm"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_bcjol"]
@@ -195,8 +196,74 @@ skeleton = NodePath("../..")
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0.498978, -0.113243, 3.9943)
 skeleton = NodePath("../..")
 
-[node name="CSGBox3D" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.49942, -2.91998)
+[node name="CreditCards" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.705946, -1.91552)
+script = ExtResource("3_gucy0")
 
-[node name="Node3D" parent="." instance=ExtResource("3_mp4mm")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.89721, 0.557349, -1.18185)
+[node name="CreditCard" parent="CreditCards" instance=ExtResource("3_mp4mm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.0567744)
+can_sleep = false
+
+[node name="CreditCard2" parent="CreditCards" instance=ExtResource("3_mp4mm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.0395479)
+can_sleep = false
+
+[node name="CreditCard3" parent="CreditCards" instance=ExtResource("3_mp4mm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.0223653)
+can_sleep = false
+
+[node name="CreditCard4" parent="CreditCards" instance=ExtResource("3_mp4mm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.00144047)
+can_sleep = false
+
+[node name="CreditCard5" parent="CreditCards" instance=ExtResource("3_mp4mm")]
+transform = Transform3D(0.165134, 0, 0.986271, 0, 1, 0, -0.986271, 0, 0.165134, 0, -0.0780905, 0.0301383)
+can_sleep = false
+
+[node name="CreditCard6" parent="CreditCards" instance=ExtResource("3_mp4mm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0624427, -0.117079)
+can_sleep = false
+
+[node name="CreditCard7" parent="CreditCards" instance=ExtResource("3_mp4mm")]
+transform = Transform3D(0.646976, 0, 0.76251, 0, 1, 0, -0.76251, 0, 0.646976, 0, -0.0633458, -0.10194)
+can_sleep = false
+
+[node name="CreditCard8" parent="CreditCards" instance=ExtResource("3_mp4mm")]
+transform = Transform3D(0.646976, 0, 0.76251, 0, 1, 0, -0.76251, 0, 0.646976, 0, 0, -0.175141)
+can_sleep = false
+
+[node name="CreditCard9" parent="CreditCards" instance=ExtResource("3_mp4mm")]
+transform = Transform3D(0.988933, 0, 0.148362, 0, 1, 0, -0.148362, 0, 0.988933, 0, 0, -0.0217104)
+can_sleep = false
+
+[node name="CreditCard10" parent="CreditCards" instance=ExtResource("3_mp4mm")]
+transform = Transform3D(0.646976, 0, 0.76251, 0, 1, 0, -0.76251, 0, 0.646976, 0, 0, -0.217171)
+can_sleep = false
+
+[node name="CreditCard11" parent="CreditCards" instance=ExtResource("3_mp4mm")]
+transform = Transform3D(0.646976, 0, 0.76251, 0, 1, 0, -0.76251, 0, 0.646976, 0, 0, -0.0971191)
+can_sleep = false
+
+[node name="CreditCard12" parent="CreditCards" instance=ExtResource("3_mp4mm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.0611854)
+can_sleep = false
+
+[node name="CreditCard13" parent="CreditCards" instance=ExtResource("3_mp4mm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.103199, 0, -0.0462559)
+can_sleep = false
+
+[node name="CreditCard14" parent="CreditCards" instance=ExtResource("3_mp4mm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.111014, 0, -0.0462559)
+can_sleep = false
+
+[node name="CreditCard15" parent="CreditCards" instance=ExtResource("3_mp4mm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.134622)
+can_sleep = false
+
+[node name="CreditCard16" parent="CreditCards" instance=ExtResource("3_mp4mm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.0813872)
+can_sleep = false
+
+[node name="CreditCard17" parent="CreditCards" instance=ExtResource("3_mp4mm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0831065, 0, -0.0847721)
+can_sleep = false
