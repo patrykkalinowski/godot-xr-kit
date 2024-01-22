@@ -1,0 +1,202 @@
+[gd_scene load_steps=7 format=3 uid="uid://b5lkb7q5glrr1"]
+
+[ext_resource type="PackedScene" uid="uid://kl4nx8ivav56" path="res://addons/xr-kit/physics-movement/scenes/player.tscn" id="1_6aq2f"]
+[ext_resource type="PackedScene" uid="uid://cd60ps1ohbmfp" path="res://addons/xr-kit/examples/playground/scenes/rounded_cube_static.tscn" id="3_77gbh"]
+[ext_resource type="PackedScene" uid="uid://bwcm3a0f2ujiy" path="res://addons/xr-kit/examples/playground/scenes/credit_card_rigid.tscn" id="3_mp4mm"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_bcjol"]
+
+[sub_resource type="Sky" id="Sky_atmsh"]
+sky_material = SubResource("ProceduralSkyMaterial_bcjol")
+
+[sub_resource type="Environment" id="Environment_64oha"]
+background_mode = 1
+background_color = Color(1, 1, 1, 1)
+sky = SubResource("Sky_atmsh")
+ambient_light_color = Color(0.988235, 0.960784, 0.831373, 1)
+
+[node name="Playground" type="Node3D"]
+
+[node name="Player" parent="." instance=ExtResource("1_6aq2f")]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_64oha")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.80478, 0.593573, 0, -0.593573, 0.80478, 0, 0, 1.79285)
+
+[node name="Instructions" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.841371, -0.796411)
+pixel_size = 0.001
+alpha_antialiasing_mode = 1
+texture_filter = 5
+text = "Move left joystick on controller to enable thrusters and move in space. Click joystick to brake.
+
+Move right joystick to rotate. Rotation works differently if you hold static objects.
+
+Static objects are white, they do not move. Darker colors represent lighter objects.
+
+Try grabbing objects with different weights and see how they influence your movement.
+
+Push away from objects using your hands.
+
+Grab objects and move them around. They will behave differently based on their weight.
+Grab with two hands, too.
+
+Grab object and hold trigger to enable smooth 6DOF rotation around it in XYZ axis."
+
+[node name="Static" type="Node3D" parent="."]
+
+[node name="RoundedCube2" parent="Static" instance=ExtResource("3_77gbh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 2.08165e-12, -0.5)
+skeleton = NodePath("../..")
+
+[node name="RoundedCube3" parent="Static" instance=ExtResource("3_77gbh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 2.08165e-12, -0.5)
+skeleton = NodePath("../..")
+
+[node name="RoundedCube4" parent="Static" instance=ExtResource("3_77gbh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 2.08165e-12, 1.82682)
+skeleton = NodePath("../..")
+
+[node name="RoundedCube5" parent="Static" instance=ExtResource("3_77gbh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 2.08165e-12, 1.82682)
+skeleton = NodePath("../..")
+
+[node name="RoundedCube6" parent="Static" instance=ExtResource("3_77gbh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 2.08165e-12, -2.82951)
+skeleton = NodePath("../..")
+
+[node name="RoundedCube7" parent="Static" instance=ExtResource("3_77gbh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 2.08165e-12, -2.82951)
+skeleton = NodePath("../..")
+
+[node name="RoundedCube8" parent="Static" instance=ExtResource("3_77gbh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 1.91953, -2.82951)
+skeleton = NodePath("../..")
+
+[node name="RoundedCube9" parent="Static" instance=ExtResource("3_77gbh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 1.91953, -2.82951)
+skeleton = NodePath("../..")
+
+[node name="RoundedCube10" parent="Static" instance=ExtResource("3_77gbh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 3.80799, -0.466095)
+skeleton = NodePath("../..")
+
+[node name="RoundedCube11" parent="Static" instance=ExtResource("3_77gbh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 3.80799, -0.466095)
+skeleton = NodePath("../..")
+
+[node name="RoundedCube12" parent="Static" instance=ExtResource("3_77gbh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 3.80799, -2.82768)
+skeleton = NodePath("../..")
+
+[node name="RoundedCube13" parent="Static" instance=ExtResource("3_77gbh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 3.80799, -2.82768)
+skeleton = NodePath("../..")
+
+[node name="RoundedCube14" parent="Static" instance=ExtResource("3_77gbh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 3.80799, 1.51106)
+skeleton = NodePath("../..")
+
+[node name="RoundedCube32" parent="Static" instance=ExtResource("3_77gbh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.12047, 2.08165e-12, -0.5)
+skeleton = NodePath("../..")
+
+[node name="RoundedCube33" parent="Static" instance=ExtResource("3_77gbh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.12047, 2.08165e-12, 1.82682)
+skeleton = NodePath("../..")
+
+[node name="RoundedCube34" parent="Static" instance=ExtResource("3_77gbh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.12047, 2.08165e-12, -2.82951)
+skeleton = NodePath("../..")
+
+[node name="RoundedCube35" parent="Static" instance=ExtResource("3_77gbh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.12047, 1.91953, -2.82951)
+skeleton = NodePath("../..")
+
+[node name="RoundedCube36" parent="Static" instance=ExtResource("3_77gbh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.12047, 3.80799, -0.466095)
+skeleton = NodePath("../..")
+
+[node name="RoundedCube37" parent="Static" instance=ExtResource("3_77gbh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.12047, 3.80799, -2.82768)
+skeleton = NodePath("../..")
+
+[node name="RoundedCube38" parent="Static" instance=ExtResource("3_77gbh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.12047, 3.80799, 1.51106)
+skeleton = NodePath("../..")
+
+[node name="RoundedCube15" parent="Static" instance=ExtResource("3_77gbh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 3.80799, 1.51106)
+skeleton = NodePath("../..")
+
+[node name="RoundedCube25" parent="Static" instance=ExtResource("3_77gbh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.71825, 2.08165e-12, -0.5)
+skeleton = NodePath("../..")
+
+[node name="RoundedCube26" parent="Static" instance=ExtResource("3_77gbh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.71825, 2.08165e-12, 1.82682)
+skeleton = NodePath("../..")
+
+[node name="RoundedCube27" parent="Static" instance=ExtResource("3_77gbh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.71825, 2.08165e-12, -2.82951)
+skeleton = NodePath("../..")
+
+[node name="RoundedCube28" parent="Static" instance=ExtResource("3_77gbh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.71825, 1.91953, -2.82951)
+skeleton = NodePath("../..")
+
+[node name="RoundedCube29" parent="Static" instance=ExtResource("3_77gbh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.71825, 3.80799, -0.466095)
+skeleton = NodePath("../..")
+
+[node name="RoundedCube30" parent="Static" instance=ExtResource("3_77gbh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.71825, 3.80799, -2.82768)
+skeleton = NodePath("../..")
+
+[node name="RoundedCube31" parent="Static" instance=ExtResource("3_77gbh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.71825, 3.80799, 1.51106)
+skeleton = NodePath("../..")
+
+[node name="RoundedCube16" parent="Static" instance=ExtResource("3_77gbh")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0.498978, 3.80799, -5.04496)
+skeleton = NodePath("../..")
+
+[node name="RoundedCube20" parent="Static" instance=ExtResource("3_77gbh")]
+transform = Transform3D(-4.37114e-07, 0, -10, 0, 10, 0, 10, 0, -4.37114e-07, 4.93143, 3.80799, -10.5849)
+skeleton = NodePath("../..")
+
+[node name="RoundedCube17" parent="Static" instance=ExtResource("3_77gbh")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0.498978, 3.80799, -1.04496)
+skeleton = NodePath("../..")
+
+[node name="RoundedCube21" parent="Static" instance=ExtResource("3_77gbh")]
+transform = Transform3D(-2.18557e-08, 0, -0.5, 0, 0.5, 0, 0.5, 0, -2.18557e-08, 0.270749, 1.7442, -1.08592)
+skeleton = NodePath("../..")
+
+[node name="RoundedCube18" parent="Static" instance=ExtResource("3_77gbh")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0.498978, -0.113243, -5.04496)
+skeleton = NodePath("../..")
+
+[node name="RoundedCube19" parent="Static" instance=ExtResource("3_77gbh")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0.498978, -0.113243, -1.04496)
+skeleton = NodePath("../..")
+
+[node name="RoundedCube22" parent="Static" instance=ExtResource("3_77gbh")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0.498978, 3.80799, 3.9943)
+skeleton = NodePath("../..")
+
+[node name="RoundedCube23" parent="Static" instance=ExtResource("3_77gbh")]
+transform = Transform3D(-2.18557e-08, 0, -0.5, 0, 0.5, 0, 0.5, 0, -2.18557e-08, 0.270749, 1.7442, 3.95334)
+skeleton = NodePath("../..")
+
+[node name="RoundedCube24" parent="Static" instance=ExtResource("3_77gbh")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0.498978, -0.113243, 3.9943)
+skeleton = NodePath("../..")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.49942, -2.91998)
+
+[node name="Node3D" parent="." instance=ExtResource("3_mp4mm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.89721, 0.557349, -1.18185)

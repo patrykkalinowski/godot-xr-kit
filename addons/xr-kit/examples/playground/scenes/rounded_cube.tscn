@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://dffrihqss7nu"]
+
+[ext_resource type="ArrayMesh" uid="uid://b0ltucab6i5ur" path="res://addons/xr-kit/examples/playground/assets/RoundedCube.obj" id="1_rpyly"]
+[ext_resource type="Material" uid="uid://2nh2f758tkor" path="res://addons/xr-kit/examples/playground/toon_material.tres" id="2_hnd5o"]
+
+[node name="RoundedCube" type="MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, -0.5)
+mesh = ExtResource("1_rpyly")
+surface_material_override/0 = ExtResource("2_hnd5o")
