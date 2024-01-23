@@ -105,7 +105,7 @@ shape = SubResource("ConvexPolygonShape3D_buf7d")
 
 [node name="JoltSliderJoint3D" type="JoltSliderJoint3D" parent="."]
 limit_enabled = true
-limit_lower = -0.06
+limit_upper = 0.06
 motor_enabled = true
 motor_target_velocity = 1.0
 motor_max_force = 1.0

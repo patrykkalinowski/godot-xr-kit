@@ -1,0 +1,14 @@
+[gd_scene load_steps=5 format=3 uid="uid://klx7aj0uyipq"]
+
+[ext_resource type="ArrayMesh" uid="uid://ebv624i3y1st" path="res://addons/xr-kit/examples/playground/assets/rounded_cube/RoundedCubeUV.obj" id="1_oy8f0"]
+[ext_resource type="Texture2D" uid="uid://hrt03xpmjg73" path="res://addons/xr-kit/examples/playground/assets/rounded_cube/CBMaterial-color.png" id="2_0ye5k"]
+[ext_resource type="Texture2D" uid="uid://bb2mwitf2ppdt" path="res://addons/xr-kit/examples/playground/assets/rounded_cube/CBMaterial-roughness.png" id="3_4qork"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c8m4c"]
+albedo_texture = ExtResource("2_0ye5k")
+roughness_texture = ExtResource("3_4qork")
+
+[node name="RoundedCubeUv" type="MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, -0.5)
+mesh = ExtResource("1_oy8f0")
+surface_material_override/0 = SubResource("StandardMaterial3D_c8m4c")
