@@ -1,27 +1,31 @@
-[gd_scene load_steps=8 format=3 uid="uid://b5lkb7q5glrr1"]
+[gd_scene load_steps=11 format=3 uid="uid://b5lkb7q5glrr1"]
 
 [ext_resource type="PackedScene" uid="uid://kl4nx8ivav56" path="res://addons/xr-kit/physics-movement/scenes/player.tscn" id="1_6aq2f"]
 [ext_resource type="PackedScene" uid="uid://cd60ps1ohbmfp" path="res://addons/xr-kit/examples/playground/scenes/rounded_cube_static.tscn" id="3_77gbh"]
 [ext_resource type="Script" path="res://addons/xr-kit/examples/playground/credit_cards.gd" id="3_gucy0"]
 [ext_resource type="PackedScene" uid="uid://bwcm3a0f2ujiy" path="res://addons/xr-kit/examples/playground/scenes/credit_card_rigid.tscn" id="3_mp4mm"]
+[ext_resource type="PackedScene" uid="uid://i8j517vl4knr" path="res://addons/xr-kit/examples/playground/scenes/button.tscn" id="5_vhnq4"]
+[ext_resource type="PackedScene" uid="uid://dfvl5p3o70t51" path="res://addons/xr-kit/examples/playground/scenes/hatch.tscn" id="6_sadw5"]
+[ext_resource type="PackedScene" uid="uid://c4xsgk8gy1w6n" path="res://addons/xr-kit/examples/playground/scenes/spinner.tscn" id="7_64pa7"]
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_bcjol"]
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_va4r1"]
 
-[sub_resource type="Sky" id="Sky_atmsh"]
-sky_material = SubResource("ProceduralSkyMaterial_bcjol")
+[sub_resource type="Sky" id="Sky_2d8ti"]
+sky_material = SubResource("ProceduralSkyMaterial_va4r1")
 
-[sub_resource type="Environment" id="Environment_64oha"]
+[sub_resource type="Environment" id="Environment_pp8o0"]
 background_mode = 1
-background_color = Color(1, 1, 1, 1)
-sky = SubResource("Sky_atmsh")
-ambient_light_color = Color(0.988235, 0.960784, 0.831373, 1)
+background_color = Color(0.815686, 0.815686, 0.815686, 1)
+sky = SubResource("Sky_2d8ti")
+ambient_light_source = 3
 
 [node name="Playground" type="Node3D"]
 
 [node name="Player" parent="." instance=ExtResource("1_6aq2f")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8.82101, 0)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_64oha")
+environment = SubResource("Environment_pp8o0")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.80478, 0.593573, 0, -0.593573, 0.80478, 0, 0, 1.79285)
@@ -267,3 +271,18 @@ can_sleep = false
 [node name="CreditCard17" parent="CreditCards" instance=ExtResource("3_mp4mm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0831065, 0, -0.0847721)
 can_sleep = false
+
+[node name="Button" parent="." instance=ExtResource("5_vhnq4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00802991, 0.00897419, -0.578633)
+
+[node name="Button2" parent="." instance=ExtResource("5_vhnq4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.032951, 3.79705, -4.60536)
+
+[node name="Hatch" parent="." instance=ExtResource("6_sadw5")]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0.816067, 1.68697, -5.69916)
+
+[node name="Spinner" parent="." instance=ExtResource("7_64pa7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0750809, 8.80799, -10.5379)
+axis_lock_linear_z = false
+axis_lock_angular_x = false
+axis_lock_angular_z = false

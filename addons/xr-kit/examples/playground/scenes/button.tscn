@@ -1,7 +1,6 @@
 [gd_scene load_steps=11 format=3 uid="uid://i8j517vl4knr"]
 
 [ext_resource type="Script" path="res://addons/xr-kit/examples/playground/scenes/button.gd" id="1_6wsab"]
-[ext_resource type="Material" uid="uid://2nh2f758tkor" path="res://addons/xr-kit/examples/playground/toon_material.tres" id="1_xp1od"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_wa2ye"]
 _surfaces = [{
@@ -68,6 +67,13 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_nknsl")
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fpf2f"]
+diffuse_mode = 3
+specular_mode = 2
+albedo_color = Color(1, 0, 0, 1)
+emission = Color(1, 1, 1, 1)
+emission_energy_multiplier = 2.0
+
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_buf7d"]
 points = PackedVector3Array(0.030733, 0.0454588, 0.124433, -0.0930219, -0.02077, 0.075, 0.062031, -0.0505798, 0.075, 0.0172982, 0.0955379, 0.075, -0.0150739, -0.0698889, 0.119296, -0.0594074, 0.0472032, 0.116532, 0.0922754, -0.00887243, 0.101839, 0.0176799, -0.0977846, 0.0774092, 0.0828953, 0.0537686, 0.075, -0.0751241, 0.0597393, 0.075, 0.0520134, -0.0582896, 0.1164, -0.0724647, -0.0568006, 0.0988529, 0.00536073, 0.0866081, 0.107799, -0.0613223, -0.0172676, 0.122067, 0.0621476, 0.062839, 0.10781, 0.0828953, -0.0535686, 0.075, -0.0363579, -0.089359, 0.075, 0.0535395, -0.0141082, 0.124494, -0.0870713, 0.0209721, 0.101832, -0.0337656, 0.0905514, 0.0897965, -0.00658022, -0.0865893, 0.107814, 0.0652249, -0.0687208, 0.0988545, -0.0260392, 0.0456268, 0.124522, 0.079019, 0.0236574, 0.113602, 0.100023, 0.00923536, 0.0774707, -0.0146258, -0.0510418, 0.124488, 0.0507749, 0.0847723, 0.0867413, -0.0870536, -0.020768, 0.101832, -0.0482744, -0.0714743, 0.107796, -0.0482748, 0.0716748, 0.107796, -0.0885511, 0.0395145, 0.0867065, 0.0925449, 0.0271357, 0.0958429)
 
@@ -92,7 +98,7 @@ shape = SubResource("ConcavePolygonShape3D_mppwe")
 [node name="Button" type="MeshInstance3D" parent="RigidBody3D"]
 mesh = SubResource("ArrayMesh_y5r3c")
 skeleton = NodePath("")
-surface_material_override/0 = ExtResource("1_xp1od")
+surface_material_override/0 = SubResource("StandardMaterial3D_fpf2f")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
 shape = SubResource("ConvexPolygonShape3D_buf7d")
