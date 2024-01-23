@@ -46,12 +46,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.359042, 0)
 [node name="StaticBody3D" type="StaticBody3D" parent="CSGBox3D"]
 
 [node name="JoltGeneric6DOFJoint3D" type="JoltGeneric6DOFJoint3D" parent="."]
-angular_limit_x/enabled = false
-angular_limit_y/enabled = false
-angular_limit_z/enabled = false
-angular_motor_y/enabled = true
-angular_motor_y/target_velocity = 0.174533
-angular_motor_y/max_torque = 10.0
-node_a = NodePath("..")
 node_b = NodePath("../CSGBox3D/StaticBody3D")
+enabled = false
 exclude_nodes_from_collision = false

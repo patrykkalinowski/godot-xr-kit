@@ -22,7 +22,6 @@ ambient_light_source = 3
 [node name="Playground" type="Node3D"]
 
 [node name="Player" parent="." instance=ExtResource("1_6aq2f")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8.82101, 0)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_pp8o0")
@@ -283,6 +282,6 @@ transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0.8160
 
 [node name="Spinner" parent="." instance=ExtResource("7_64pa7")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0750809, 8.80799, -10.5379)
-axis_lock_linear_z = false
 axis_lock_angular_x = false
 axis_lock_angular_z = false
+angular_velocity = Vector3(3.63316e-14, 0.349066, 3.63316e-14)
