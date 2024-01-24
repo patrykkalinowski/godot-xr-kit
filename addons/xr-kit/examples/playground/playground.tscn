@@ -52,152 +52,115 @@ Grab object and hold trigger to enable smooth 6DOF rotation around it in XYZ axi
 [node name="Static" type="Node3D" parent="."]
 
 [node name="RoundedCube2" parent="Static" instance=ExtResource("3_77gbh")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 2.08165e-12, -0.5)
-skeleton = NodePath("../..")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.50789, 2.08165e-12, -0.5)
 
 [node name="RoundedCube3" parent="Static" instance=ExtResource("3_77gbh")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 2.08165e-12, -0.5)
-skeleton = NodePath("../..")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.49211, 2.08165e-12, -0.5)
 
 [node name="RoundedCube4" parent="Static" instance=ExtResource("3_77gbh")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 2.08165e-12, 1.82682)
-skeleton = NodePath("../..")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.50789, 2.08165e-12, 1.82682)
 
 [node name="RoundedCube5" parent="Static" instance=ExtResource("3_77gbh")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 2.08165e-12, 1.82682)
-skeleton = NodePath("../..")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.49211, 2.08165e-12, 1.82682)
 
 [node name="RoundedCube6" parent="Static" instance=ExtResource("3_77gbh")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 2.08165e-12, -2.82951)
-skeleton = NodePath("../..")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.50789, 2.08165e-12, -2.82951)
 
 [node name="RoundedCube7" parent="Static" instance=ExtResource("3_77gbh")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 2.08165e-12, -2.82951)
-skeleton = NodePath("../..")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.49211, 2.08165e-12, -2.82951)
 
 [node name="RoundedCube8" parent="Static" instance=ExtResource("3_77gbh")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 1.91953, -2.82951)
-skeleton = NodePath("../..")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.50789, 1.91953, -2.82951)
 
 [node name="RoundedCube9" parent="Static" instance=ExtResource("3_77gbh")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 1.91953, -2.82951)
-skeleton = NodePath("../..")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.49211, 1.91953, -2.82951)
 
 [node name="RoundedCube10" parent="Static" instance=ExtResource("3_77gbh")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 3.80799, -0.466095)
-skeleton = NodePath("../..")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.50789, 3.80799, -0.466095)
 
 [node name="RoundedCube11" parent="Static" instance=ExtResource("3_77gbh")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 3.80799, -0.466095)
-skeleton = NodePath("../..")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.49211, 3.80799, -0.466095)
 
 [node name="RoundedCube12" parent="Static" instance=ExtResource("3_77gbh")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 3.80799, -2.82768)
-skeleton = NodePath("../..")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.50789, 3.80799, -2.82768)
 
 [node name="RoundedCube13" parent="Static" instance=ExtResource("3_77gbh")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 3.80799, -2.82768)
-skeleton = NodePath("../..")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.49211, 3.80799, -2.82768)
 
 [node name="RoundedCube14" parent="Static" instance=ExtResource("3_77gbh")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 3.80799, 1.51106)
-skeleton = NodePath("../..")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.50789, 3.80799, 1.51106)
 
 [node name="RoundedCube32" parent="Static" instance=ExtResource("3_77gbh")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.12047, 2.08165e-12, -0.5)
-skeleton = NodePath("../..")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.62836, 2.08165e-12, -0.5)
 
 [node name="RoundedCube33" parent="Static" instance=ExtResource("3_77gbh")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.12047, 2.08165e-12, 1.82682)
-skeleton = NodePath("../..")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.62836, 2.08165e-12, 1.82682)
 
 [node name="RoundedCube34" parent="Static" instance=ExtResource("3_77gbh")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.12047, 2.08165e-12, -2.82951)
-skeleton = NodePath("../..")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.62836, 2.08165e-12, -2.82951)
 
 [node name="RoundedCube35" parent="Static" instance=ExtResource("3_77gbh")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.12047, 1.91953, -2.82951)
-skeleton = NodePath("../..")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.62836, 1.91953, -2.82951)
 
 [node name="RoundedCube36" parent="Static" instance=ExtResource("3_77gbh")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.12047, 3.80799, -0.466095)
-skeleton = NodePath("../..")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.62836, 3.80799, -0.466095)
 
 [node name="RoundedCube37" parent="Static" instance=ExtResource("3_77gbh")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.12047, 3.80799, -2.82768)
-skeleton = NodePath("../..")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.62836, 3.80799, -2.82768)
 
 [node name="RoundedCube38" parent="Static" instance=ExtResource("3_77gbh")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.12047, 3.80799, 1.51106)
-skeleton = NodePath("../..")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.62836, 3.80799, 1.51106)
 
 [node name="RoundedCube15" parent="Static" instance=ExtResource("3_77gbh")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 3.80799, 1.51106)
-skeleton = NodePath("../..")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.49211, 3.80799, 1.51106)
 
 [node name="RoundedCube25" parent="Static" instance=ExtResource("3_77gbh")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.71825, 2.08165e-12, -0.5)
-skeleton = NodePath("../..")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.21036, 2.08165e-12, -0.5)
 
 [node name="RoundedCube26" parent="Static" instance=ExtResource("3_77gbh")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.71825, 2.08165e-12, 1.82682)
-skeleton = NodePath("../..")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.21036, 2.08165e-12, 1.82682)
 
 [node name="RoundedCube27" parent="Static" instance=ExtResource("3_77gbh")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.71825, 2.08165e-12, -2.82951)
-skeleton = NodePath("../..")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.21036, 2.08165e-12, -2.82951)
 
 [node name="RoundedCube28" parent="Static" instance=ExtResource("3_77gbh")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.71825, 1.91953, -2.82951)
-skeleton = NodePath("../..")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.21036, 1.91953, -2.82951)
 
 [node name="RoundedCube29" parent="Static" instance=ExtResource("3_77gbh")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.71825, 3.80799, -0.466095)
-skeleton = NodePath("../..")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.21036, 3.80799, -0.466095)
 
 [node name="RoundedCube30" parent="Static" instance=ExtResource("3_77gbh")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.71825, 3.80799, -2.82768)
-skeleton = NodePath("../..")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.21036, 3.80799, -2.82768)
 
 [node name="RoundedCube31" parent="Static" instance=ExtResource("3_77gbh")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.71825, 3.80799, 1.51106)
-skeleton = NodePath("../..")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.21036, 3.80799, 1.51106)
 
 [node name="RoundedCube16" parent="Static" instance=ExtResource("3_77gbh")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0.498978, 3.80799, -5.04496)
-skeleton = NodePath("../..")
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -0.00891557, 3.80799, -5.04496)
 
 [node name="RoundedCube20" parent="Static" instance=ExtResource("3_77gbh")]
-transform = Transform3D(-4.37114e-07, 0, -10, 0, 10, 0, 10, 0, -4.37114e-07, 4.93143, 3.80799, -10.5849)
-skeleton = NodePath("../..")
+transform = Transform3D(-4.37114e-07, 0, -10, 0, 10, 0, 10, 0, -4.37114e-07, 2.08165e-12, 3.808, -10.585)
 
 [node name="RoundedCube17" parent="Static" instance=ExtResource("3_77gbh")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0.498978, 3.80799, -1.04496)
-skeleton = NodePath("../..")
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -0.00891557, 3.80799, -1.04496)
 
 [node name="RoundedCube21" parent="Static" instance=ExtResource("3_77gbh")]
-transform = Transform3D(-2.18557e-08, 0, -0.5, 0, 0.5, 0, 0.5, 0, -2.18557e-08, 0.270749, 1.7442, -1.08592)
-skeleton = NodePath("../..")
+transform = Transform3D(-2.18557e-08, 0, -0.5, 0, 0.5, 0, 0.5, 0, -2.18557e-08, -0.237145, 1.7442, -1.08592)
 
 [node name="RoundedCube18" parent="Static" instance=ExtResource("3_77gbh")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0.498978, -0.113243, -5.04496)
-skeleton = NodePath("../..")
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -0.00891557, -0.113243, -5.04496)
 
 [node name="RoundedCube19" parent="Static" instance=ExtResource("3_77gbh")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0.498978, -0.113243, -1.04496)
-skeleton = NodePath("../..")
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -0.00891557, -0.113243, -1.04496)
 
 [node name="RoundedCube22" parent="Static" instance=ExtResource("3_77gbh")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0.498978, 3.80799, 3.9943)
-skeleton = NodePath("../..")
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -0.00891557, 3.80799, 3.9943)
 
 [node name="RoundedCube23" parent="Static" instance=ExtResource("3_77gbh")]
-transform = Transform3D(-2.18557e-08, 0, -0.5, 0, 0.5, 0, 0.5, 0, -2.18557e-08, 0.270749, 1.7442, 3.95334)
-skeleton = NodePath("../..")
+transform = Transform3D(-2.18557e-08, 0, -0.5, 0, 0.5, 0, 0.5, 0, -2.18557e-08, -0.237145, 1.7442, 3.95334)
 
 [node name="RoundedCube24" parent="Static" instance=ExtResource("3_77gbh")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0.498978, -0.113243, 3.9943)
-skeleton = NodePath("../..")
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -0.00891557, -0.113243, 3.9943)
 
 [node name="CreditCards" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.705946, -1.91552)
