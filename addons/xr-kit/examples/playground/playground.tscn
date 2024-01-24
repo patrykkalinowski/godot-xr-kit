@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://b5lkb7q5glrr1"]
+[gd_scene load_steps=12 format=3 uid="uid://b5lkb7q5glrr1"]
 
 [ext_resource type="PackedScene" uid="uid://kl4nx8ivav56" path="res://addons/xr-kit/physics-movement/scenes/player.tscn" id="1_6aq2f"]
 [ext_resource type="PackedScene" uid="uid://cd60ps1ohbmfp" path="res://addons/xr-kit/examples/playground/scenes/rounded_cube_static.tscn" id="3_77gbh"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://i8j517vl4knr" path="res://addons/xr-kit/examples/playground/scenes/button.tscn" id="5_vhnq4"]
 [ext_resource type="PackedScene" uid="uid://dfvl5p3o70t51" path="res://addons/xr-kit/examples/playground/scenes/hatch.tscn" id="6_sadw5"]
 [ext_resource type="PackedScene" uid="uid://c4xsgk8gy1w6n" path="res://addons/xr-kit/examples/playground/scenes/spinner.tscn" id="7_64pa7"]
+[ext_resource type="PackedScene" uid="uid://b1gha0yxcisc3" path="res://addons/xr-kit/examples/playground/scenes/lever.tscn" id="8_scuco"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_va4r1"]
 
@@ -248,3 +249,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0750809, 8.80799, -10.5379)
 axis_lock_angular_x = false
 axis_lock_angular_z = false
 angular_velocity = Vector3(3.63316e-14, 0.349066, 3.63316e-14)
+
+[node name="Lever" parent="." instance=ExtResource("8_scuco")]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -0.324422, 0.0707626, -0.564102)
