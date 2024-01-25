@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://b5lkb7q5glrr1"]
+[gd_scene load_steps=13 format=3 uid="uid://b5lkb7q5glrr1"]
 
 [ext_resource type="PackedScene" uid="uid://kl4nx8ivav56" path="res://addons/xr-kit/physics-movement/scenes/player.tscn" id="1_6aq2f"]
 [ext_resource type="PackedScene" uid="uid://cd60ps1ohbmfp" path="res://addons/xr-kit/examples/playground/scenes/rounded_cube_static.tscn" id="3_77gbh"]
@@ -19,6 +19,8 @@ background_mode = 1
 background_color = Color(0.815686, 0.815686, 0.815686, 1)
 sky = SubResource("Sky_2d8ti")
 ambient_light_source = 3
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_18j5k"]
 
 [node name="Playground" type="Node3D"]
 
@@ -169,71 +171,54 @@ script = ExtResource("3_gucy0")
 
 [node name="CreditCard" parent="CreditCards" instance=ExtResource("3_mp4mm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.0567744)
-can_sleep = false
 
 [node name="CreditCard2" parent="CreditCards" instance=ExtResource("3_mp4mm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.0395479)
-can_sleep = false
 
 [node name="CreditCard3" parent="CreditCards" instance=ExtResource("3_mp4mm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.0223653)
-can_sleep = false
 
 [node name="CreditCard4" parent="CreditCards" instance=ExtResource("3_mp4mm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.00144047)
-can_sleep = false
 
 [node name="CreditCard5" parent="CreditCards" instance=ExtResource("3_mp4mm")]
 transform = Transform3D(0.165134, 0, 0.986271, 0, 1, 0, -0.986271, 0, 0.165134, 0, -0.0780905, 0.0301383)
-can_sleep = false
 
 [node name="CreditCard6" parent="CreditCards" instance=ExtResource("3_mp4mm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0624427, -0.117079)
-can_sleep = false
 
 [node name="CreditCard7" parent="CreditCards" instance=ExtResource("3_mp4mm")]
 transform = Transform3D(0.646976, 0, 0.76251, 0, 1, 0, -0.76251, 0, 0.646976, 0, -0.0633458, -0.10194)
-can_sleep = false
 
 [node name="CreditCard8" parent="CreditCards" instance=ExtResource("3_mp4mm")]
 transform = Transform3D(0.646976, 0, 0.76251, 0, 1, 0, -0.76251, 0, 0.646976, 0, 0, -0.175141)
-can_sleep = false
 
 [node name="CreditCard9" parent="CreditCards" instance=ExtResource("3_mp4mm")]
 transform = Transform3D(0.988933, 0, 0.148362, 0, 1, 0, -0.148362, 0, 0.988933, 0, 0, -0.0217104)
-can_sleep = false
 
 [node name="CreditCard10" parent="CreditCards" instance=ExtResource("3_mp4mm")]
 transform = Transform3D(0.646976, 0, 0.76251, 0, 1, 0, -0.76251, 0, 0.646976, 0, 0, -0.217171)
-can_sleep = false
 
 [node name="CreditCard11" parent="CreditCards" instance=ExtResource("3_mp4mm")]
 transform = Transform3D(0.646976, 0, 0.76251, 0, 1, 0, -0.76251, 0, 0.646976, 0, 0, -0.0971191)
-can_sleep = false
 
 [node name="CreditCard12" parent="CreditCards" instance=ExtResource("3_mp4mm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.0611854)
-can_sleep = false
 
 [node name="CreditCard13" parent="CreditCards" instance=ExtResource("3_mp4mm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.103199, 0, -0.0462559)
-can_sleep = false
 
 [node name="CreditCard14" parent="CreditCards" instance=ExtResource("3_mp4mm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.111014, 0, -0.0462559)
-can_sleep = false
 
 [node name="CreditCard15" parent="CreditCards" instance=ExtResource("3_mp4mm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.134622)
-can_sleep = false
 
 [node name="CreditCard16" parent="CreditCards" instance=ExtResource("3_mp4mm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.0813872)
-can_sleep = false
 
 [node name="CreditCard17" parent="CreditCards" instance=ExtResource("3_mp4mm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0831065, 0, -0.0847721)
-can_sleep = false
 
 [node name="Button" parent="." instance=ExtResource("5_vhnq4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00802991, 0.00897419, -0.578633)
@@ -252,3 +237,14 @@ angular_velocity = Vector3(3.63316e-14, 0.349066, 3.63316e-14)
 
 [node name="Lever" parent="." instance=ExtResource("8_scuco")]
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -0.324422, 0.0707626, -0.564102)
+
+[node name="RigidBody3D" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.14621, 0, -0.34858)
+mass = 50.0
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="RigidBody3D"]
+radial_segments = 100
+rings = 100
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
+shape = SubResource("SphereShape3D_18j5k")

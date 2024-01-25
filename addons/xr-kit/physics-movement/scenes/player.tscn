@@ -5,13 +5,13 @@
 [ext_resource type="Script" path="res://addons/xr-kit/physics-movement/scripts/body.gd" id="2_du0ta"]
 [ext_resource type="Script" path="res://addons/xr-kit/physics-movement/scripts/chest.gd" id="4_he44h"]
 [ext_resource type="Script" path="res://addons/xr-kit/physics-movement/scripts/controller.gd" id="5_1paut"]
-[ext_resource type="Texture2D" uid="uid://bepo0kf4361rl" path="res://addons/xr-kit/physics-movement/assets/valve_hand_models/textures/vr_glove_normal.png" id="7_mov64"]
+[ext_resource type="Texture2D" uid="uid://djb1jvsia1ht2" path="res://addons/xr-kit/physics-movement/assets/valve_hand_models/textures/vr_glove_normal.png" id="7_mov64"]
 [ext_resource type="PackedScene" uid="uid://c55ye36xc38vm" path="res://addons/xr-kit/hand-gesture-recognition/scenes/hand_pose_save.tscn" id="9_dmrsn"]
 [ext_resource type="PackedScene" uid="uid://csmt4dhikwq4i" path="res://addons/xr-kit/physics-movement/scenes/finger_collider.tscn" id="9_skcr2"]
 [ext_resource type="Script" path="res://addons/xr-kit/physics-movement/scripts/physics_hand.gd" id="10_7gjb2"]
 [ext_resource type="PackedScene" uid="uid://7c0k8oiqssl5" path="res://addons/xr-kit/hand-gesture-recognition/scenes/hand_pose_recognition.tscn" id="11_hqvgg"]
 [ext_resource type="PackedScene" uid="uid://bilvqj7qyd5br" path="res://addons/xr-kit/physics-movement/scenes/controller_animation_tree.tscn" id="11_j5hkn"]
-[ext_resource type="Texture2D" uid="uid://dig36stjp5m34" path="res://addons/xr-kit/physics-movement/assets/valve_hand_models/textures/vr_glove_color_red.jpg" id="12_0ewhw"]
+[ext_resource type="Texture2D" uid="uid://dm5gmsh1vgqxw" path="res://addons/xr-kit/physics-movement/assets/valve_hand_models/textures/vr_glove_color_red.jpg" id="12_0ewhw"]
 [ext_resource type="PackedScene" uid="uid://c2obhfn7ss62o" path="res://addons/xr-kit/physics-movement/scenes/grab_joint.tscn" id="13_htrok"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_ga5er"]
@@ -358,7 +358,7 @@ bind/25/pose = Transform3D(0.083606, 0.996362, 0.0165156, -0.97618, 0.0785601, 0
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_swoqk"]
 radius = 0.03
-height = 0.100927
+height = 0.12
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5f5mg"]
 resource_name = "blinn1"
@@ -684,7 +684,7 @@ bones/22/parent = 21
 bones/22/rest = Transform3D(0.999737, -0.00227762, 0.0228101, -0.00379517, 0.964875, 0.262682, -0.0226071, -0.2627, 0.964613, -2.59174e-07, 2.0522e-07, -0.0298751)
 bones/22/enabled = true
 bones/22/position = Vector3(-2.59174e-07, 2.0522e-07, -0.0298751)
-bones/22/rotation = Quaternion(-0.106446, 0.000272847, 0.00189612, 0.994317)
+bones/22/rotation = Quaternion(-0.106446, 0.000272846, 0.00189612, 0.994317)
 bones/22/scale = Vector3(1, 1, 1)
 bones/23/name = "Little_Distal_L"
 bones/23/parent = 22
@@ -733,7 +733,7 @@ visible = false
 size = Vector3(0.01, 0.01, 0.5)
 
 [node name="ThumbDistal" type="BoneAttachment3D" parent="Body/Origin/OpenXRHandLeft/ControllerSkeletonLeft"]
-transform = Transform3D(0.210251, 0.520199, -0.82776, -0.911324, 0.410823, 0.0267027, 0.353954, 0.748743, 0.560447, 0.0716159, -0.036301, -0.0814991)
+transform = Transform3D(0.21025, 0.520199, -0.827761, -0.911324, 0.410822, 0.0267033, 0.353954, 0.748743, 0.560446, 0.0716159, -0.0363011, -0.0814991)
 bone_name = "Thumb_Distal_L"
 bone_idx = 3
 
@@ -741,7 +741,7 @@ bone_idx = 3
 transform = Transform3D(1, -2.23517e-08, -2.98023e-08, -3.72529e-09, 1, 7.45058e-09, 2.98023e-08, -1.49012e-08, 1, 0, -0.0137826, -0.0135852)
 
 [node name="IndexDistal" type="BoneAttachment3D" parent="Body/Origin/OpenXRHandLeft/ControllerSkeletonLeft"]
-transform = Transform3D(0.944566, 0.0515951, -0.324243, -0.0877001, 0.991341, -0.0977355, 0.316393, 0.120754, 0.940911, 0.0567251, 0.0124995, -0.154457)
+transform = Transform3D(0.944565, 0.0515952, -0.324244, -0.0877001, 0.991341, -0.0977355, 0.316393, 0.120754, 0.940911, 0.0567251, 0.0124995, -0.154457)
 bone_name = "Index_Distal_L"
 bone_idx = 8
 
@@ -749,7 +749,7 @@ bone_idx = 8
 transform = Transform3D(1, -2.23517e-08, 0, 0, 1, 0, -1.49012e-08, 0, 1, -1.19209e-07, -0.00832665, -0.0135852)
 
 [node name="MiddleDistal" type="BoneAttachment3D" parent="Body/Origin/OpenXRHandLeft/ControllerSkeletonLeft"]
-transform = Transform3D(0.893711, 0.386272, -0.228196, -0.399801, 0.916488, -0.0144301, 0.203565, 0.104129, 0.973508, 0.0223921, 0.0140099, -0.160818)
+transform = Transform3D(0.893711, 0.386272, -0.228196, -0.399801, 0.916488, -0.0144304, 0.203565, 0.10413, 0.973508, 0.0223921, 0.0140099, -0.160818)
 bone_name = "Middle_Distal_L"
 bone_idx = 13
 
@@ -765,7 +765,7 @@ bone_idx = 18
 transform = Transform3D(1, -2.79397e-09, 6.51926e-09, 0, 1, -2.98023e-08, -3.72529e-09, 0, 1, -2.98023e-07, -0.0105623, -0.0190609)
 
 [node name="LittleDistal" type="BoneAttachment3D" parent="Body/Origin/OpenXRHandLeft/ControllerSkeletonLeft"]
-transform = Transform3D(0.983498, -0.139314, -0.115414, 0.154042, 0.979417, 0.13043, 0.0948682, -0.146057, 0.984716, -0.0368572, -0.0098588, -0.122218)
+transform = Transform3D(0.983498, -0.139315, -0.115414, 0.154043, 0.979416, 0.13043, 0.0948674, -0.146057, 0.984716, -0.0368573, -0.00985881, -0.122218)
 bone_name = "Little_Distal_L"
 bone_idx = 23
 
@@ -914,7 +914,7 @@ bones/18/parent = 17
 bones/18/rest = Transform3D(0.999964, 0.000760279, -0.00850133, 0.00154782, 0.963358, 0.268215, 0.00839374, -0.268218, 0.963322, 1.26099e-07, 2.36287e-07, -0.0284901)
 bones/18/enabled = true
 bones/18/position = Vector3(1.26099e-07, 2.36287e-07, -0.0284901)
-bones/18/rotation = Quaternion(-0.0404204, -0.0127095, -0.00072132, 0.999102)
+bones/18/rotation = Quaternion(-0.0404204, -0.0127095, -0.000721321, 0.999102)
 bones/18/scale = Vector3(1, 1, 1)
 bones/19/name = "Ring_Tip_R"
 bones/19/parent = 18
@@ -942,7 +942,7 @@ bones/22/parent = 21
 bones/22/rest = Transform3D(0.999737, 0.00227805, -0.0228097, 0.00379467, 0.964875, 0.262682, 0.0226069, -0.262699, 0.964613, 2.50406e-07, -1.50485e-07, -0.0298734)
 bones/22/enabled = true
 bones/22/position = Vector3(2.50406e-07, -1.50485e-07, -0.0298734)
-bones/22/rotation = Quaternion(-0.106446, 0.000272848, 0.00189612, 0.994317)
+bones/22/rotation = Quaternion(-0.106446, 0.000272847, 0.00189612, 0.994317)
 bones/22/scale = Vector3(1, 1, 1)
 bones/23/name = "Little_Distal_R"
 bones/23/parent = 22
@@ -991,7 +991,7 @@ visible = false
 size = Vector3(0.01, 0.01, 0.5)
 
 [node name="ThumbDistal" type="BoneAttachment3D" parent="Body/Origin/OpenXRHandRight/ControllerSkeletonRight"]
-transform = Transform3D(-0.175464, -0.524289, 0.833267, 0.927957, 0.194602, 0.317845, -0.328798, 0.829006, 0.452371, -0.0716715, -0.0392383, -0.0804074)
+transform = Transform3D(-0.175464, -0.524289, 0.833267, 0.927957, 0.1946, 0.317845, -0.328797, 0.829006, 0.452371, -0.0716715, -0.0392382, -0.0804074)
 bone_name = "Thumb_Distal_R"
 bone_idx = 3
 
@@ -999,7 +999,7 @@ bone_idx = 3
 transform = Transform3D(1, -2.6077e-08, 2.98023e-08, -7.45058e-09, 1, 0, -2.98023e-08, 1.49012e-08, 1, -2.38419e-07, -0.0146961, -0.0135852)
 
 [node name="IndexDistal" type="BoneAttachment3D" parent="Body/Origin/OpenXRHandRight/ControllerSkeletonRight"]
-transform = Transform3D(0.954386, -0.284289, 0.0912454, 0.281416, 0.958612, 0.0432152, -0.0997545, -0.015566, 0.994891, -0.0463653, 0.0144965, -0.156487)
+transform = Transform3D(0.954386, -0.284289, 0.0912455, 0.281416, 0.958612, 0.0432152, -0.0997546, -0.015566, 0.994891, -0.0463653, 0.0144965, -0.156487)
 bone_name = "Index_Distal_R"
 bone_idx = 8
 
@@ -1007,7 +1007,7 @@ bone_idx = 8
 transform = Transform3D(1, -2.23517e-08, 0, 0, 1, 0, -1.49012e-08, 0, 1, -1.19209e-07, -0.00832665, -0.0135852)
 
 [node name="MiddleDistal" type="BoneAttachment3D" parent="Body/Origin/OpenXRHandRight/ControllerSkeletonRight"]
-transform = Transform3D(0.954037, 0.231398, -0.190438, -0.244754, 0.968318, -0.0495583, 0.172937, 0.093891, 0.980447, 0.00120391, 0.0159895, -0.161209)
+transform = Transform3D(0.954037, 0.231398, -0.190438, -0.244754, 0.968318, -0.0495586, 0.172937, 0.0938914, 0.980447, 0.00120391, 0.0159896, -0.161209)
 bone_name = "Middle_Distal_R"
 bone_idx = 13
 
@@ -1023,7 +1023,7 @@ bone_idx = 18
 transform = Transform3D(1, -2.79397e-09, 6.51926e-09, 0, 1, -2.98023e-08, -3.72529e-09, 0, 1, -2.98023e-07, -0.0105623, -0.0190609)
 
 [node name="LittleDistal" type="BoneAttachment3D" parent="Body/Origin/OpenXRHandRight/ControllerSkeletonRight"]
-transform = Transform3D(0.725366, 0.413792, -0.550108, -0.288531, 0.908332, 0.302792, 0.624973, -0.060912, 0.778266, 0.0599053, -0.0158274, -0.115066)
+transform = Transform3D(0.725366, 0.413792, -0.550109, -0.288532, 0.908332, 0.302792, 0.624973, -0.0609116, 0.778266, 0.0599054, -0.0158275, -0.115066)
 bone_name = "Little_Distal_R"
 bone_idx = 23
 
@@ -1286,7 +1286,6 @@ bone_idx = 25
 
 [node name="GrabArea" type="ShapeCast3D" parent="PhysicsHandLeft/PhysicsSkeletonLeft/Palm"]
 transform = Transform3D(1, 3.72529e-09, 0, 0, 5.89062e-08, -1, 3.72529e-09, 1, -4.51691e-08, 0.0053278, -0.0514623, -0.0283869)
-enabled = false
 shape = SubResource("CapsuleShape3D_swoqk")
 target_position = Vector3(0, 0, 0)
 
@@ -1304,7 +1303,7 @@ target_position = Vector3(0, 0, 0)
 hit_from_inside = true
 
 [node name="ThumbDistal" type="BoneAttachment3D" parent="PhysicsHandLeft/PhysicsSkeletonLeft"]
-transform = Transform3D(0.0184909, 0.991216, 0.13095, -0.937245, -0.0284256, 0.34751, 0.34818, -0.129158, 0.928487, 0.0601131, -0.0394405, -0.0851188)
+transform = Transform3D(0.0184909, 0.991216, 0.13095, -0.937245, -0.0284256, 0.347509, 0.34818, -0.129158, 0.928488, 0.0601131, -0.0394405, -0.0851188)
 bone_name = "Thumb_Distal_L"
 bone_idx = 3
 
@@ -1320,7 +1319,7 @@ bone_idx = 8
 transform = Transform3D(1, -2.23517e-08, 0, 0, 1, 0, -1.49012e-08, 0, 1, -1.19209e-07, -0.00832665, -0.0135852)
 
 [node name="MiddleDistal" type="BoneAttachment3D" parent="PhysicsHandLeft/PhysicsSkeletonLeft"]
-transform = Transform3D(0.996576, 0.0648169, 0.0513262, -0.0812012, 0.650531, 0.755126, 0.0155557, -0.756709, 0.653567, 0.00790305, -0.0127199, -0.155316)
+transform = Transform3D(0.996576, 0.0648169, 0.0513262, -0.0812012, 0.650531, 0.755126, 0.0155557, -0.756708, 0.653567, 0.00790305, -0.0127199, -0.155316)
 bone_name = "Middle_Distal_L"
 bone_idx = 13
 
@@ -1328,7 +1327,7 @@ bone_idx = 13
 transform = Transform3D(1, 9.31323e-10, 7.45058e-09, 0, 1, -2.98023e-08, -3.72529e-09, 0, 1, -4.17233e-07, -0.00977743, -0.0233366)
 
 [node name="RingDistal" type="BoneAttachment3D" parent="PhysicsHandLeft/PhysicsSkeletonLeft"]
-transform = Transform3D(0.98335, -0.154228, 0.0961054, 0.030437, 0.661178, 0.749611, -0.179154, -0.734205, 0.654864, -0.023206, -0.0180304, -0.142863)
+transform = Transform3D(0.98335, -0.154228, 0.0961054, 0.030437, 0.661178, 0.749611, -0.179154, -0.734205, 0.654863, -0.023206, -0.0180304, -0.142863)
 bone_name = "Ring_Distal_L"
 bone_idx = 18
 
@@ -1602,8 +1601,7 @@ bone_name = "Palm_R"
 bone_idx = 25
 
 [node name="GrabArea" type="ShapeCast3D" parent="PhysicsHandRight/PhysicsSkeletonRight/Palm"]
-transform = Transform3D(1, 3.72529e-09, 0, 0, 5.89062e-08, -1, 3.72529e-09, 1, -4.51691e-08, 0.0053278, -0.0514623, -0.0283869)
-enabled = false
+transform = Transform3D(1, 1.49012e-08, 3.25963e-09, -1.62981e-09, 5.96046e-08, -1, 9.31323e-09, 1, -4.47035e-08, 0.0053278, -0.0514623, -0.0283869)
 shape = SubResource("CapsuleShape3D_swoqk")
 target_position = Vector3(0, 0, 0)
 
@@ -1624,7 +1622,7 @@ bone_idx = 3
 transform = Transform3D(1, -2.6077e-08, 2.98023e-08, -7.45058e-09, 1, 0, -2.98023e-08, 1.49012e-08, 1, -2.38419e-07, -0.0146961, -0.0135852)
 
 [node name="IndexDistal" type="BoneAttachment3D" parent="PhysicsHandRight/PhysicsSkeletonRight"]
-transform = Transform3D(0.977075, -0.19881, -0.0761532, 0.19221, 0.669965, 0.717079, -0.0915425, -0.715277, 0.692819, -0.0373099, -0.0183927, -0.149582)
+transform = Transform3D(0.977075, -0.19881, -0.0761531, 0.19221, 0.669965, 0.717079, -0.0915425, -0.715277, 0.692819, -0.0373099, -0.0183927, -0.149582)
 bone_name = "Index_Distal_R"
 bone_idx = 8
 
@@ -1632,7 +1630,7 @@ bone_idx = 8
 transform = Transform3D(1, -2.23517e-08, 0, 0, 1, 0, -1.49012e-08, 0, 1, -1.19209e-07, -0.00832665, -0.0135852)
 
 [node name="MiddleDistal" type="BoneAttachment3D" parent="PhysicsHandRight/PhysicsSkeletonRight"]
-transform = Transform3D(0.996576, -0.0648171, -0.0513262, 0.0812013, 0.650531, 0.755126, -0.0155558, -0.756709, 0.653567, -0.00790306, -0.0127199, -0.155315)
+transform = Transform3D(0.996576, -0.0648171, -0.0513262, 0.0812013, 0.650531, 0.755126, -0.0155558, -0.756708, 0.653567, -0.00790306, -0.0127199, -0.155315)
 bone_name = "Middle_Distal_R"
 bone_idx = 13
 
@@ -1640,7 +1638,7 @@ bone_idx = 13
 transform = Transform3D(1, -2.79397e-09, 6.51926e-09, 0, 1, -2.98023e-08, -3.72529e-09, 0, 1, -2.98023e-07, -0.0105623, -0.0190609)
 
 [node name="RingDistal" type="BoneAttachment3D" parent="PhysicsHandRight/PhysicsSkeletonRight"]
-transform = Transform3D(0.98335, 0.154228, -0.0961053, -0.030437, 0.661178, 0.749611, 0.179153, -0.734205, 0.654864, 0.023206, -0.01803, -0.142862)
+transform = Transform3D(0.98335, 0.154228, -0.0961053, -0.0304371, 0.661178, 0.749611, 0.179154, -0.734205, 0.654864, 0.023206, -0.01803, -0.142862)
 bone_name = "Ring_Distal_R"
 bone_idx = 18
 

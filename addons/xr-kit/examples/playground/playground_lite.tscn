@@ -1,0 +1,59 @@
+[gd_scene load_steps=7 format=3 uid="uid://uxxtaggw2aoq"]
+
+[ext_resource type="PackedScene" uid="uid://kl4nx8ivav56" path="res://addons/xr-kit/physics-movement/scenes/player.tscn" id="1_pt5ww"]
+[ext_resource type="PackedScene" uid="uid://cd60ps1ohbmfp" path="res://addons/xr-kit/examples/playground/scenes/rounded_cube_static.tscn" id="2_46vtr"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_va4r1"]
+
+[sub_resource type="Sky" id="Sky_2d8ti"]
+sky_material = SubResource("ProceduralSkyMaterial_va4r1")
+
+[sub_resource type="Environment" id="Environment_pp8o0"]
+background_mode = 1
+background_color = Color(0.815686, 0.815686, 0.815686, 1)
+sky = SubResource("Sky_2d8ti")
+ambient_light_source = 3
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_q5h5r"]
+
+[node name="Playground" type="Node3D"]
+
+[node name="Player" parent="." instance=ExtResource("1_pt5ww")]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_pp8o0")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.80478, 0.593573, 0, -0.593573, 0.80478, 0, 0, 1.79285)
+
+[node name="Instructions" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.841371, -0.796411)
+pixel_size = 0.001
+alpha_antialiasing_mode = 1
+texture_filter = 5
+text = "Move left joystick on controller to enable thrusters and move in space. Click joystick to brake.
+
+Move right joystick to rotate. Rotation works differently if you hold static objects.
+
+Static objects are white, they do not move. Darker colors represent lighter objects.
+
+Try grabbing objects with different weights and see how they influence your movement.
+
+Push away from objects using your hands.
+
+Grab objects and move them around. They will behave differently based on their weight.
+Grab with two hands, too.
+
+Grab object and hold trigger to enable smooth 6DOF rotation around it in XYZ axis."
+
+[node name="RoundedCube" parent="." instance=ExtResource("2_46vtr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.55078, -1.837)
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.75207, 0, -2.02602)
+sides = 64
+
+[node name="StaticBody3D" type="StaticBody3D" parent="CSGCylinder3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CSGCylinder3D/StaticBody3D"]
+shape = SubResource("CylinderShape3D_q5h5r")
