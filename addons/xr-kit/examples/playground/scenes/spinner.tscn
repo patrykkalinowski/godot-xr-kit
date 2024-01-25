@@ -1,6 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://c4xsgk8gy1w6n"]
+[gd_scene load_steps=10 format=3 uid="uid://c4xsgk8gy1w6n"]
 
-[ext_resource type="ArrayMesh" path="res://addons/xr-kit/examples/playground/assets/Spinner.obj" id="1_vp75b"]
+[ext_resource type="Script" path="res://addons/xr-kit/examples/playground/scenes/spinner.gd" id="1_4rdnd"]
+[ext_resource type="ArrayMesh" uid="uid://euvibrymc6dw" path="res://addons/xr-kit/examples/playground/assets/Spinner.obj" id="1_vp75b"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cssmy"]
 
@@ -23,13 +24,8 @@ radius = 0.964781
 [sub_resource type="BoxShape3D" id="BoxShape3D_kxo2g"]
 size = Vector3(0.980225, 0.292603, 10.0321)
 
-[node name="Spinner" type="RigidBody3D"]
-axis_lock_linear_x = true
-axis_lock_linear_y = true
-axis_lock_linear_z = true
-axis_lock_angular_x = true
-axis_lock_angular_z = true
-mass = 1000.0
+[node name="Spinner" type="CharacterBody3D"]
+script = ExtResource("1_4rdnd")
 
 [node name="Mesh" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -0.026677, -0.193706, 0.0038631)
@@ -39,16 +35,6 @@ surface_material_override/1 = SubResource("StandardMaterial3D_6qug0")
 surface_material_override/2 = SubResource("StandardMaterial3D_qg5e8")
 surface_material_override/3 = SubResource("StandardMaterial3D_0wejk")
 surface_material_override/4 = SubResource("StandardMaterial3D_qfm6h")
-
-[node name="CSGBox3D" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.359042, 0)
-
-[node name="StaticBody3D" type="StaticBody3D" parent="CSGBox3D"]
-
-[node name="JoltGeneric6DOFJoint3D" type="JoltGeneric6DOFJoint3D" parent="."]
-node_b = NodePath("../CSGBox3D/StaticBody3D")
-enabled = false
-exclude_nodes_from_collision = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.296174, 0)
