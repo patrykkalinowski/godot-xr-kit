@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://b5lkb7q5glrr1"]
+[gd_scene load_steps=13 format=3 uid="uid://hsr1qcqk72on"]
 
 [ext_resource type="PackedScene" uid="uid://kl4nx8ivav56" path="res://addons/xr-kit/physics-movement/scenes/player.tscn" id="1_6aq2f"]
 [ext_resource type="PackedScene" uid="uid://cd60ps1ohbmfp" path="res://addons/xr-kit/examples/playground/scenes/rounded_cube_static.tscn" id="3_77gbh"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://dfvl5p3o70t51" path="res://addons/xr-kit/examples/playground/scenes/hatch.tscn" id="6_sadw5"]
 [ext_resource type="PackedScene" uid="uid://c4xsgk8gy1w6n" path="res://addons/xr-kit/examples/playground/scenes/spinner.tscn" id="7_64pa7"]
 [ext_resource type="PackedScene" uid="uid://b1gha0yxcisc3" path="res://addons/xr-kit/examples/playground/scenes/lever.tscn" id="8_scuco"]
+[ext_resource type="PackedScene" uid="uid://c8wxu1pi5yw5r" path="res://addons/xr-kit/examples/playground/scenes/pointy_stick.tscn" id="9_ysum5"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_va4r1"]
 
@@ -19,8 +20,6 @@ background_mode = 1
 background_color = Color(0.815686, 0.815686, 0.815686, 1)
 sky = SubResource("Sky_2d8ti")
 ambient_light_source = 3
-
-[sub_resource type="SphereShape3D" id="SphereShape3D_18j5k"]
 
 [node name="Playground" type="Node3D"]
 
@@ -230,7 +229,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.032951, 3.79705, -4.60536)
 transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0.816067, 1.68697, -5.69916)
 
 [node name="Spinner" parent="." instance=ExtResource("7_64pa7")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0750809, 8.80799, -10.5379)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0750809, 9.17721, -10.5379)
 axis_lock_angular_x = false
 axis_lock_angular_z = false
 angular_velocity = Vector3(3.63316e-14, 0.349066, 3.63316e-14)
@@ -238,13 +237,11 @@ angular_velocity = Vector3(3.63316e-14, 0.349066, 3.63316e-14)
 [node name="Lever" parent="." instance=ExtResource("8_scuco")]
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -0.324422, 0.0707626, -0.564102)
 
-[node name="RigidBody3D" type="RigidBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.14621, 0, -0.34858)
-mass = 50.0
+[node name="PointyStick" parent="." instance=ExtResource("9_ysum5")]
+transform = Transform3D(0.881015, 1.49012e-08, 0.473089, -0.289947, 0.790176, 0.539956, -0.373824, -0.612879, 0.696157, -0.109968, 0.422548, -4.09158)
 
-[node name="CSGSphere3D" type="CSGSphere3D" parent="RigidBody3D"]
-radial_segments = 100
-rings = 100
+[node name="PointyStick2" parent="." instance=ExtResource("9_ysum5")]
+transform = Transform3D(0.523167, 0.585849, -0.618932, -0.378195, 0.81042, 0.447423, 0.763717, 0, 0.645551, -1.86445, 1.40741, -1.2261)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
-shape = SubResource("SphereShape3D_18j5k")
+[node name="PointyStick3" parent="." instance=ExtResource("9_ysum5")]
+transform = Transform3D(0.849284, -0.437634, 0.295287, 0.497396, 0.850767, -0.169684, -0.176961, 0.290984, 0.94022, -1.67905, -0.00692391, -4.60919)

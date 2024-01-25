@@ -73,6 +73,7 @@ mesh = SubResource("ArrayMesh_ddncu")
 skeleton = NodePath("")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Lever/Base"]
+collision_mask = 1537
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Lever/Base/StaticBody3D"]
 shape = SubResource("ConvexPolygonShape3D_4k40h")
@@ -83,9 +84,10 @@ limit_upper = 2.44346
 limit_lower = 0.698132
 node_a = NodePath("../../../../RigidBody3D")
 node_b = NodePath("..")
-transform = Transform3D(1, 0, 0, -7.10543e-15, -4.37114e-08, -1, 0, 1, -4.37114e-08, -1.34706e-08, -3.36153e-09, 0.0735961)
+transform = Transform3D(-1, 8.74228e-08, 0, -3.28406e-15, 4.37114e-08, -1, -8.74228e-08, -1, -4.37114e-08, -1.34706e-08, -3.36153e-09, 0.0735961)
 
 [node name="RigidBody3D" type="RigidBody3D" parent="."]
+collision_mask = 1537
 
 [node name="Lever" type="MeshInstance3D" parent="RigidBody3D"]
 mesh = SubResource("ArrayMesh_cg0cg")

@@ -89,6 +89,7 @@ skeleton = NodePath("")
 surface_material_override/0 = SubResource("StandardMaterial3D_buj3r")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Base"]
+collision_mask = 1537
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Base/StaticBody3D"]
 shape = SubResource("ConvexPolygonShape3D_qttgm")
@@ -103,6 +104,7 @@ node_b = NodePath("../../../RigidBody3D")
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 3.62056e-09, 0, 0.0828288)
 
 [node name="RigidBody3D" type="RigidBody3D" parent="."]
+collision_mask = 1537
 
 [node name="Button" type="MeshInstance3D" parent="RigidBody3D"]
 mesh = SubResource("ArrayMesh_y5r3c")
@@ -115,7 +117,7 @@ shape = SubResource("ConvexPolygonShape3D_ek58l")
 [node name="Area3D" type="Area3D" parent="."]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.0333299)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.00870162)
 shape = SubResource("BoxShape3D_0v3lf")
 
 [connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]

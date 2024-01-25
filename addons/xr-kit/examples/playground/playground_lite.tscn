@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://uxxtaggw2aoq"]
+[gd_scene load_steps=7 format=3 uid="uid://wlpnpwsmgrfs"]
 
 [ext_resource type="PackedScene" uid="uid://kl4nx8ivav56" path="res://addons/xr-kit/physics-movement/scenes/player.tscn" id="1_pt5ww"]
 [ext_resource type="PackedScene" uid="uid://cd60ps1ohbmfp" path="res://addons/xr-kit/examples/playground/scenes/rounded_cube_static.tscn" id="2_46vtr"]
@@ -16,7 +16,7 @@ ambient_light_source = 3
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_q5h5r"]
 
-[node name="Playground" type="Node3D"]
+[node name="Playground2" type="Node3D"]
 
 [node name="Player" parent="." instance=ExtResource("1_pt5ww")]
 

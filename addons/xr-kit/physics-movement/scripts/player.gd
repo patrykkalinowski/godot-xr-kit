@@ -13,7 +13,7 @@ func _ready():
 		# Turn off v-sync
 		DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_DISABLED)
 
-		set_initial_player_position()
+		#set_initial_player_position()
 
 		print(interface.get_system_info())
 	else:
