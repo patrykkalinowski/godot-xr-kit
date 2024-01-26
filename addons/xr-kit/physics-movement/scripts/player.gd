@@ -13,13 +13,15 @@ func _ready():
 		# Turn off v-sync
 		DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_DISABLED)
 
-		#set_initial_player_position()
+		set_initial_player_position()
 
 		print(interface.get_system_info())
 	else:
 		print("OpenXR not initialised, please check if your headset is connected")
 
+
 func set_initial_player_position():
+	# Set player head on Player node position
 	origin.global_transform = origin.global_transform.translated(global_transform.origin - camera.global_transform.origin + Vector3(0, 1.7, 0))
 
 	var t1 = Transform3D()
@@ -28,8 +30,7 @@ func set_initial_player_position():
 
 	t1.origin = camera.global_transform.origin
 	t2.origin = -camera.global_transform.origin
-	var angle = global_transform.basis.z.signed_angle_to(camera.basis.z, origin.global_transform.basis.y)
-	rot = rot.rotated_local(origin.global_transform.basis.y, -angle)
+	rot.basis = global_transform.basis * camera.global_transform.basis.inverse()
 
 	origin.global_transform *= t1 * rot * t2
 
