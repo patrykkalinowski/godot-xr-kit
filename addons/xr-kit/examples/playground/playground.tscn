@@ -140,6 +140,27 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.21036, 3.80799, -2.82768)
 [node name="RoundedCube31" parent="Static" instance=ExtResource("3_77gbh")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.21036, 3.80799, 1.51106)
 
+[node name="RoundedCube39" parent="Static" instance=ExtResource("3_77gbh")]
+transform = Transform3D(0.788279, 0.615318, 0, -0.615318, 0.788279, 0, 0, 0, 1, -0.102277, -6.28308, -0.5)
+
+[node name="RoundedCube40" parent="Static" instance=ExtResource("3_77gbh")]
+transform = Transform3D(0.788279, 0.615318, 0, -0.615318, 0.788279, 0, 0, 0, 1, -0.102277, -6.28308, 1.82682)
+
+[node name="RoundedCube41" parent="Static" instance=ExtResource("3_77gbh")]
+transform = Transform3D(0.788279, 0.615318, 0, -0.615318, 0.788279, 0, 0, 0, 1, -0.102277, -6.28308, -2.82951)
+
+[node name="RoundedCube42" parent="Static" instance=ExtResource("3_77gbh")]
+transform = Transform3D(0.788279, 0.615318, 0, -0.615318, 0.788279, 0, 0, 0, 1, -0.102277, -4.36355, -2.82951)
+
+[node name="RoundedCube43" parent="Static" instance=ExtResource("3_77gbh")]
+transform = Transform3D(0.788279, 0.615318, 0, -0.615318, 0.788279, 0, 0, 0, 1, -0.102277, -2.47509, -0.466095)
+
+[node name="RoundedCube44" parent="Static" instance=ExtResource("3_77gbh")]
+transform = Transform3D(0.788279, 0.615318, 0, -0.615318, 0.788279, 0, 0, 0, 1, -0.102277, -2.47509, -2.82768)
+
+[node name="RoundedCube45" parent="Static" instance=ExtResource("3_77gbh")]
+transform = Transform3D(0.788279, 0.615318, 0, -0.615318, 0.788279, 0, 0, 0, 1, -0.102277, -2.47509, 1.51106)
+
 [node name="RoundedCube16" parent="Static" instance=ExtResource("3_77gbh")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -0.00891557, 3.80799, -5.04496)
 
@@ -287,7 +308,7 @@ transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -0.0162354, 0.619873, -
 transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, -0.444672, 0.774025, -1.13464)
 
 [node name="RoundedCube10kg3" parent="." instance=ExtResource("12_l1epf")]
-transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -3.49951, -0.599182, -5.7561)
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0.247437, 1.34442, -5.21973)
 
 [node name="RoundedCube10kg4" parent="." instance=ExtResource("12_l1epf")]
 transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -0.53479, 0, -2.62659)
