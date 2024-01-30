@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://b5lkb7q5glrr1"]
+[gd_scene load_steps=20 format=3 uid="uid://hsr1qcqk72on"]
 
 [ext_resource type="PackedScene" uid="uid://kl4nx8ivav56" path="res://addons/xr-kit/physics-movement/scenes/player.tscn" id="1_6aq2f"]
 [ext_resource type="PackedScene" uid="uid://cd60ps1ohbmfp" path="res://addons/xr-kit/examples/playground/scenes/rounded_cube_static.tscn" id="3_77gbh"]
@@ -8,11 +8,12 @@
 [ext_resource type="PackedScene" uid="uid://dfvl5p3o70t51" path="res://addons/xr-kit/examples/playground/scenes/hatch.tscn" id="6_sadw5"]
 [ext_resource type="PackedScene" uid="uid://c4xsgk8gy1w6n" path="res://addons/xr-kit/examples/playground/scenes/spinner.tscn" id="7_64pa7"]
 [ext_resource type="PackedScene" uid="uid://b1gha0yxcisc3" path="res://addons/xr-kit/examples/playground/scenes/lever.tscn" id="8_scuco"]
-[ext_resource type="PackedScene" uid="uid://dire3th1aw8n7" path="res://addons/xr-kit/examples/playground/scenes/pointy_stick.tscn" id="9_ysum5"]
-[ext_resource type="PackedScene" path="res://addons/xr-kit/examples/playground/scenes/rounded_cube_200kg.tscn" id="10_qft4x"]
-[ext_resource type="PackedScene" path="res://addons/xr-kit/examples/playground/scenes/rounded_cube_50kg.tscn" id="11_sbxa4"]
-[ext_resource type="PackedScene" path="res://addons/xr-kit/examples/playground/scenes/rounded_cube_10kg.tscn" id="12_l1epf"]
+[ext_resource type="PackedScene" uid="uid://c8wxu1pi5yw5r" path="res://addons/xr-kit/examples/playground/scenes/pointy_stick.tscn" id="9_ysum5"]
+[ext_resource type="PackedScene" uid="uid://b4rq1fq3rs1q2" path="res://addons/xr-kit/examples/playground/scenes/rounded_cube_200kg.tscn" id="10_qft4x"]
+[ext_resource type="PackedScene" uid="uid://xihuqsveoowc" path="res://addons/xr-kit/examples/playground/scenes/rounded_cube_50kg.tscn" id="11_sbxa4"]
+[ext_resource type="PackedScene" uid="uid://dgk0yjo6hpbx4" path="res://addons/xr-kit/examples/playground/scenes/rounded_cube_10kg.tscn" id="12_l1epf"]
 [ext_resource type="Shader" path="res://addons/xr-kit/examples/playground/glass.gdshader" id="13_00w87"]
+[ext_resource type="PackedScene" uid="uid://bnbda0wdsonaf" path="res://addons/xr-kit/examples/playground/scenes/rounded_cube_1kg.tscn" id="14_pmith"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_va4r1"]
 
@@ -51,11 +52,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.841371, -0.796411)
 pixel_size = 0.001
 alpha_antialiasing_mode = 1
 texture_filter = 5
-text = "Move left joystick on controller to enable thrusters and move in space. Click joystick to brake.
+text = "Move left joystick on controller to enable thrusters and move in space. Click left joystick to brake.
 
-Move right joystick to rotate. Rotation works differently if you hold static objects.
+Move right joystick to rotate. If you hold static objects, you will rotate around it.
 
-Static objects are white, they do not move. Darker colors represent lighter objects.
+Static objects are grey, they do not move. Cubes with other colors have different weights.
 
 Try grabbing objects with different weights and see how they influence your movement.
 
@@ -64,7 +65,9 @@ Push away from objects using your hands.
 Grab objects and move them around. They will behave differently based on their weight.
 Grab with two hands, too.
 
-Grab object and hold trigger to enable smooth 6DOF rotation around it in XYZ axis."
+Grab object and hold trigger to enable smooth 6DOF rotation around it in XYZ axis.
+
+On your left there is an area with gravity enabled."
 
 [node name="Static" type="Node3D" parent="."]
 
@@ -269,7 +272,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0750809, 9.17721, -10.5379)
 collision_mask = 3585
 
 [node name="Lever" parent="." instance=ExtResource("8_scuco")]
-transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -0.324422, 0.0707626, -0.564102)
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -0.324422, 0.0707626, -0.516739)
 
 [node name="PointyStick" parent="." instance=ExtResource("9_ysum5")]
 transform = Transform3D(0.881015, 1.49012e-08, 0.473089, -0.289947, 0.790176, 0.539956, -0.373824, -0.612879, 0.696157, -0.109968, 0.422548, -4.09158)
@@ -295,6 +298,9 @@ transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, -1.5509, 0, -0.0742188)
 [node name="RoundedCube200kg5" parent="." instance=ExtResource("10_qft4x")]
 transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 1.05194, 0, -1.46509)
 
+[node name="RoundedCube200kg7" parent="." instance=ExtResource("10_qft4x")]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0.0407729, 10.4857, -10.5364)
+
 [node name="RoundedCube50kg" parent="." instance=ExtResource("11_sbxa4")]
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -0.934967, 0, -0.884155)
 
@@ -311,7 +317,7 @@ transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0.227997, 0, -2.81909)
 transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -0.975159, 0, -0.266113)
 
 [node name="RoundedCube10kg2" parent="." instance=ExtResource("12_l1epf")]
-transform = Transform3D(0.199987, 0, -0.00224794, 0, 0.2, 0, 0.00224794, 0, 0.199987, 0.418549, 0.493042, -1.08215)
+transform = Transform3D(0.199987, 0, -0.00224794, 0, 0.2, 0, 0.00224794, 0, 0.199987, 0.27953, 0.493042, -1.08371)
 
 [node name="RoundedCube50kg5" parent="." instance=ExtResource("11_sbxa4")]
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -0.0162354, 0.619873, -1.10498)
@@ -354,7 +360,7 @@ material = SubResource("ShaderMaterial_ojtaa")
 
 [node name="Label3D" type="Label3D" parent="GravityEnabled"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.21627, 0)
-billboard = 1
+billboard = 2
 text = "Gravity inside this bubble"
 
 [node name="CSGCombiner3D" type="CSGCombiner3D" parent="GravityEnabled"]
@@ -414,3 +420,72 @@ transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -0.481219, 0.422355, -0
 
 [node name="RoundedCube50kg8" parent="GravityEnabled" instance=ExtResource("11_sbxa4")]
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -0.481219, 0.735545, 0.0819517)
+
+[node name="RoundedCube10kg9" parent="." instance=ExtResource("14_pmith")]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -6.48056, 0.247356, -1.0789)
+
+[node name="RoundedCube10kg10" parent="." instance=ExtResource("14_pmith")]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -6.48056, 0.247356, -0.829906)
+
+[node name="RoundedCube10kg11" parent="." instance=ExtResource("14_pmith")]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -6.48056, 0.247356, -0.578893)
+
+[node name="RoundedCube10kg12" parent="." instance=ExtResource("14_pmith")]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -6.48056, 0.247356, -0.334728)
+
+[node name="RoundedCube10kg13" parent="." instance=ExtResource("14_pmith")]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -6.48056, 0.247356, -0.0800045)
+
+[node name="RoundedCube10kg14" parent="." instance=ExtResource("14_pmith")]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -6.48056, 0.247356, 0.145715)
+
+[node name="RoundedCube10kg15" parent="." instance=ExtResource("14_pmith")]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -6.48056, 0.247356, 0.410047)
+
+[node name="RoundedCube10kg16" parent="." instance=ExtResource("14_pmith")]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -6.48056, 0.247356, 0.668123)
+
+[node name="RoundedCube10kg17" parent="." instance=ExtResource("14_pmith")]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -6.48056, 0.247356, 0.931131)
+
+[node name="RoundedCube10kg18" parent="." instance=ExtResource("14_pmith")]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -6.48056, 0.247356, 1.20631)
+
+[node name="RoundedCube10kg19" parent="." instance=ExtResource("14_pmith")]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -5.97633, 1.09882, -0.747898)
+
+[node name="RoundedCube10kg20" parent="." instance=ExtResource("14_pmith")]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -5.97633, 1.2951, -0.747898)
+
+[node name="RoundedCube10kg21" parent="." instance=ExtResource("14_pmith")]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -5.97633, 1.50762, -0.747898)
+
+[node name="RoundedCube10kg22" parent="." instance=ExtResource("14_pmith")]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -5.97633, 1.72129, -0.747898)
+
+[node name="RoundedCube10kg23" parent="." instance=ExtResource("14_pmith")]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -5.88312, 0.719142, -0.154621)
+
+[node name="RoundedCube10kg24" parent="." instance=ExtResource("14_pmith")]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -5.56158, 0.719142, -0.154621)
+
+[node name="RoundedCube10kg25" parent="." instance=ExtResource("14_pmith")]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -5.56158, 0.38406, 0.709812)
+
+[node name="RoundedCube10kg26" parent="." instance=ExtResource("14_pmith")]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0.707817, 0.337408, 0.0937651)
+
+[node name="RoundedCube10kg27" parent="." instance=ExtResource("14_pmith")]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -0.0168094, 0.919974, -1.1197)
+
+[node name="RoundedCube10kg28" parent="." instance=ExtResource("14_pmith")]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -0.0168094, 0.408414, -1.79616)
+
+[node name="RoundedCube10kg29" parent="." instance=ExtResource("14_pmith")]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -1.27751, 0.408414, -1.79616)
+
+[node name="RoundedCube10kg30" parent="." instance=ExtResource("14_pmith")]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -1.27751, 0.408414, -2.32911)
+
+[node name="RoundedCube10kg31" parent="." instance=ExtResource("14_pmith")]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0.47794, 0.408414, -2.32911)
