@@ -101,6 +101,10 @@ If you are on Quest, make sure your hardware is configured properly:
 
 XR Kit has been tested with SteamVR and Oculus (PC and standalone) using Meta Quest 3. 
 
+## License
+
+General project license is MIT, unless LICENSE file exists in a folder, which then overrides license for all files inside this folder.
+
 ## Contributing
 
 If you'd like to improve the plugin, there are few options:
