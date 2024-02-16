@@ -23,7 +23,7 @@ window/vsync/vsync_mode=0
 
 [editor_plugins]
 
-enabled=PackedStringArray()
+enabled=PackedStringArray("res://addons/godotopenxrvendors/plugin.cfg")
 
 [layer_names]
 
