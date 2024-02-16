@@ -87,7 +87,7 @@ Latest release is available in Godot's Asset Library under the name [XR Kit](htt
 
 To get most recent version of the whole project, [download from master branch](https://github.com/patrykkalinowski/godot-xr-kit/archive/refs/heads/master.zip).
 
-`/addons/xr-kit/examples/playground.tscn` implements Physics Movement, Hand Gesture Recognition and Cinematic View.
+`/addons/xr-kit/examples/playground.tscn` implements Physics Movement, Hand Gesture Recognition and Cinematic View. Branch `new_playground` contains much better playground scene with more features and is more interesting in general, but it crashes on standalone. After I fix this, `new_playground` will be merged to master.
 
 `/addons/xr-kit/examples/smooth_input_filter.tscn` implements Smooth Input Filter.
 
