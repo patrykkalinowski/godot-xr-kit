@@ -20,3 +20,5 @@ addons/godotopenxrvendors
 android/
 
 .tmp
+
+bin/
