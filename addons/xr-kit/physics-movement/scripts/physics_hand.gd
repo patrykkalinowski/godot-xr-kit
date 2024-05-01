@@ -401,11 +401,11 @@ class PIDController:
 	func calculate(target: Vector3, current: Vector3, delta: float) -> Vector3:
 		error = target - current
 		proportional = error
-		proportional.limit_length(proportional_limit)
+		proportional = proportional.limit_length(proportional_limit)
 		integral += error * delta
-		integral.limit_length(integral_limit)
+		integral = integral.limit_length(integral_limit)
 		derivative = (error - previous_error) / delta
-		derivative.limit_length(derivative_limit)
+		derivative = derivative.limit_length(derivative_limit)
 		previous_error = error
 		output = Kp * proportional + Ki * integral + Kd * derivative
 
