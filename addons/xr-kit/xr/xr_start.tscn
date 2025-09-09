@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://dwgg6y0kh4psp"]
+
+[ext_resource type="Script" uid="uid://bcwfxgs11al8" path="res://addons/xr-kit/xr/xr_start.gd" id="1_b6m56"]
+
+[node name="XRStart" type="Node"]
+script = ExtResource("1_b6m56")
+xr_enabled = true

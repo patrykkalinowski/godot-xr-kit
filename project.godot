@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Godot XR Kit"
-run/main_scene="res://addons/xr-kit/examples/playground.tscn"
+run/main_scene="uid://bbbrvl7adskb8"
 config/features=PackedStringArray("4.5", "Forward Plus")
 
 [display]
@@ -23,7 +23,11 @@ window/vsync/vsync_mode=0
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/godotopenxrvendors/plugin.cfg")
+enabled=PackedStringArray()
+
+[filesystem]
+
+import/blender/enabled=false
 
 [layer_names]
 

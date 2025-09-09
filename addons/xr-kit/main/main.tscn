@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3 uid="uid://bbbrvl7adskb8"]
+
+[ext_resource type="PackedScene" uid="uid://dwgg6y0kh4psp" path="res://addons/xr-kit/xr/xr_start.tscn" id="1_qudja"]
+[ext_resource type="PackedScene" uid="uid://hsr1qcqk72on" path="res://addons/xr-kit/levels/playground/playground.tscn" id="3_8dhox"]
+[ext_resource type="PackedScene" uid="uid://0rj4i0v7awv4" path="res://addons/xr-kit/physics-movement/player/scenes/xr_player.tscn" id="3_no7gy"]
+
+[node name="Main" type="Node"]
+
+[node name="XRStart" parent="." instance=ExtResource("1_qudja")]
+script = null
+
+[node name="Playground" parent="." instance=ExtResource("3_8dhox")]
+
+[node name="XRPlayer" parent="." instance=ExtResource("3_no7gy")]

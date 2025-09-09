@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://v2oct2fefvq1"]
+
+[ext_resource type="Script" uid="uid://ctqw2tdtcbrpi" path="res://addons/xr-kit/physics-movement/player/scripts/physics_hand.gd" id="1_650kk"]
+
+[node name="PhysicsHand" type="RigidBody3D"]
+gravity_scale = 0.0
+inertia = Vector3(0.01, 0.01, 0.01)
+can_sleep = false
+continuous_cd = true
+contact_monitor = true
+max_contacts_reported = 1
+script = ExtResource("1_650kk")

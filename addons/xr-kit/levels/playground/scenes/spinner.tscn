@@ -1,0 +1,57 @@
+[gd_scene load_steps=10 format=3 uid="uid://c4xsgk8gy1w6n"]
+
+[ext_resource type="Script" path="res://levels/playground/scenes/spinner.gd" id="1_4rdnd"]
+[ext_resource type="ArrayMesh" uid="uid://djloax4h5y05n" path="res://levels/playground/assets/Spinner.obj" id="1_vp75b"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cssmy"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6qug0"]
+albedo_color = Color(0, 1, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qg5e8"]
+albedo_color = Color(0.831373, 0.521569, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0wejk"]
+albedo_color = Color(1, 0, 1, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qfm6h"]
+albedo_color = Color(0, 1, 1, 1)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_l8ewg"]
+height = 0.934202
+radius = 0.964781
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_kxo2g"]
+size = Vector3(0.980225, 0.292603, 10.0321)
+
+[node name="Spinner" type="CharacterBody3D"]
+script = ExtResource("1_4rdnd")
+
+[node name="Mesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -0.026677, -0.193706, 0.0038631)
+mesh = ExtResource("1_vp75b")
+surface_material_override/0 = SubResource("StandardMaterial3D_cssmy")
+surface_material_override/1 = SubResource("StandardMaterial3D_6qug0")
+surface_material_override/2 = SubResource("StandardMaterial3D_qg5e8")
+surface_material_override/3 = SubResource("StandardMaterial3D_0wejk")
+surface_material_override/4 = SubResource("StandardMaterial3D_qfm6h")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.296174, 0)
+shape = SubResource("CylinderShape3D_l8ewg")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.532084, 0.960513, -5.00395)
+shape = SubResource("BoxShape3D_kxo2g")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.485586, 0.960513, 4.97719)
+shape = SubResource("BoxShape3D_kxo2g")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -5.03968, 0.960513, 0.510761)
+shape = SubResource("BoxShape3D_kxo2g")
+
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 4.96349, 0.960513, -0.500256)
+shape = SubResource("BoxShape3D_kxo2g")

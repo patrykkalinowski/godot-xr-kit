@@ -1,0 +1,122 @@
+[gd_scene load_steps=10 format=3 uid="uid://dm80ayo60emwm"]
+
+[ext_resource type="Script" uid="uid://b4hjil10udfht" path="res://addons/xr-kit/physics-movement/player/scripts/body.gd" id="1_6urq6"]
+[ext_resource type="Script" uid="uid://bp560ibtdwjli" path="res://addons/xr-kit/physics-movement/player/scripts/camera.gd" id="2_g74s0"]
+[ext_resource type="Script" uid="uid://dsolg88m7uhgq" path="res://addons/xr-kit/physics-movement/player/scripts/controller.gd" id="3_tusbf"]
+[ext_resource type="PackedScene" uid="uid://0luwkd61736y" path="res://addons/xr-kit/physics-movement/player/scenes/robot_hand_left.tscn" id="4_3hqjv"]
+[ext_resource type="PackedScene" uid="uid://2cfm3ouy7edm" path="res://addons/xr-kit/physics-movement/player/scenes/robot_hand_right.tscn" id="5_gvy7y"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_qk4f5"]
+radius = 0.1
+height = 0.4
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_77y22"]
+margin = 0.01
+radius = 0.11
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_k25ec"]
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0sn1n"]
+albedo_color = Color(0, 0.348529, 0.348529, 1)
+
+[node name="Player" type="Node3D"]
+
+[node name="Body" type="CharacterBody3D" parent="."]
+unique_name_in_owner = true
+collision_layer = 2048
+collision_mask = 271
+motion_mode = 1
+platform_on_leave = 2
+script = ExtResource("1_6urq6")
+
+[node name="Camera" type="Camera3D" parent="Body"]
+unique_name_in_owner = true
+script = ExtResource("2_g74s0")
+
+[node name="ControllerHandLeft" type="Node3D" parent="Body/Camera"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.166, -0.05, -0.4)
+script = ExtResource("3_tusbf")
+SIDE = "left"
+
+[node name="RayCast3D" type="RayCast3D" parent="Body/Camera/ControllerHandLeft"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.3)
+target_position = Vector3(0, 0, -0.3)
+
+[node name="ShapeCast3D2" type="ShapeCast3D" parent="Body/Camera/ControllerHandLeft/RayCast3D"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, -0.3)
+shape = SubResource("CapsuleShape3D_qk4f5")
+exclude_parent = false
+target_position = Vector3(0, 0.2, 0)
+
+[node name="Tracker" type="CSGSphere3D" parent="Body/Camera/ControllerHandLeft"]
+radius = 0.05
+
+[node name="ControllerHandRight" type="Node3D" parent="Body/Camera"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.166, -0.05, -0.4)
+script = ExtResource("3_tusbf")
+SIDE = "right"
+
+[node name="RayCast3D" type="RayCast3D" parent="Body/Camera/ControllerHandRight"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.3)
+target_position = Vector3(0, 0, -0.3)
+
+[node name="ShapeCast3D" type="ShapeCast3D" parent="Body/Camera/ControllerHandRight/RayCast3D"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, -0.3)
+shape = SubResource("CapsuleShape3D_qk4f5")
+exclude_parent = false
+target_position = Vector3(0, 0.2, 0)
+
+[node name="Tracker" type="CSGSphere3D" parent="Body/Camera/ControllerHandRight"]
+radius = 0.03
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="Body/Camera/ControllerHandRight/Tracker"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, -0.0102667)
+radius = 0.042
+height = 0.167
+cone = true
+
+[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="Body/Camera/ControllerHandRight/Tracker"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.0102667)
+radius = 0.042
+height = 0.167
+cone = true
+
+[node name="HeadCollider" type="CollisionShape3D" parent="Body"]
+unique_name_in_owner = true
+shape = SubResource("SphereShape3D_77y22")
+
+[node name="PhysicsHandLeft" parent="." node_paths=PackedStringArray("tracker", "controller") instance=ExtResource("4_3hqjv")]
+unique_name_in_owner = true
+collision_layer = 512
+tracker = NodePath("../Body/Camera/ControllerHandLeft/Tracker")
+controller = NodePath("../Body/Camera/ControllerHandLeft")
+
+[node name="PhysicsHandRight" parent="." node_paths=PackedStringArray("tracker", "controller") instance=ExtResource("5_gvy7y")]
+unique_name_in_owner = true
+collision_layer = 1024
+tracker = NodePath("../Body/Camera/ControllerHandRight/Tracker")
+controller = NodePath("../Body/Camera/ControllerHandRight")
+
+[node name="PhysicsPivotPoint" type="Node3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0359819, -0.05, -0.577939)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="PhysicsPivotPoint"]
+size = Vector3(0.1, 0.1, 0.1)
+material = SubResource("StandardMaterial3D_k25ec")
+
+[node name="ControllerPivotPoint" type="Node3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00306638, -0.05, -0.4)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="ControllerPivotPoint"]
+size = Vector3(0.1, 0.1, 0.1)
+material = SubResource("StandardMaterial3D_0sn1n")
+
+[connection signal="click" from="Body/Camera/ControllerHandLeft" to="PhysicsHandLeft" method="_on_click"]
+[connection signal="long_click" from="Body/Camera/ControllerHandLeft" to="PhysicsHandLeft" method="_on_long_click"]
+[connection signal="click" from="Body/Camera/ControllerHandRight" to="PhysicsHandRight" method="_on_click"]
+[connection signal="long_click" from="Body/Camera/ControllerHandRight" to="PhysicsHandRight" method="_on_long_click"]

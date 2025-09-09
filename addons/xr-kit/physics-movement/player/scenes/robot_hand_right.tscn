@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://2cfm3ouy7edm"]
+
+[ext_resource type="PackedScene" uid="uid://b1arf26i1tiur" path="res://addons/xr-kit/physics-movement/assets/core/player/robot_hand_right_skeleton.glb" id="1_0j50f"]
+
+[node name="robot_hand_right_v2" instance=ExtResource("1_0j50f")]
