@@ -2,7 +2,7 @@
 
 Scripts and scenes for physics-based XR movement. Player hands collide with environment and can grab or push physics object in realistic manner. Player body can collide with physics objects and be moved around in space.
 
-*Physics Movement is in alpha stage.*
+*Physics Movement is in alpha stage. Provided hand models currently have no meshes (skeleton only), make sure to enable Visible Collision Shapes in Debug settings to see your hands.*
 
 ![Godot XR Kit - Physics Movement](/screenshots/physics_movement.gif)
 
@@ -24,18 +24,15 @@ Scripts and scenes for physics-based XR movement. Player hands collide with envi
 - Smooth 6 degrees of freedom rotation around grabbed static object (trigger activated)
 - Fingers wiggle a little when hand is moving
 
+(this is very much work in progress, sometimes things stop working after updates)
+
 ## How does it work
 
 Usually in VR games, player hand is just a visual object which clips through walls and doesn't react to physics in general.
 
-This addon introduces a copy of controller hand mesh which is driven by physics-based RigidBody. Physics hand tries to follow player hand driven by controller, but as physics object it reacts to environment and can push other RigidBodies or be stopped by a wall.
+This addon introduces physics-based hand which tries to follow real-world player hand driven by controller, but as physics object it reacts to environment and can push other RigidBodies or be stopped by a wall.
 
 To make sure physics hand works in predictable ways, only wrist bone is responsible for physics movement and acts as driving force for the whole hand. physics fingers are simply colliders for wrist RigidBody and are always following controller fingers poses. Additionally, fingers use Inverse Kinematics to procedurally define positions on grabbed objects and react on forces applied to them, ex. simulating inertia during fast hand movements.
-
-Provided hand models use OpenXR convention of 26 joints for hand tracking: 4 joints for the thumb finger, 5 joints for the other four fingers, and the wrist and palm of the hands.
-
-![OpenXR Hands](/screenshots/openxr_hands.png)
-*Source: https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#_conventions_of_hand_joints*
 
 Addon as been tested with SteamVR and Oculus OpenXR runtimes. Hand tracking is supported in Oculus.
 
@@ -43,18 +40,16 @@ Custom OpenXR Action Map is provided for control scheme used by Physics Movement
 
 ## Getting started
 
-Physics Movement requires [Jolt Physics engine](https://github.com/godot-jolt/godot-jolt). It is already included in this repository.
+Physics Movement requires Jolt Physics engine to be set in Project Settings.
 
-`/addons/xr-kit/physics_movement/scenes/player.tscn` contains everything needed for physics movement, including XR interface initialization.
+Open main scene with example playground at `/addons/xr-kit/main/main.tscn`. It implements physics movement in zero gravity with some objects to interact with.
 
-`/addons/xr-kit/examples/playground.tscn` implements `player.tscn` with some additional objects to interact with.
+`/addons/xr-kit/physics_movement/player/scenes/xr_player.tscn` contains player code for physics movement. 
+
 
 ## Known issues
 
-- Provided hand models (valve_hand_models) were designed for SteamVR where hands have fixed size. Oculus hand tracking changes skeleton size based on user hands, which messes up the mesh due to incorrect mesh skinning
 - Free rotation (when you press trigger while holding an object) has several rotation bugs
-- Joystick rotation around static object applies incorrect rotation value depending on angle
-- Body does not retain momentum during grab (grabbing when moving will stop body, pushback and thrusters don't work when holding an object)
 
 ## Godot 3.5
 

@@ -26,6 +26,8 @@ Physics-based XR movement. Player hands collide with environment and can grab or
 - Smooth 6 degrees of freedom rotation around grabbed static object (trigger activated)
 - Fingers wiggle a little when hand is moving
 
+(this is very much work in progress, sometimes things stop working after updates)
+
 [Read more](/addons/xr-kit/physics-movement/)
 
 ## Hand Gesture Recognition
@@ -81,15 +83,11 @@ Smooth VR preview for recording in native monitor resolution.
 
 ## Getting started
 
-Repository contains Godot 4.2 project with XR and main scene preconfigured. Releases are reduced to addon files only.
+Repository contains Godot 4.5 project with XR and main scene preconfigured. Releases are reduced to addon files only.
 
-Latest release is available in Godot's Asset Library under the name [XR Kit](https://godotengine.org/asset-library/asset/1870) or on [releases page](https://github.com/patrykkalinowski/godot-xr-kit/releases/latest).
+To get most recent version of the whole project (for Godot 4.5, without official release yet), [download from master branch](https://github.com/patrykkalinowski/godot-xr-kit/archive/refs/heads/master.zip).
 
-To get most recent version of the whole project, [download from master branch](https://github.com/patrykkalinowski/godot-xr-kit/archive/refs/heads/master.zip).
-
-`/addons/xr-kit/examples/playground.tscn` implements Physics Movement, Hand Gesture Recognition and Cinematic View. Branch `new_playground` contains much better playground scene with more features and is more interesting in general, but it crashes on standalone. After I fix this, `new_playground` will be merged to master.
-
-`/addons/xr-kit/examples/smooth_input_filter.tscn` implements Smooth Input Filter.
+Latest release (for Godot 4.2) is available in Godot's Asset Library under the name [XR Kit](https://godotengine.org/asset-library/asset/1870) or on [releases page](https://github.com/patrykkalinowski/godot-xr-kit/releases/latest).
 
 If you are on Quest, make sure your hardware is configured properly:
 
