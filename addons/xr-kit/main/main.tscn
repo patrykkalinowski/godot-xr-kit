@@ -7,7 +7,6 @@
 [node name="Main" type="Node"]
 
 [node name="XRStart" parent="." instance=ExtResource("1_qudja")]
-script = null
 
 [node name="Playground" parent="." instance=ExtResource("3_8dhox")]
 

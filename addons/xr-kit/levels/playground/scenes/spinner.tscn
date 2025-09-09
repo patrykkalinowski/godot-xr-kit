@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=3 uid="uid://c4xsgk8gy1w6n"]
 
-[ext_resource type="Script" path="res://levels/playground/scenes/spinner.gd" id="1_4rdnd"]
-[ext_resource type="ArrayMesh" uid="uid://djloax4h5y05n" path="res://levels/playground/assets/Spinner.obj" id="1_vp75b"]
+[ext_resource type="Script" uid="uid://dolr0ufifr3pv" path="res://addons/xr-kit/levels/playground/scenes/spinner.gd" id="1_4rdnd"]
+[ext_resource type="ArrayMesh" uid="uid://djloax4h5y05n" path="res://addons/xr-kit/levels/playground/assets/Spinner.obj" id="1_vp75b"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cssmy"]
 

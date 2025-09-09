@@ -1,6 +1,6 @@
 [gd_scene load_steps=11 format=3 uid="uid://i8j517vl4knr"]
 
-[ext_resource type="Script" path="res://levels/playground/scenes/button.gd" id="1_6wsab"]
+[ext_resource type="Script" uid="uid://bh4n7qq26yib8" path="res://addons/xr-kit/levels/playground/scenes/button.gd" id="1_6wsab"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_wa2ye"]
 _surfaces = [{

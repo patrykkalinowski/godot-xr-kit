@@ -1,6 +1,6 @@
 [gd_scene load_steps=18 format=3 uid="uid://dfvl5p3o70t51"]
 
-[ext_resource type="Shader" path="res://levels/playground/simple_outline.gdshader" id="1_bwpnb"]
+[ext_resource type="Shader" uid="uid://b62crxcxqnenp" path="res://addons/xr-kit/levels/playground/simple_outline.gdshader" id="1_bwpnb"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_kh7d3"]
 _surfaces = [{
