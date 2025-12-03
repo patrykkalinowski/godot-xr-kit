@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://dfvl5p3o70t51" path="res://addons/xr-kit/levels/playground/scenes/hatch.tscn" id="6_sadw5"]
 [ext_resource type="PackedScene" uid="uid://c4xsgk8gy1w6n" path="res://addons/xr-kit/levels/playground/scenes/spinner.tscn" id="7_64pa7"]
 [ext_resource type="PackedScene" uid="uid://b1gha0yxcisc3" path="res://addons/xr-kit/levels/playground/scenes/lever.tscn" id="8_scuco"]
-[ext_resource type="PackedScene" uid="uid://c8wxu1pi5yw5r" path="res://addons/xr-kit/levels/playground/scenes/pointy_stick.tscn" id="9_ysum5"]
+[ext_resource type="PackedScene" path="res://addons/xr-kit/levels/playground/scenes/pointy_stick.tscn" id="9_ysum5"]
 [ext_resource type="PackedScene" uid="uid://b4rq1fq3rs1q2" path="res://addons/xr-kit/levels/playground/scenes/rounded_cube_200kg.tscn" id="10_qft4x"]
 [ext_resource type="Shader" uid="uid://ck1vsx2yi3ygx" path="res://addons/xr-kit/levels/playground/glass.gdshader" id="11_kbmmm"]
 [ext_resource type="PackedScene" uid="uid://xihuqsveoowc" path="res://addons/xr-kit/levels/playground/scenes/rounded_cube_50kg.tscn" id="11_sbxa4"]

@@ -1,18 +1,17 @@
-[gd_scene load_steps=61 format=3 uid="uid://0rj4i0v7awv4"]
+[gd_scene load_steps=60 format=3 uid="uid://0rj4i0v7awv4"]
 
-[ext_resource type="Script" uid="uid://b4hjil10udfht" path="res://core/player/scripts/body.gd" id="1_ioxqf"]
-[ext_resource type="Script" uid="uid://dvfjv1rvash8c" path="res://core/player/scripts/xr_player.gd" id="1_nnh2p"]
-[ext_resource type="Script" uid="uid://ddol38a8aebim" path="res://core/player/scripts/xr_chest.gd" id="2_8bc75"]
-[ext_resource type="PackedScene" uid="uid://b2jji68mjbl3h" path="res://core/streaming/scenes/smooth_camera.tscn" id="2_xhnxk"]
-[ext_resource type="Script" uid="uid://dhblcugo7uric" path="res://core/player/scripts/xr_controller.gd" id="5_ua3bj"]
-[ext_resource type="Script" uid="uid://bpjwajpbgr0si" path="res://core/player/scripts/hand_skeleton.gd" id="7_cj3lu"]
-[ext_resource type="Script" uid="uid://db1b4iid315rl" path="res://core/player/scripts/xr_hand_ik.gd" id="8_k73v0"]
-[ext_resource type="PackedScene" uid="uid://2cfm3ouy7edm" path="res://core/player/scenes/robot_hand_right.tscn" id="9_khimo"]
-[ext_resource type="Script" uid="uid://3jttcwhkqm63" path="res://core/player/scripts/xr_hand_modifier.gd" id="9_yybae"]
-[ext_resource type="PackedScene" uid="uid://0luwkd61736y" path="res://core/player/scenes/robot_hand_left.tscn" id="10_iddgg"]
-[ext_resource type="PackedScene" uid="uid://v2oct2fefvq1" path="res://core/player/scenes/physics_hand.tscn" id="10_p3jmf"]
-[ext_resource type="Script" uid="uid://cpl25onrbji7c" path="res://core/player/scripts/xr_grab_ik.gd" id="10_wahie"]
-[ext_resource type="PackedScene" uid="uid://bdb6dvgs08uus" path="res://utilities/axes3d.tscn" id="12_3vt40"]
+[ext_resource type="Script" uid="uid://b4hjil10udfht" path="res://addons/xr-kit/physics-movement/player/scripts/body.gd" id="1_ioxqf"]
+[ext_resource type="Script" uid="uid://dvfjv1rvash8c" path="res://addons/xr-kit/physics-movement/player/scripts/xr_player.gd" id="1_nnh2p"]
+[ext_resource type="Script" uid="uid://ddol38a8aebim" path="res://addons/xr-kit/physics-movement/player/scripts/xr_chest.gd" id="2_8bc75"]
+[ext_resource type="PackedScene" uid="uid://b2jji68mjbl3h" path="res://addons/xr-kit/cinematic-view/scenes/cinematic_view.tscn" id="2_xhnxk"]
+[ext_resource type="Script" uid="uid://dhblcugo7uric" path="res://addons/xr-kit/physics-movement/player/scripts/xr_controller.gd" id="5_ua3bj"]
+[ext_resource type="PackedScene" uid="uid://tmfgx71psjgi" path="res://addons/xr-kit/physics-movement/assets/core/player/valve_hands/left_hand.glb" id="6_ska2k"]
+[ext_resource type="Script" uid="uid://bpjwajpbgr0si" path="res://addons/xr-kit/physics-movement/player/scripts/hand_skeleton.gd" id="7_cj3lu"]
+[ext_resource type="Script" uid="uid://db1b4iid315rl" path="res://addons/xr-kit/physics-movement/player/scripts/xr_hand_ik.gd" id="8_k73v0"]
+[ext_resource type="Script" uid="uid://3jttcwhkqm63" path="res://addons/xr-kit/physics-movement/player/scripts/xr_hand_modifier.gd" id="9_yybae"]
+[ext_resource type="PackedScene" uid="uid://b2ys51mk8gna1" path="res://addons/xr-kit/physics-movement/assets/core/player/valve_hands/right_hand.glb" id="10_83d6f"]
+[ext_resource type="PackedScene" uid="uid://v2oct2fefvq1" path="res://addons/xr-kit/physics-movement/player/scenes/physics_hand.tscn" id="10_p3jmf"]
+[ext_resource type="Script" uid="uid://cpl25onrbji7c" path="res://addons/xr-kit/physics-movement/player/scripts/xr_grab_ik.gd" id="10_wahie"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_nuyqs"]
 margin = 0.01
@@ -222,16 +221,17 @@ visible = false
 size = Vector3(0.12, 0.12, 0.12)
 material = SubResource("StandardMaterial3D_cjdfc")
 
-[node name="robot_hand_left_v2" parent="Body" instance=ExtResource("10_iddgg")]
+[node name="left_hand" parent="Body" instance=ExtResource("6_ska2k")]
 
-[node name="Skeleton3D" parent="Body/robot_hand_left_v2/Armature" index="0"]
+[node name="Skeleton3D" parent="Body/left_hand/Armature" index="0"]
 script = ExtResource("7_cj3lu")
 
-[node name="XRHandModifier3D" type="XRHandModifier3D" parent="Body/robot_hand_left_v2/Armature/Skeleton3D" index="0"]
+[node name="XRHandModifier3D" type="XRHandModifier3D" parent="Body/left_hand/Armature/Skeleton3D" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, -1, 0, 0, 0)
 bone_update = 1
 script = ExtResource("9_yybae")
 
-[node name="XRHandIK" type="SkeletonModifier3D" parent="Body/robot_hand_left_v2/Armature/Skeleton3D" index="1" node_paths=PackedStringArray("physics_hand")]
+[node name="XRHandIK" type="SkeletonModifier3D" parent="Body/left_hand/Armature/Skeleton3D" index="2" node_paths=PackedStringArray("physics_hand")]
 _import_path = NodePath("")
 unique_name_in_owner = false
 process_mode = 0
@@ -241,7 +241,7 @@ process_thread_group = 0
 physics_interpolation_mode = 0
 auto_translate_mode = 0
 editor_description = ""
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, -1, 0, 0, 0)
 rotation_edit_mode = 0
 rotation_order = 2
 top_level = false
@@ -254,7 +254,7 @@ physics_hand = NodePath("../../../../../PhysicsHandLeft")
 palm_bone = "LeftPalm"
 preview_in_editor = false
 
-[node name="XRGrabIK" type="SkeletonModifier3D" parent="Body/robot_hand_left_v2/Armature/Skeleton3D" index="2"]
+[node name="XRGrabIK" type="SkeletonModifier3D" parent="Body/left_hand/Armature/Skeleton3D" index="3"]
 _import_path = NodePath("")
 unique_name_in_owner = false
 process_mode = 0
@@ -264,7 +264,7 @@ process_thread_group = 0
 physics_interpolation_mode = 0
 auto_translate_mode = 0
 editor_description = ""
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, -1, 0, 0, 0)
 rotation_edit_mode = 0
 rotation_order = 2
 top_level = false
@@ -273,269 +273,280 @@ visibility_parent = NodePath("")
 active = true
 influence = 1.0
 script = ExtResource("10_wahie")
-metadata/_custom_type_script = ExtResource("10_wahie")
+metadata/_custom_type_script = "uid://cpl25onrbji7c"
 
-[node name="ThumbIK" type="SkeletonIK3D" parent="Body/robot_hand_left_v2/Armature/Skeleton3D" index="3"]
+[node name="ThumbIK" type="SkeletonIK3D" parent="Body/left_hand/Armature/Skeleton3D" index="4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, -1, 0, 0, 0)
 active = false
 root_bone = &"LeftThumbProximal"
 tip_bone = &"LeftThumbTouch"
 override_tip_basis = false
 target_node = NodePath("../ThumbIKTarget")
 
-[node name="ThumbIKTarget" type="Node3D" parent="Body/robot_hand_left_v2/Armature/Skeleton3D" index="4"]
+[node name="ThumbIKTarget" type="Node3D" parent="Body/left_hand/Armature/Skeleton3D" index="5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, -1, 0, 0, 0)
 
-[node name="IndexIK" type="SkeletonIK3D" parent="Body/robot_hand_left_v2/Armature/Skeleton3D" index="5"]
+[node name="IndexIK" type="SkeletonIK3D" parent="Body/left_hand/Armature/Skeleton3D" index="6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, -1, 0, 0, 0)
 active = false
 root_bone = &"LeftIndexProximal"
 tip_bone = &"LeftIndexTouch"
 override_tip_basis = false
 target_node = NodePath("../IndexIKTarget")
 
-[node name="IndexIKTarget" type="Node3D" parent="Body/robot_hand_left_v2/Armature/Skeleton3D" index="6"]
+[node name="IndexIKTarget" type="Node3D" parent="Body/left_hand/Armature/Skeleton3D" index="7"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, -1, 0, 0, 0)
 
-[node name="MiddleIK" type="SkeletonIK3D" parent="Body/robot_hand_left_v2/Armature/Skeleton3D" index="7"]
+[node name="MiddleIK" type="SkeletonIK3D" parent="Body/left_hand/Armature/Skeleton3D" index="8"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, -1, 0, 0, 0)
 active = false
 root_bone = &"LeftMiddleProximal"
 tip_bone = &"LeftMiddleTouch"
 override_tip_basis = false
 target_node = NodePath("../MiddleIKTarget")
 
-[node name="MiddleIKTarget" type="Node3D" parent="Body/robot_hand_left_v2/Armature/Skeleton3D" index="8"]
+[node name="MiddleIKTarget" type="Node3D" parent="Body/left_hand/Armature/Skeleton3D" index="9"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, -1, 0, 0, 0)
 
-[node name="RingIK" type="SkeletonIK3D" parent="Body/robot_hand_left_v2/Armature/Skeleton3D" index="9"]
+[node name="RingIK" type="SkeletonIK3D" parent="Body/left_hand/Armature/Skeleton3D" index="10"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, -1, 0, 0, 0)
 active = false
 root_bone = &"LeftRingProximal"
 tip_bone = &"LeftRingTouch"
 override_tip_basis = false
 target_node = NodePath("../RingIKTarget")
 
-[node name="RingIKTarget" type="Node3D" parent="Body/robot_hand_left_v2/Armature/Skeleton3D" index="10"]
+[node name="RingIKTarget" type="Node3D" parent="Body/left_hand/Armature/Skeleton3D" index="11"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, -1, 0, 0, 0)
 
-[node name="LittleIK" type="SkeletonIK3D" parent="Body/robot_hand_left_v2/Armature/Skeleton3D" index="11"]
+[node name="LittleIK" type="SkeletonIK3D" parent="Body/left_hand/Armature/Skeleton3D" index="12"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, -1, 0, 0, 0)
 active = false
 root_bone = &"LeftLittleProximal"
 tip_bone = &"LeftLittleTouch"
 override_tip_basis = false
 target_node = NodePath("../LittleIKTarget")
 
-[node name="LittleIKTarget" type="Node3D" parent="Body/robot_hand_left_v2/Armature/Skeleton3D" index="12"]
+[node name="LittleIKTarget" type="Node3D" parent="Body/left_hand/Armature/Skeleton3D" index="13"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, -1, 0, 0, 0)
 
-[node name="LeftHand" type="BoneAttachment3D" parent="Body/robot_hand_left_v2/Armature/Skeleton3D" index="13"]
-transform = Transform3D(0, -3.57628e-07, 1, -1, 1.19209e-07, 0, -1.19209e-07, -1, -3.57628e-07, 0, 0, 0)
+[node name="LeftHand" type="BoneAttachment3D" parent="Body/left_hand/Armature/Skeleton3D" index="14"]
+transform = Transform3D(0.0034908652, 1.1920929e-07, 0.9999939, -0.9999939, 1.1920929e-07, 0.003490895, -1.1920929e-07, -1, 1.1920929e-07, -0.00015978742, -3.1924534e-05, 0.0006257086)
 bone_name = "LeftHand"
 bone_idx = 0
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Body/robot_hand_left_v2/Armature/Skeleton3D/LeftHand"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Body/left_hand/Armature/Skeleton3D/LeftHand"]
 shape = SubResource("SphereShape3D_ja0d6")
 
-[node name="GrabArea" type="ShapeCast3D" parent="Body/robot_hand_left_v2/Armature/Skeleton3D/LeftHand"]
+[node name="GrabArea" type="ShapeCast3D" parent="Body/left_hand/Armature/Skeleton3D/LeftHand"]
 transform = Transform3D(1, -8.47033e-22, 0, 0, 1, 0, 0, 0, 1, -0.00623801, 0.060499, 0.0657465)
 shape = SubResource("SphereShape3D_cj3lu")
 target_position = Vector3(0, 0, 0)
 max_results = 1
 debug_shape_custom_color = Color(1, 0, 0, 1)
 
-[node name="GrabJoint" type="Generic6DOFJoint3D" parent="Body/robot_hand_left_v2/Armature/Skeleton3D/LeftHand"]
+[node name="GrabJoint" type="Generic6DOFJoint3D" parent="Body/left_hand/Armature/Skeleton3D/LeftHand"]
 transform = Transform3D(1, -8.47033e-22, 0, 0, 1, 0, 0, 0, 1, -0.00623801, 0.060499, -0.005188)
 
-[node name="GripPose" type="Node3D" parent="Body/robot_hand_left_v2/Armature/Skeleton3D/LeftHand"]
+[node name="GripPose" type="Node3D" parent="Body/left_hand/Armature/Skeleton3D/LeftHand"]
 transform = Transform3D(-2.46564e-07, -0.707107, 0.707107, 1.6693e-07, -0.707107, -0.707107, 1, -3.8408e-08, 3.07285e-07, -0.0164512, 0.060499, 0.0304121)
 
-[node name="ThumbIKRayCast" type="RayCast3D" parent="Body/robot_hand_left_v2/Armature/Skeleton3D/LeftHand"]
+[node name="ThumbIKRayCast" type="RayCast3D" parent="Body/left_hand/Armature/Skeleton3D/LeftHand"]
 transform = Transform3D(-0.307243, -0.24382, 0.919866, 0.365808, 0.862091, 0.35069, -0.878513, 0.444241, -0.17568, -0.0663304, 0.0698677, 0.0462468)
 target_position = Vector3(0, 0, 0.08)
 
-[node name="IndexIKRayCast" type="RayCast3D" parent="Body/robot_hand_left_v2/Armature/Skeleton3D/LeftHand"]
+[node name="IndexIKRayCast" type="RayCast3D" parent="Body/left_hand/Armature/Skeleton3D/LeftHand"]
 transform = Transform3D(0.996846, 0.00825437, -0.0789241, -0.0472633, 0.860684, -0.506941, 0.0637442, 0.509073, 0.858359, -0.0260594, 0.154865, -0.00571781)
 target_position = Vector3(0, 0, 0.08)
 
-[node name="MiddleIKRayCast" type="RayCast3D" parent="Body/robot_hand_left_v2/Armature/Skeleton3D/LeftHand"]
+[node name="MiddleIKRayCast" type="RayCast3D" parent="Body/left_hand/Armature/Skeleton3D/LeftHand"]
 transform = Transform3D(0.987316, -0.00715862, -0.158602, -0.0729239, 0.866917, -0.493089, 0.141025, 0.498401, 0.855399, 0.000626699, 0.16244, 0.0029254)
 target_position = Vector3(0, 0, 0.08)
 
-[node name="RingIKRayCast" type="RayCast3D" parent="Body/robot_hand_left_v2/Armature/Skeleton3D/LeftHand"]
+[node name="RingIKRayCast" type="RayCast3D" parent="Body/left_hand/Armature/Skeleton3D/LeftHand"]
 transform = Transform3D(0.92425, -0.020738, -0.381224, -0.178743, 0.858827, -0.480069, 0.337362, 0.511845, 0.790064, 0.0272242, 0.151233, 0.00681168)
 target_position = Vector3(0, 0, 0.08)
 
-[node name="LittleIKRayCast" type="RayCast3D" parent="Body/robot_hand_left_v2/Armature/Skeleton3D/LeftHand"]
+[node name="LittleIKRayCast" type="RayCast3D" parent="Body/left_hand/Armature/Skeleton3D/LeftHand"]
 transform = Transform3D(0.89169, 0.0319711, -0.451516, -0.243017, 0.875365, -0.417946, 0.381879, 0.482404, 0.788324, 0.0475464, 0.135564, 0.00932592)
 target_position = Vector3(0, 0, 0.08)
 
-[node name="PalmPose" type="Node3D" parent="Body/robot_hand_left_v2/Armature/Skeleton3D/LeftHand"]
+[node name="PalmPose" type="Node3D" parent="Body/left_hand/Armature/Skeleton3D/LeftHand"]
 transform = Transform3D(-8.74228e-08, -1, -4.37114e-08, -4.37114e-08, 4.37114e-08, -1, 1, -8.74228e-08, -4.37114e-08, 0.005, 0.045, 0.015)
 
-[node name="LeftPalm" type="BoneAttachment3D" parent="Body/robot_hand_left_v2/Armature/Skeleton3D" index="81"]
-transform = Transform3D(-4.76837e-07, -3.57628e-07, 1, -1, 1.19209e-07, -4.76837e-07, -1.19209e-07, -1, -3.57628e-07, -0.00518802, 0.000772598, -0.0440036)
+[node name="LeftPalm" type="BoneAttachment3D" parent="Body/left_hand/Armature/Skeleton3D" index="15"]
+transform = Transform3D(-0.95583963, 0.26143795, 0.1342431, 0.061397664, 0.6243402, -0.77873605, -0.28740457, -0.73610425, -0.6128208, 0.017754002, 0.029146254, -0.02467269)
 bone_name = "LeftPalm"
 bone_idx = 1
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Body/robot_hand_left_v2/Armature/Skeleton3D/LeftPalm"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Body/left_hand/Armature/Skeleton3D/LeftPalm"]
 shape = SubResource("SphereShape3D_tmc76")
 
-[node name="LeftLittleMetacarpal" type="BoneAttachment3D" parent="Body/robot_hand_left_v2/Armature/Skeleton3D" index="82"]
-transform = Transform3D(0.510791, 0.252089, 0.821914, -0.778068, -0.271073, 0.566683, 0.365653, -0.928962, 0.0576809, -0.0035113, -0.0176394, -0.0268421)
+[node name="LeftLittleMetacarpal" type="BoneAttachment3D" parent="Body/left_hand/Armature/Skeleton3D" index="16"]
+transform = Transform3D(-0.93860275, 0.33715382, -0.07315998, 0.13902119, 0.17553812, -0.97460735, -0.3157503, -0.9249396, -0.21163237, 0.02831765, 0.05437331, -0.054415688)
 bone_name = "LeftLittleMetacarpal"
 bone_idx = 2
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Body/robot_hand_left_v2/Armature/Skeleton3D/LeftLittleMetacarpal"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Body/left_hand/Armature/Skeleton3D/LeftLittleMetacarpal"]
 shape = SubResource("SphereShape3D_gwbtq")
 
-[node name="LeftLittleProximal" type="BoneAttachment3D" parent="Body/robot_hand_left_v2/Armature/Skeleton3D" index="83"]
-transform = Transform3D(0.420095, 0.337188, 0.842511, -0.878354, -0.0822434, 0.470882, 0.228067, -0.937838, 0.26162, 0.00802477, -0.0300442, -0.0693531)
+[node name="LeftLittleProximal" type="BoneAttachment3D" parent="Body/left_hand/Armature/Skeleton3D" index="17"]
+transform = Transform3D(-0.9154543, 0.3475088, -0.20293117, 0.16691773, -0.13094966, -0.9772363, -0.36617205, -0.92848754, 0.061872676, 0.03928081, 0.060081247, -0.08449174)
 bone_name = "LeftLittleProximal"
 bone_idx = 3
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Body/robot_hand_left_v2/Armature/Skeleton3D/LeftLittleProximal"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Body/left_hand/Armature/Skeleton3D/LeftLittleProximal"]
 shape = SubResource("SphereShape3D_rrgl5")
 
-[node name="LeftLittleIntermediate" type="BoneAttachment3D" parent="Body/robot_hand_left_v2/Armature/Skeleton3D" index="84"]
-transform = Transform3D(0.408043, 0.265026, 0.873648, -0.877895, -0.14877, 0.455157, 0.250601, -0.952695, 0.171961, 0.0149171, -0.0333537, -0.0939648)
+[node name="LeftLittleIntermediate" type="BoneAttachment3D" parent="Body/left_hand/Armature/Skeleton3D" index="18"]
+transform = Transform3D(-0.9154542, 0.3475082, -0.2029327, 0.16691945, -0.13094953, -0.977236, -0.3661716, -0.9284877, 0.06187204, 0.049867284, 0.05609201, -0.1127771)
 bone_name = "LeftLittleIntermediate"
 bone_idx = 4
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Body/robot_hand_left_v2/Armature/Skeleton3D/LeftLittleIntermediate"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Body/left_hand/Armature/Skeleton3D/LeftLittleIntermediate"]
 shape = SubResource("SphereShape3D_pipu6")
 
-[node name="LeftLittleDistal" type="BoneAttachment3D" parent="Body/robot_hand_left_v2/Armature/Skeleton3D" index="85"]
-transform = Transform3D(0.381879, 0.482404, 0.788324, -0.89169, -0.0319702, 0.451515, 0.243016, -0.875365, 0.417946, 0.021434, -0.0353942, -0.111346)
+[node name="LeftLittleDistal" type="BoneAttachment3D" parent="Body/left_hand/Armature/Skeleton3D" index="19"]
+transform = Transform3D(-0.9154542, 0.3475082, -0.20293272, 0.16691947, -0.13094954, -0.977236, -0.36617157, -0.9284877, 0.061872054, 0.042554837, 0.04185682, -0.094757035)
 bone_name = "LeftLittleDistal"
 bone_idx = 5
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Body/robot_hand_left_v2/Armature/Skeleton3D/LeftLittleDistal"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Body/left_hand/Armature/Skeleton3D/LeftLittleDistal"]
 shape = SubResource("SphereShape3D_fl0uu")
 
-[node name="LeftRingMetacarpal" type="BoneAttachment3D" parent="Body/robot_hand_left_v2/Armature/Skeleton3D" index="86"]
-transform = Transform3D(0.113832, 0.0429439, 0.992571, -0.992469, -0.0405889, 0.115577, 0.0452506, -0.998252, 0.0380002, 0.000229863, -0.0115575, -0.0256542)
+[node name="LeftRingMetacarpal" type="BoneAttachment3D" parent="Body/left_hand/Armature/Skeleton3D" index="20"]
+transform = Transform3D(-0.03336864, 0.60699046, 0.79400826, -0.9990448, -0.042682864, -0.009355906, 0.028211486, -0.79356176, 0.60783494, 0.0010700263, 0.03848528, -0.12651753)
 bone_name = "LeftRingMetacarpal"
 bone_idx = 8
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Body/robot_hand_left_v2/Armature/Skeleton3D/LeftRingMetacarpal"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Body/left_hand/Armature/Skeleton3D/LeftRingMetacarpal"]
 shape = SubResource("SphereShape3D_kc62m")
 
-[node name="LeftRingProximal" type="BoneAttachment3D" parent="Body/robot_hand_left_v2/Armature/Skeleton3D" index="87"]
-transform = Transform3D(0.349758, 0.160328, 0.923019, -0.921701, -0.117519, 0.369672, 0.167741, -0.980043, 0.106671, 0.00256032, -0.0137602, -0.0798269)
+[node name="LeftRingProximal" type="BoneAttachment3D" parent="Body/left_hand/Armature/Skeleton3D" index="21"]
+transform = Transform3D(-0.05693912, 0.7170781, 0.69466317, -0.9970914, -0.07615251, -0.0031183446, 0.05066413, -0.69282, 0.71932817, 0.018232794, 0.037278417, -0.14895564)
 bone_name = "LeftRingProximal"
 bone_idx = 9
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Body/robot_hand_left_v2/Armature/Skeleton3D/LeftRingProximal"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Body/left_hand/Armature/Skeleton3D/LeftRingProximal"]
 shape = SubResource("SphereShape3D_1rrqe")
 
-[node name="LeftRingIntermediate" type="BoneAttachment3D" parent="Body/robot_hand_left_v2/Armature/Skeleton3D" index="88"]
-transform = Transform3D(0.324291, 0.297326, 0.898016, -0.932174, -0.0610231, 0.35683, 0.160895, -0.952824, 0.25737, 0.00926385, -0.0168141, -0.107179)
+[node name="LeftRingIntermediate" type="BoneAttachment3D" parent="Body/left_hand/Armature/Skeleton3D" index="22"]
+transform = Transform3D(-0.0569392, 0.717079, 0.6946623, -0.9970914, -0.07615263, -0.0031182435, 0.050664213, -0.6928191, 0.71932906, 0.0345975, 0.035540514, -0.16476676)
 bone_name = "LeftRingIntermediate"
 bone_idx = 10
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Body/robot_hand_left_v2/Armature/Skeleton3D/LeftRingIntermediate"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Body/left_hand/Armature/Skeleton3D/LeftRingIntermediate"]
 shape = SubResource("SphereShape3D_2d05o")
 
-[node name="LeftRingDistal" type="BoneAttachment3D" parent="Body/robot_hand_left_v2/Armature/Skeleton3D" index="89"]
-transform = Transform3D(0.337361, 0.511844, 0.790065, -0.92425, 0.0207382, 0.381224, 0.178743, -0.858827, 0.480068, 0.0175186, -0.0169991, -0.124994)
+[node name="LeftRingDistal" type="BoneAttachment3D" parent="Body/left_hand/Armature/Skeleton3D" index="23"]
+transform = Transform3D(-0.05693861, 0.7170791, 0.69466215, -0.9970914, -0.076152615, -0.0031174002, 0.0506648, -0.69281894, 0.7193292, 0.033106685, 0.03415706, -0.14687042)
 bone_name = "LeftRingDistal"
 bone_idx = 11
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Body/robot_hand_left_v2/Armature/Skeleton3D/LeftRingDistal"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Body/left_hand/Armature/Skeleton3D/LeftRingDistal"]
 shape = SubResource("SphereShape3D_dqhbf")
 
-[node name="LeftMiddleMetacarpal" type="BoneAttachment3D" parent="Body/robot_hand_left_v2/Armature/Skeleton3D" index="90"]
-transform = Transform3D(0.164304, -0.0686823, 0.984016, -0.985803, -0.046419, 0.161363, 0.0345942, -0.996558, -0.0753341, 0.000401791, 0.00772436, -0.025376)
+[node name="LeftMiddleMetacarpal" type="BoneAttachment3D" parent="Body/left_hand/Armature/Skeleton3D" index="24"]
+transform = Transform3D(0.028349582, 0.54233104, 0.83968645, -0.9974838, -0.039254703, 0.05903079, 0.06497586, -0.83924717, 0.5398538, -0.0054804403, 0.009176998, -0.1267719)
 bone_name = "LeftMiddleMetacarpal"
 bone_idx = 14
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Body/robot_hand_left_v2/Armature/Skeleton3D/LeftMiddleMetacarpal"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Body/left_hand/Armature/Skeleton3D/LeftMiddleMetacarpal"]
 shape = SubResource("SphereShape3D_1814r")
 
-[node name="LeftMiddleProximal" type="BoneAttachment3D" parent="Body/robot_hand_left_v2/Armature/Skeleton3D" index="91"]
-transform = Transform3D(0.200596, 0.186651, 0.961729, -0.975453, -0.0529712, 0.213739, 0.0908386, -0.980997, 0.171444, -0.00365847, 0.00498023, -0.084289)
+[node name="LeftMiddleProximal" type="BoneAttachment3D" parent="Body/left_hand/Armature/Skeleton3D" index="25"]
+transform = Transform3D(0.006189934, 0.75512594, 0.6555505, -0.99632764, -0.051326055, 0.068530016, 0.085395604, -0.6535673, 0.75203526, 0.012560746, 0.007871153, -0.1546903)
 bone_name = "LeftMiddleProximal"
 bone_idx = 15
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Body/robot_hand_left_v2/Armature/Skeleton3D/LeftMiddleProximal"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Body/left_hand/Armature/Skeleton3D/LeftMiddleProximal"]
 shape = SubResource("SphereShape3D_0vbgo")
 
-[node name="LeftMiddleIntermediate" type="BoneAttachment3D" parent="Body/robot_hand_left_v2/Armature/Skeleton3D" index="92"]
-transform = Transform3D(0.154928, 0.348018, 0.924597, -0.982848, -0.0404693, 0.179921, 0.100034, -0.936613, 0.335779, 0.00460863, 0.00414258, -0.113794)
+[node name="LeftMiddleIntermediate" type="BoneAttachment3D" parent="Body/left_hand/Armature/Skeleton3D" index="26"]
+transform = Transform3D(0.0061900476, 0.75512624, 0.6555502, -0.99632764, -0.051326122, 0.06853032, 0.08539588, -0.653567, 0.7520355, 0.03211247, 0.006542217, -0.17161246)
 bone_name = "LeftMiddleIntermediate"
 bone_idx = 16
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Body/robot_hand_left_v2/Armature/Skeleton3D/LeftMiddleIntermediate"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Body/left_hand/Armature/Skeleton3D/LeftMiddleIntermediate"]
 shape = SubResource("SphereShape3D_qfevc")
 
-[node name="LeftMiddleDistal" type="BoneAttachment3D" parent="Body/robot_hand_left_v2/Armature/Skeleton3D" index="93"]
-transform = Transform3D(0.141025, 0.498399, 0.855401, -0.987316, 0.00715872, 0.158602, 0.0729234, -0.866918, 0.493087, 0.0164031, 0.00372583, -0.136102)
+[node name="LeftMiddleDistal" type="BoneAttachment3D" parent="Body/left_hand/Armature/Skeleton3D" index="27"]
+transform = Transform3D(0.006190036, 0.7551262, 0.6555502, -0.99632764, -0.051326133, 0.068530306, 0.08539588, -0.653567, 0.7520355, 0.033830985, 0.006133453, -0.15439577)
 bone_name = "LeftMiddleDistal"
 bone_idx = 17
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Body/robot_hand_left_v2/Armature/Skeleton3D/LeftMiddleDistal"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Body/left_hand/Armature/Skeleton3D/LeftMiddleDistal"]
 shape = SubResource("SphereShape3D_vsp22")
 
-[node name="LeftIndexMetacarpal" type="BoneAttachment3D" parent="Body/robot_hand_left_v2/Armature/Skeleton3D" index="94"]
-transform = Transform3D(-0.0151621, -0.0918284, 0.995659, -0.999843, -0.0077713, -0.0159426, 0.00920155, -0.995744, -0.0916961, 7.77708e-05, 0.0246775, -0.0243102)
+[node name="LeftIndexMetacarpal" type="BoneAttachment3D" parent="Body/left_hand/Armature/Skeleton3D" index="28"]
+transform = Transform3D(-0.026083555, 0.5445218, 0.8383409, -0.99076694, -0.12569305, 0.05081457, 0.13304329, -0.82927483, 0.5427728, 0.0023564743, -0.019656949, -0.11861027)
 bone_name = "LeftIndexMetacarpal"
 bone_idx = 20
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Body/robot_hand_left_v2/Armature/Skeleton3D/LeftIndexMetacarpal"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Body/left_hand/Armature/Skeleton3D/LeftIndexMetacarpal"]
 shape = SubResource("SphereShape3D_2keyy")
 
-[node name="LeftIndexProximal" type="BoneAttachment3D" parent="Body/robot_hand_left_v2/Armature/Skeleton3D" index="95"]
-transform = Transform3D(0.0370232, 0.094443, 0.994842, -0.999265, -0.00636586, 0.0377921, 0.00990222, -0.99551, 0.0941378, -0.00516021, 0.0242342, -0.0811084)
+[node name="LeftIndexProximal" type="BoneAttachment3D" parent="Body/left_hand/Armature/Skeleton3D" index="29"]
+transform = Transform3D(-0.017995797, 0.74961174, 0.66163313, -0.99199575, -0.09610547, 0.0819035, 0.124982394, -0.6548632, 0.7453411, 0.017869245, -0.023237793, -0.14223531)
 bone_name = "LeftIndexProximal"
 bone_idx = 21
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Body/robot_hand_left_v2/Armature/Skeleton3D/LeftIndexProximal"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Body/left_hand/Armature/Skeleton3D/LeftIndexProximal"]
 shape = SubResource("SphereShape3D_wpfly")
 
-[node name="LeftIndexIntermediate" type="BoneAttachment3D" parent="Body/robot_hand_left_v2/Armature/Skeleton3D" index="96"]
-transform = Transform3D(0.0815623, 0.297798, 0.951138, -0.995957, -0.011696, 0.0890676, 0.0376486, -0.954557, 0.29564, 0.000822541, 0.0261737, -0.107606)
+[node name="LeftIndexIntermediate" type="BoneAttachment3D" parent="Body/left_hand/Armature/Skeleton3D" index="30"]
+transform = Transform3D(-0.017995816, 0.7496116, 0.6616334, -0.99199575, -0.09610542, 0.08190334, 0.12498224, -0.6548635, 0.74534094, 0.03468322, -0.02539346, -0.15692404)
 bone_name = "LeftIndexIntermediate"
 bone_idx = 22
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Body/robot_hand_left_v2/Armature/Skeleton3D/LeftIndexIntermediate"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Body/left_hand/Armature/Skeleton3D/LeftIndexIntermediate"]
 shape = SubResource("SphereShape3D_r7cxx")
 
-[node name="LeftIndexDistal" type="BoneAttachment3D" parent="Body/robot_hand_left_v2/Armature/Skeleton3D" index="97"]
-transform = Transform3D(0.0637442, 0.509071, 0.858361, -0.996846, -0.00825502, 0.0789244, 0.0472639, -0.860685, 0.50694, 0.0105993, 0.0274403, -0.129229)
+[node name="LeftIndexDistal" type="BoneAttachment3D" parent="Body/left_hand/Armature/Skeleton3D" index="31"]
+transform = Transform3D(-0.01799582, 0.74961144, 0.66163343, -0.99199575, -0.096105404, 0.08190332, 0.12498223, -0.6548635, 0.7453409, 0.03904526, -0.02254692, -0.14204076)
 bone_name = "LeftIndexDistal"
 bone_idx = 23
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Body/robot_hand_left_v2/Armature/Skeleton3D/LeftIndexDistal"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Body/left_hand/Armature/Skeleton3D/LeftIndexDistal"]
 shape = SubResource("SphereShape3D_dvcob")
 
-[node name="LeftThumbMetacarpal" type="BoneAttachment3D" parent="Body/robot_hand_left_v2/Armature/Skeleton3D" index="98"]
-transform = Transform3D(-0.85753, 0.512083, -0.0491263, 0.382763, 0.571323, -0.726004, -0.343707, -0.641374, -0.685933, 0.00377457, 0.0176566, -0.0118522)
+[node name="LeftThumbMetacarpal" type="BoneAttachment3D" parent="Body/left_hand/Armature/Skeleton3D" index="32"]
+transform = Transform3D(-0.1117257, 0.4450948, 0.8884862, -0.98966026, -0.13076033, -0.058942582, 0.0899438, -0.88588494, 0.45510194, 0.008005876, -0.04330095, -0.10335298)
 bone_name = "LeftThumbMetacarpal"
 bone_idx = 26
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Body/robot_hand_left_v2/Armature/Skeleton3D/LeftThumbMetacarpal"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Body/left_hand/Armature/Skeleton3D/LeftThumbMetacarpal"]
 shape = SubResource("SphereShape3D_wl68d")
 
-[node name="LeftThumbProximal" type="BoneAttachment3D" parent="Body/robot_hand_left_v2/Armature/Skeleton3D" index="99"]
-transform = Transform3D(-0.854252, 0.473515, -0.214564, 0.353969, 0.227521, -0.907161, -0.380736, -0.850892, -0.36197, 0.0170222, 0.0324368, -0.0284446)
+[node name="LeftThumbProximal" type="BoneAttachment3D" parent="Body/left_hand/Armature/Skeleton3D" index="33"]
+transform = Transform3D(-0.044302158, 0.61543435, 0.7869419, -0.998965, -0.03542943, -0.028530344, 0.010322425, -0.78739125, 0.61636686, 0.016008098, -0.04565185, -0.11928003)
 bone_name = "LeftThumbProximal"
 bone_idx = 27
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Body/robot_hand_left_v2/Armature/Skeleton3D/LeftThumbProximal"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Body/left_hand/Armature/Skeleton3D/LeftThumbProximal"]
 shape = SubResource("SphereShape3D_cc65b")
 
-[node name="LeftThumbDistal" type="BoneAttachment3D" parent="Body/robot_hand_left_v2/Armature/Skeleton3D" index="100"]
-transform = Transform3D(-0.878513, 0.444241, -0.175681, 0.307243, 0.24382, -0.919866, -0.365808, -0.862091, -0.350689, 0.0349587, 0.0410552, -0.0606759)
+[node name="LeftThumbDistal" type="BoneAttachment3D" parent="Body/left_hand/Armature/Skeleton3D" index="34"]
+transform = Transform3D(-0.044302654, 0.61543536, 0.786941, -0.99896497, -0.035429258, -0.028531095, 0.010321767, -0.7873905, 0.6163678, 0.027096968, -0.04629022, -0.13346723)
 bone_name = "LeftThumbDistal"
 bone_idx = 28
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Body/robot_hand_left_v2/Armature/Skeleton3D/LeftThumbDistal"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Body/left_hand/Armature/Skeleton3D/LeftThumbDistal"]
 shape = SubResource("SphereShape3D_gcqq0")
 
-[node name="robot_hand_right_v2" parent="Body" instance=ExtResource("9_khimo")]
+[node name="right_hand" parent="Body" instance=ExtResource("10_83d6f")]
 
-[node name="Skeleton3D" parent="Body/robot_hand_right_v2/Armature" index="0"]
+[node name="Skeleton3D" parent="Body/right_hand/Armature" index="0"]
 script = ExtResource("7_cj3lu")
 
-[node name="XRHandModifier3D" type="XRHandModifier3D" parent="Body/robot_hand_right_v2/Armature/Skeleton3D" index="0"]
+[node name="XRHandModifier3D" type="XRHandModifier3D" parent="Body/right_hand/Armature/Skeleton3D" index="1"]
+transform = Transform3D(-1, 0, 1.509958e-07, 0, 1, 0, -1.509958e-07, 0, -1, 0, 0, 0)
 hand_tracker = &"/user/hand_tracker/right"
 bone_update = 1
 script = ExtResource("9_yybae")
 hand = "Right"
 
-[node name="XRHandIK" type="SkeletonModifier3D" parent="Body/robot_hand_right_v2/Armature/Skeleton3D" index="1" node_paths=PackedStringArray("physics_hand")]
+[node name="XRHandIK" type="SkeletonModifier3D" parent="Body/right_hand/Armature/Skeleton3D" index="2" node_paths=PackedStringArray("physics_hand")]
 _import_path = NodePath("")
 unique_name_in_owner = false
 process_mode = 0
@@ -545,7 +556,7 @@ process_thread_group = 0
 physics_interpolation_mode = 0
 auto_translate_mode = 0
 editor_description = ""
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+transform = Transform3D(-1, 0, 1.509958e-07, 0, 1, 0, -1.509958e-07, 0, -1, 0, 0, 0)
 rotation_edit_mode = 0
 rotation_order = 2
 top_level = false
@@ -559,7 +570,7 @@ physics_hand = NodePath("../../../../../PhysicsHandRight")
 palm_bone = "RightPalm"
 preview_in_editor = false
 
-[node name="XRGrabIK" type="SkeletonModifier3D" parent="Body/robot_hand_right_v2/Armature/Skeleton3D" index="2"]
+[node name="XRGrabIK" type="SkeletonModifier3D" parent="Body/right_hand/Armature/Skeleton3D" index="3"]
 _import_path = NodePath("")
 unique_name_in_owner = false
 process_mode = 0
@@ -569,7 +580,7 @@ process_thread_group = 0
 physics_interpolation_mode = 0
 auto_translate_mode = 0
 editor_description = ""
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+transform = Transform3D(-1, 0, 1.509958e-07, 0, 1, 0, -1.509958e-07, 0, -1, 0, 0, 0)
 rotation_edit_mode = 0
 rotation_order = 2
 top_level = false
@@ -579,249 +590,259 @@ active = true
 influence = 1.0
 script = ExtResource("10_wahie")
 hand = "Right"
-metadata/_custom_type_script = ExtResource("10_wahie")
+metadata/_custom_type_script = "uid://cpl25onrbji7c"
 
-[node name="ThumbIK" type="SkeletonIK3D" parent="Body/robot_hand_right_v2/Armature/Skeleton3D" index="3"]
+[node name="ThumbIK" type="SkeletonIK3D" parent="Body/right_hand/Armature/Skeleton3D" index="4"]
+transform = Transform3D(-1, 0, 1.509958e-07, 0, 1, 0, -1.509958e-07, 0, -1, 0, 0, 0)
 active = false
 root_bone = &"RightThumbProximal"
 tip_bone = &"RightThumbTouch"
 target_node = NodePath("../ThumbIKTarget")
 
-[node name="ThumbIKTarget" type="Node3D" parent="Body/robot_hand_right_v2/Armature/Skeleton3D" index="4"]
+[node name="ThumbIKTarget" type="Node3D" parent="Body/right_hand/Armature/Skeleton3D" index="5"]
+transform = Transform3D(-1, 0, 1.509958e-07, 0, 1, 0, -1.509958e-07, 0, -1, 0, 0, 0)
 
-[node name="IndexIK" type="SkeletonIK3D" parent="Body/robot_hand_right_v2/Armature/Skeleton3D" index="5"]
+[node name="IndexIK" type="SkeletonIK3D" parent="Body/right_hand/Armature/Skeleton3D" index="6"]
+transform = Transform3D(-1, 0, 1.509958e-07, 0, 1, 0, -1.509958e-07, 0, -1, 0, 0, 0)
 active = false
 root_bone = &"RightIndexProximal"
 tip_bone = &"RightIndexTouch"
 target_node = NodePath("../IndexIKTarget")
 
-[node name="IndexIKTarget" type="Node3D" parent="Body/robot_hand_right_v2/Armature/Skeleton3D" index="6"]
+[node name="IndexIKTarget" type="Node3D" parent="Body/right_hand/Armature/Skeleton3D" index="7"]
+transform = Transform3D(-1, 0, 1.509958e-07, 0, 1, 0, -1.509958e-07, 0, -1, 0, 0, 0)
 
-[node name="MiddleIK" type="SkeletonIK3D" parent="Body/robot_hand_right_v2/Armature/Skeleton3D" index="7"]
+[node name="MiddleIK" type="SkeletonIK3D" parent="Body/right_hand/Armature/Skeleton3D" index="8"]
+transform = Transform3D(-1, 0, 1.509958e-07, 0, 1, 0, -1.509958e-07, 0, -1, 0, 0, 0)
 active = false
 root_bone = &"RightMiddleProximal"
 tip_bone = &"RightMiddleTouch"
 target_node = NodePath("../MiddleIKTarget")
 
-[node name="MiddleIKTarget" type="Node3D" parent="Body/robot_hand_right_v2/Armature/Skeleton3D" index="8"]
+[node name="MiddleIKTarget" type="Node3D" parent="Body/right_hand/Armature/Skeleton3D" index="9"]
+transform = Transform3D(-1, 0, 1.509958e-07, 0, 1, 0, -1.509958e-07, 0, -1, 0, 0, 0)
 
-[node name="RingIK" type="SkeletonIK3D" parent="Body/robot_hand_right_v2/Armature/Skeleton3D" index="9"]
+[node name="RingIK" type="SkeletonIK3D" parent="Body/right_hand/Armature/Skeleton3D" index="10"]
+transform = Transform3D(-1, 0, 1.509958e-07, 0, 1, 0, -1.509958e-07, 0, -1, 0, 0, 0)
 active = false
 root_bone = &"RightRingProximal"
 tip_bone = &"RightRingTouch"
 target_node = NodePath("../RingIKTarget")
 
-[node name="RingIKTarget" type="Node3D" parent="Body/robot_hand_right_v2/Armature/Skeleton3D" index="10"]
+[node name="RingIKTarget" type="Node3D" parent="Body/right_hand/Armature/Skeleton3D" index="11"]
+transform = Transform3D(-1, 0, 1.509958e-07, 0, 1, 0, -1.509958e-07, 0, -1, 0, 0, 0)
 
-[node name="LittleIK" type="SkeletonIK3D" parent="Body/robot_hand_right_v2/Armature/Skeleton3D" index="11"]
+[node name="LittleIK" type="SkeletonIK3D" parent="Body/right_hand/Armature/Skeleton3D" index="12"]
+transform = Transform3D(-1, 0, 1.509958e-07, 0, 1, 0, -1.509958e-07, 0, -1, 0, 0, 0)
 active = false
 root_bone = &"RightLittleProximal"
 tip_bone = &"RightLittleTouch"
 target_node = NodePath("../LittleIKTarget")
 
-[node name="LittleIKTarget" type="Node3D" parent="Body/robot_hand_right_v2/Armature/Skeleton3D" index="12"]
+[node name="LittleIKTarget" type="Node3D" parent="Body/right_hand/Armature/Skeleton3D" index="13"]
+transform = Transform3D(-1, 0, 1.509958e-07, 0, 1, 0, -1.509958e-07, 0, -1, 0, 0, 0)
 
-[node name="RightHand" type="BoneAttachment3D" parent="Body/robot_hand_right_v2/Armature/Skeleton3D" index="13"]
-transform = Transform3D(0, 3.57628e-07, -1, 1, 1.19209e-07, 0, 1.19209e-07, -1, -3.57628e-07, 0, 0, 0)
+[node name="RightHand" type="BoneAttachment3D" parent="Body/right_hand/Armature/Skeleton3D" index="14"]
+transform = Transform3D(-0.0034908054, -1.7881393e-07, 0.99999386, 0.99999386, 0, 0.0034907756, -5.960464e-08, 1, 1.1920928e-07, -0.00015978733, -3.1924534e-05, -0.0006257086)
 bone_name = "RightHand"
 bone_idx = 0
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Body/robot_hand_right_v2/Armature/Skeleton3D/RightHand"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Body/right_hand/Armature/Skeleton3D/RightHand"]
 shape = SubResource("SphereShape3D_7p6ew")
 
-[node name="GrabJoint" type="Generic6DOFJoint3D" parent="Body/robot_hand_right_v2/Armature/Skeleton3D/RightHand"]
+[node name="GrabJoint" type="Generic6DOFJoint3D" parent="Body/right_hand/Armature/Skeleton3D/RightHand"]
 transform = Transform3D(1, -2.21943e-15, 0, -2.21943e-15, 1, 0, 0, 0, 1, 0, 0, 0)
 
-[node name="GrabArea" type="ShapeCast3D" parent="Body/robot_hand_right_v2/Armature/Skeleton3D/RightHand"]
+[node name="GrabArea" type="ShapeCast3D" parent="Body/right_hand/Armature/Skeleton3D/RightHand"]
 transform = Transform3D(1, -1.49012e-07, 1.50996e-07, 1.49012e-07, 1, -3.91156e-07, -1.50996e-07, 3.91156e-07, 1, 0.00623803, 0.060499, 0.0657465)
 shape = SubResource("SphereShape3D_3vt40")
 target_position = Vector3(0, 0, 0)
 max_results = 1
 
-[node name="GripPose" type="Node3D" parent="Body/robot_hand_right_v2/Armature/Skeleton3D/RightHand"]
+[node name="GripPose" type="Node3D" parent="Body/right_hand/Armature/Skeleton3D/RightHand"]
 transform = Transform3D(-1.89276e-08, 0.707107, -0.707107, 6.25859e-08, -0.707107, -0.707107, -1, -7.55405e-08, -4.57722e-08, -0.00397516, 0.060499, 0.0304121)
 
-[node name="ThumbIKRayCast" type="RayCast3D" parent="Body/robot_hand_right_v2/Armature/Skeleton3D/RightHand"]
+[node name="ThumbIKRayCast" type="RayCast3D" parent="Body/right_hand/Armature/Skeleton3D/RightHand"]
 transform = Transform3D(-0.307243, 0.24382, -0.919866, -0.365808, 0.862091, 0.350689, 0.878513, 0.444241, -0.17568, 0.0694538, 0.068677, 0.0468433)
 target_position = Vector3(0, 0, 0.08)
 
-[node name="IndexIKRayCast" type="RayCast3D" parent="Body/robot_hand_right_v2/Armature/Skeleton3D/RightHand"]
+[node name="IndexIKRayCast" type="RayCast3D" parent="Body/right_hand/Armature/Skeleton3D/RightHand"]
 transform = Transform3D(0.996846, -0.00825422, 0.0789241, 0.0472632, 0.860684, -0.506941, -0.0637443, 0.509072, 0.858359, 0.026248, 0.153654, -0.00366651)
 target_position = Vector3(0, 0, 0.08)
 
-[node name="MiddleIKRayCast" type="RayCast3D" parent="Body/robot_hand_right_v2/Armature/Skeleton3D/RightHand"]
+[node name="MiddleIKRayCast" type="RayCast3D" parent="Body/right_hand/Armature/Skeleton3D/RightHand"]
 transform = Transform3D(0.987316, 0.00715854, 0.158602, 0.072924, 0.866917, -0.493088, -0.141025, 0.4984, 0.8554, -0.000535972, 0.162158, 0.00341472)
 target_position = Vector3(0, 0, 0.08)
 
-[node name="RingIKRayCast" type="RayCast3D" parent="Body/robot_hand_right_v2/Armature/Skeleton3D/RightHand"]
+[node name="RingIKRayCast" type="RayCast3D" parent="Body/right_hand/Armature/Skeleton3D/RightHand"]
 transform = Transform3D(0.92425, 0.0207383, 0.381224, 0.178743, 0.858827, -0.480069, -0.337362, 0.511845, 0.790064, -0.0270301, 0.150989, 0.00721395)
 target_position = Vector3(0, 0, 0.08)
 
-[node name="LittleIKRayCast" type="RayCast3D" parent="Body/robot_hand_right_v2/Armature/Skeleton3D/RightHand"]
+[node name="LittleIKRayCast" type="RayCast3D" parent="Body/right_hand/Armature/Skeleton3D/RightHand"]
 transform = Transform3D(0.89169, -0.0319716, 0.451515, 0.243017, 0.875365, -0.417945, -0.381878, 0.482404, 0.788324, -0.0483628, 0.13632, 0.00790055)
 target_position = Vector3(0, 0, 0.08)
 
-[node name="PalmPose" type="Node3D" parent="Body/robot_hand_right_v2/Armature/Skeleton3D/RightHand"]
+[node name="PalmPose" type="Node3D" parent="Body/right_hand/Armature/Skeleton3D/RightHand"]
 transform = Transform3D(0, 1, -4.37114e-08, 4.37114e-08, -4.37114e-08, -1, -1, 0, -4.37114e-08, 0.005, 0.045, 0.015)
 
-[node name="RightPalm" type="BoneAttachment3D" parent="Body/robot_hand_right_v2/Armature/Skeleton3D" index="81"]
-transform = Transform3D(-4.76837e-07, 3.57628e-07, -1, 1, 1.19209e-07, -4.76837e-07, 1.19209e-07, -1, -3.57628e-07, 0.00518802, 0.000772598, -0.0440036)
+[node name="RightPalm" type="BoneAttachment3D" parent="Body/right_hand/Armature/Skeleton3D" index="15"]
+transform = Transform3D(0.93734425, 0.26143783, 0.23029523, 0.017734399, 0.6243402, -0.7809512, -0.34795278, 0.7361044, 0.5805853, 0.017753996, 0.02914625, 0.024672695)
 bone_name = "RightPalm"
 bone_idx = 1
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Body/robot_hand_right_v2/Armature/Skeleton3D/RightPalm"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Body/right_hand/Armature/Skeleton3D/RightPalm"]
 shape = SubResource("SphereShape3D_ljktf")
 
-[node name="RightLittleMetacarpal" type="BoneAttachment3D" parent="Body/robot_hand_right_v2/Armature/Skeleton3D" index="82"]
-transform = Transform3D(0.510792, -0.252089, -0.821914, 0.778068, -0.271073, 0.566683, -0.365653, -0.928962, 0.0576809, 0.0035113, -0.0176394, -0.0268421)
+[node name="RightLittleMetacarpal" type="BoneAttachment3D" parent="Body/right_hand/Armature/Skeleton3D" index="16"]
+transform = Transform3D(0.93821245, 0.33715364, 0.07800364, 0.018753929, 0.1755383, -0.9842939, -0.34555095, 0.9249399, 0.15836927, 0.028317641, 0.054373316, 0.054415703)
 bone_name = "RightLittleMetacarpal"
 bone_idx = 2
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Body/robot_hand_right_v2/Armature/Skeleton3D/RightLittleMetacarpal"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Body/right_hand/Armature/Skeleton3D/RightLittleMetacarpal"]
 shape = SubResource("SphereShape3D_j8xsl")
 
-[node name="RightLittleProximal" type="BoneAttachment3D" parent="Body/robot_hand_right_v2/Armature/Skeleton3D" index="83"]
-transform = Transform3D(0.420095, -0.337188, -0.842511, 0.878354, -0.0822434, 0.470883, -0.228067, -0.937838, 0.26162, -0.00802477, -0.0300442, -0.0693531)
+[node name="RightLittleProximal" type="BoneAttachment3D" parent="Body/right_hand/Armature/Skeleton3D" index="17"]
+transform = Transform3D(0.93724567, 0.3475085, -0.028426193, 0.018489908, -0.13094941, -0.99121654, -0.34817863, 0.9284881, -0.12915729, 0.039280795, 0.06008126, 0.08449178)
 bone_name = "RightLittleProximal"
 bone_idx = 3
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Body/robot_hand_right_v2/Armature/Skeleton3D/RightLittleProximal"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Body/right_hand/Armature/Skeleton3D/RightLittleProximal"]
 shape = SubResource("SphereShape3D_fxy0v")
 
-[node name="RightLittleIntermediate" type="BoneAttachment3D" parent="Body/robot_hand_right_v2/Armature/Skeleton3D" index="84"]
-transform = Transform3D(0.408043, -0.265026, -0.873648, 0.877895, -0.14877, 0.455157, -0.250601, -0.952695, 0.171961, -0.014917, -0.0333537, -0.0939648)
+[node name="RightLittleIntermediate" type="BoneAttachment3D" parent="Body/right_hand/Armature/Skeleton3D" index="18"]
+transform = Transform3D(0.9372459, 0.34750798, -0.028424915, 0.018491149, -0.13094932, -0.99121654, -0.34817794, 0.92848825, -0.12915766, 0.04986726, 0.056092024, 0.11277714)
 bone_name = "RightLittleIntermediate"
 bone_idx = 4
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Body/robot_hand_right_v2/Armature/Skeleton3D/RightLittleIntermediate"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Body/right_hand/Armature/Skeleton3D/RightLittleIntermediate"]
 shape = SubResource("SphereShape3D_bkfpn")
 
-[node name="RightLittleDistal" type="BoneAttachment3D" parent="Body/robot_hand_right_v2/Armature/Skeleton3D" index="85"]
-transform = Transform3D(0.381879, -0.482404, -0.788324, 0.89169, -0.0319702, 0.451515, -0.243016, -0.875365, 0.417946, -0.021434, -0.0353942, -0.111346)
+[node name="RightLittleDistal" type="BoneAttachment3D" parent="Body/right_hand/Armature/Skeleton3D" index="19"]
+transform = Transform3D(0.93724585, 0.34750807, -0.02842493, 0.018491196, -0.13094942, -0.99121666, -0.34817806, 0.9284882, -0.12915778, 0.04255481, 0.041856833, 0.09475707)
 bone_name = "RightLittleDistal"
 bone_idx = 5
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Body/robot_hand_right_v2/Armature/Skeleton3D/RightLittleDistal"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Body/right_hand/Armature/Skeleton3D/RightLittleDistal"]
 shape = SubResource("SphereShape3D_jpy71")
 
-[node name="RightRingMetacarpal" type="BoneAttachment3D" parent="Body/robot_hand_right_v2/Armature/Skeleton3D" index="86"]
-transform = Transform3D(0.113832, -0.0429439, -0.992571, 0.992469, -0.0405889, 0.115577, -0.0452506, -0.998252, 0.0380002, -0.000229863, -0.0115575, -0.0256542)
+[node name="RightRingMetacarpal" type="BoneAttachment3D" parent="Body/right_hand/Armature/Skeleton3D" index="20"]
+transform = Transform3D(0.19061634, 0.6069902, 0.77151024, 0.97722673, -0.04268294, -0.20786133, -0.093239665, 0.79356194, -0.601303, 0.0010699946, 0.038485266, 0.12651753)
 bone_name = "RightRingMetacarpal"
 bone_idx = 8
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Body/robot_hand_right_v2/Armature/Skeleton3D/RightRingMetacarpal"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Body/right_hand/Armature/Skeleton3D/RightRingMetacarpal"]
 shape = SubResource("SphereShape3D_qac3y")
 
-[node name="RightRingProximal" type="BoneAttachment3D" parent="Body/robot_hand_right_v2/Armature/Skeleton3D" index="87"]
-transform = Transform3D(0.349758, -0.160328, -0.923019, 0.921701, -0.117519, 0.369672, -0.167741, -0.980043, 0.106671, -0.00256032, -0.0137602, -0.0798269)
+[node name="RightRingProximal" type="BoneAttachment3D" parent="Body/right_hand/Armature/Skeleton3D" index="21"]
+transform = Transform3D(0.19220993, 0.7170778, 0.66996604, 0.97707486, -0.07615256, -0.19881022, -0.09154295, 0.6928202, -0.7152759, 0.018232748, 0.037278403, 0.14895564)
 bone_name = "RightRingProximal"
 bone_idx = 9
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Body/robot_hand_right_v2/Armature/Skeleton3D/RightRingProximal"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Body/right_hand/Armature/Skeleton3D/RightRingProximal"]
 shape = SubResource("SphereShape3D_dvb2s")
 
-[node name="RightRingIntermediate" type="BoneAttachment3D" parent="Body/robot_hand_right_v2/Armature/Skeleton3D" index="88"]
-transform = Transform3D(0.324291, -0.297326, -0.898016, 0.932174, -0.0610231, 0.35683, -0.160895, -0.952824, 0.25737, -0.00926385, -0.0168141, -0.107179)
+[node name="RightRingIntermediate" type="BoneAttachment3D" parent="Body/right_hand/Armature/Skeleton3D" index="22"]
+transform = Transform3D(0.19220982, 0.71707845, 0.6699653, 0.97707486, -0.07615261, -0.19881015, -0.09154306, 0.6928195, -0.71527654, 0.034597456, 0.03554049, 0.16476676)
 bone_name = "RightRingIntermediate"
 bone_idx = 10
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Body/robot_hand_right_v2/Armature/Skeleton3D/RightRingIntermediate"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Body/right_hand/Armature/Skeleton3D/RightRingIntermediate"]
 shape = SubResource("SphereShape3D_68rv6")
 
-[node name="RightRingDistal" type="BoneAttachment3D" parent="Body/robot_hand_right_v2/Armature/Skeleton3D" index="89"]
-transform = Transform3D(0.337361, -0.511844, -0.790065, 0.92425, 0.0207381, 0.381224, -0.178743, -0.858828, 0.480068, -0.0175186, -0.0169991, -0.124994)
+[node name="RightRingDistal" type="BoneAttachment3D" parent="Body/right_hand/Armature/Skeleton3D" index="23"]
+transform = Transform3D(0.1922103, 0.71707857, 0.6699652, 0.97707486, -0.0761526, -0.19881085, -0.09154357, 0.6928194, -0.7152766, 0.033106644, 0.03415704, 0.14687042)
 bone_name = "RightRingDistal"
 bone_idx = 11
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Body/robot_hand_right_v2/Armature/Skeleton3D/RightRingDistal"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Body/right_hand/Armature/Skeleton3D/RightRingDistal"]
 shape = SubResource("SphereShape3D_wu04l")
 
-[node name="RightMiddleMetacarpal" type="BoneAttachment3D" parent="Body/robot_hand_right_v2/Armature/Skeleton3D" index="90"]
-transform = Transform3D(0.164304, 0.0686823, -0.984016, 0.985803, -0.046419, 0.161363, -0.0345942, -0.996558, -0.0753341, -0.000401791, 0.00772436, -0.025376)
+[node name="RightMiddleMetacarpal" type="BoneAttachment3D" parent="Body/right_hand/Armature/Skeleton3D" index="24"]
+transform = Transform3D(0.08676885, 0.54233074, 0.8356723, 0.99618334, -0.039254766, -0.07795954, -0.009475805, 0.8392474, -0.5436671, -0.0054804794, 0.009176987, 0.12677187)
 bone_name = "RightMiddleMetacarpal"
 bone_idx = 14
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Body/robot_hand_right_v2/Armature/Skeleton3D/RightMiddleMetacarpal"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Body/right_hand/Armature/Skeleton3D/RightMiddleMetacarpal"]
 shape = SubResource("SphereShape3D_ae7m0")
 
-[node name="RightMiddleProximal" type="BoneAttachment3D" parent="Body/robot_hand_right_v2/Armature/Skeleton3D" index="91"]
-transform = Transform3D(0.200596, -0.186651, -0.961729, 0.975453, -0.0529712, 0.213739, -0.0908386, -0.980997, 0.171444, 0.00365847, 0.00498024, -0.084289)
+[node name="RightMiddleProximal" type="BoneAttachment3D" parent="Body/right_hand/Armature/Skeleton3D" index="25"]
+transform = Transform3D(0.08120113, 0.75512564, 0.6505317, 0.99657625, -0.05132608, -0.06481697, -0.015555787, 0.6535678, -0.75670826, 0.012560695, 0.007871139, 0.15469027)
 bone_name = "RightMiddleProximal"
 bone_idx = 15
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Body/robot_hand_right_v2/Armature/Skeleton3D/RightMiddleProximal"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Body/right_hand/Armature/Skeleton3D/RightMiddleProximal"]
 shape = SubResource("SphereShape3D_a3cpv")
 
-[node name="RightMiddleIntermediate" type="BoneAttachment3D" parent="Body/robot_hand_right_v2/Armature/Skeleton3D" index="92"]
-transform = Transform3D(0.154928, -0.348018, -0.924597, 0.982848, -0.0404693, 0.179921, -0.100034, -0.936613, 0.335779, -0.00460863, 0.00414258, -0.113794)
+[node name="RightMiddleIntermediate" type="BoneAttachment3D" parent="Body/right_hand/Armature/Skeleton3D" index="26"]
+transform = Transform3D(0.08120123, 0.7551257, 0.6505317, 0.99657637, -0.05132614, -0.064817056, -0.015555821, 0.65356773, -0.75670844, 0.032112416, 0.006542204, 0.17161244)
 bone_name = "RightMiddleIntermediate"
 bone_idx = 16
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Body/robot_hand_right_v2/Armature/Skeleton3D/RightMiddleIntermediate"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Body/right_hand/Armature/Skeleton3D/RightMiddleIntermediate"]
 shape = SubResource("SphereShape3D_55l4a")
 
-[node name="RightMiddleDistal" type="BoneAttachment3D" parent="Body/robot_hand_right_v2/Armature/Skeleton3D" index="93"]
-transform = Transform3D(0.141025, -0.498399, -0.8554, 0.987317, 0.00715873, 0.158602, -0.0729234, -0.866918, 0.493087, -0.0164031, 0.00372583, -0.136102)
+[node name="RightMiddleDistal" type="BoneAttachment3D" parent="Body/right_hand/Armature/Skeleton3D" index="27"]
+transform = Transform3D(0.08120123, 0.7551256, 0.65053177, 0.99657637, -0.051326144, -0.06481705, -0.015555806, 0.65356773, -0.7567084, 0.03383094, 0.006133441, 0.15439576)
 bone_name = "RightMiddleDistal"
 bone_idx = 17
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Body/robot_hand_right_v2/Armature/Skeleton3D/RightMiddleDistal"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Body/right_hand/Armature/Skeleton3D/RightMiddleDistal"]
 shape = SubResource("SphereShape3D_4toqi")
 
-[node name="RightIndexMetacarpal" type="BoneAttachment3D" parent="Body/robot_hand_right_v2/Armature/Skeleton3D" index="94"]
-transform = Transform3D(-0.0151622, 0.0918284, -0.995659, 0.999843, -0.0077713, -0.0159427, -0.00920156, -0.995744, -0.0916961, -7.77708e-05, 0.0246775, -0.0243102)
+[node name="RightIndexMetacarpal" type="BoneAttachment3D" parent="Body/right_hand/Armature/Skeleton3D" index="28"]
+transform = Transform3D(-0.0363064, 0.5445217, 0.8379604, 0.98424834, -0.12569317, 0.12432231, 0.17302206, 0.829275, -0.5313814, 0.0023564575, -0.01965696, 0.11861028)
 bone_name = "RightIndexMetacarpal"
 bone_idx = 20
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Body/robot_hand_right_v2/Armature/Skeleton3D/RightIndexMetacarpal"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Body/right_hand/Armature/Skeleton3D/RightIndexMetacarpal"]
 shape = SubResource("SphereShape3D_tek50")
 
-[node name="RightIndexProximal" type="BoneAttachment3D" parent="Body/robot_hand_right_v2/Armature/Skeleton3D" index="95"]
-transform = Transform3D(0.0370232, -0.094443, -0.994842, 0.999265, -0.00636586, 0.0377921, -0.00990222, -0.99551, 0.0941378, 0.00516021, 0.0242342, -0.0811084)
+[node name="RightIndexProximal" type="BoneAttachment3D" parent="Body/right_hand/Armature/Skeleton3D" index="29"]
+transform = Transform3D(-0.030436236, 0.74961156, 0.6611775, 0.98335016, -0.096105546, 0.15422681, 0.17915301, 0.6548631, -0.73420584, 0.017869234, -0.023237808, 0.14223532)
 bone_name = "RightIndexProximal"
 bone_idx = 21
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Body/robot_hand_right_v2/Armature/Skeleton3D/RightIndexProximal"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Body/right_hand/Armature/Skeleton3D/RightIndexProximal"]
 shape = SubResource("SphereShape3D_v4usb")
 
-[node name="RightIndexIntermediate" type="BoneAttachment3D" parent="Body/robot_hand_right_v2/Armature/Skeleton3D" index="96"]
-transform = Transform3D(0.0815623, -0.297798, -0.951138, 0.995957, -0.011696, 0.0890676, -0.0376486, -0.954557, 0.29564, -0.000822542, 0.0261737, -0.107606)
+[node name="RightIndexIntermediate" type="BoneAttachment3D" parent="Body/right_hand/Armature/Skeleton3D" index="30"]
+transform = Transform3D(-0.030436486, 0.749611, 0.66117805, 0.98335016, -0.09610543, 0.15422682, 0.17915292, 0.6548638, -0.73420525, 0.034683198, -0.025393475, 0.15692404)
 bone_name = "RightIndexIntermediate"
 bone_idx = 22
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Body/robot_hand_right_v2/Armature/Skeleton3D/RightIndexIntermediate"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Body/right_hand/Armature/Skeleton3D/RightIndexIntermediate"]
 shape = SubResource("SphereShape3D_4hmnv")
 
-[node name="RightIndexDistal" type="BoneAttachment3D" parent="Body/robot_hand_right_v2/Armature/Skeleton3D" index="97"]
-transform = Transform3D(0.0637442, -0.509071, -0.858361, 0.996846, -0.00825505, 0.0789244, -0.0472639, -0.860685, 0.50694, -0.0105993, 0.0274403, -0.129229)
+[node name="RightIndexDistal" type="BoneAttachment3D" parent="Body/right_hand/Armature/Skeleton3D" index="31"]
+transform = Transform3D(-0.030436486, 0.749611, 0.66117805, 0.98335016, -0.09610543, 0.15422682, 0.17915292, 0.6548638, -0.73420525, 0.039045237, -0.022546936, 0.14204079)
 bone_name = "RightIndexDistal"
 bone_idx = 23
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Body/robot_hand_right_v2/Armature/Skeleton3D/RightIndexDistal"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Body/right_hand/Armature/Skeleton3D/RightIndexDistal"]
 shape = SubResource("SphereShape3D_c1pxd")
 
-[node name="RightThumbMetacarpal" type="BoneAttachment3D" parent="Body/robot_hand_right_v2/Armature/Skeleton3D" index="98"]
-transform = Transform3D(-0.85753, -0.512083, 0.0491263, -0.382763, 0.571323, -0.726004, 0.343707, -0.641374, -0.685933, -0.00377457, 0.0176566, -0.0118522)
+[node name="RightThumbMetacarpal" type="BoneAttachment3D" parent="Body/right_hand/Armature/Skeleton3D" index="32"]
+transform = Transform3D(-0.22986718, 0.44509462, 0.86547774, 0.939449, -0.13076058, 0.31676057, 0.25415874, 0.8858852, -0.38808617, 0.008005858, -0.043300964, 0.10335297)
 bone_name = "RightThumbMetacarpal"
 bone_idx = 26
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Body/robot_hand_right_v2/Armature/Skeleton3D/RightThumbMetacarpal"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Body/right_hand/Armature/Skeleton3D/RightThumbMetacarpal"]
 shape = SubResource("SphereShape3D_vqrd6")
 
-[node name="RightThumbProximal" type="BoneAttachment3D" parent="Body/robot_hand_right_v2/Armature/Skeleton3D" index="99"]
-transform = Transform3D(-0.854252, -0.473515, 0.214564, -0.353969, 0.227521, -0.907161, 0.380736, -0.850892, -0.36197, -0.0170222, 0.0324368, -0.0284446)
+[node name="RightThumbProximal" type="BoneAttachment3D" parent="Body/right_hand/Armature/Skeleton3D" index="33"]
+transform = Transform3D(-0.24429482, 0.61543435, 0.7493733, 0.9412192, -0.035429604, 0.33593327, 0.23329481, 0.78739154, -0.5706034, 0.016008072, -0.04565186, 0.11928002)
 bone_name = "RightThumbProximal"
 bone_idx = 27
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Body/robot_hand_right_v2/Armature/Skeleton3D/RightThumbProximal"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Body/right_hand/Armature/Skeleton3D/RightThumbProximal"]
 shape = SubResource("SphereShape3D_wdal1")
 
-[node name="RightThumbDistal" type="BoneAttachment3D" parent="Body/robot_hand_right_v2/Armature/Skeleton3D" index="100"]
-transform = Transform3D(-0.878513, -0.444241, 0.175681, -0.307243, 0.24382, -0.919866, 0.365808, -0.862091, -0.350689, -0.0349587, 0.0410552, -0.0606759)
+[node name="RightThumbDistal" type="BoneAttachment3D" parent="Body/right_hand/Armature/Skeleton3D" index="34"]
+transform = Transform3D(-0.24429515, 0.6154355, 0.7493723, 0.941219, -0.03542941, 0.33593395, 0.23329543, 0.7873908, -0.5706043, 0.027096938, -0.04629023, 0.13346723)
 bone_name = "RightThumbDistal"
 bone_idx = 28
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Body/robot_hand_right_v2/Armature/Skeleton3D/RightThumbDistal"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Body/right_hand/Armature/Skeleton3D/RightThumbDistal"]
 shape = SubResource("SphereShape3D_ke5dl")
 
 [node name="PhysicsHandLeft" parent="." node_paths=PackedStringArray("tracker", "controller", "hand_tracker", "skeleton", "hand_modifier", "grab_joint", "grab_area") instance=ExtResource("10_p3jmf")]
@@ -831,10 +852,10 @@ collision_mask = 3073
 tracker = NodePath("../Body/XROrigin/XRHandTrackerLeft")
 controller = NodePath("../Body/XROrigin/XRControllerLeft")
 hand_tracker = NodePath("../Body/XROrigin/XRHandTrackerLeft")
-skeleton = NodePath("../Body/robot_hand_left_v2/Armature/Skeleton3D")
-hand_modifier = NodePath("../Body/robot_hand_left_v2/Armature/Skeleton3D/XRHandModifier3D")
-grab_joint = NodePath("../Body/robot_hand_left_v2/Armature/Skeleton3D/LeftHand/GrabJoint")
-grab_area = NodePath("../Body/robot_hand_left_v2/Armature/Skeleton3D/LeftHand/GrabArea")
+skeleton = NodePath("../Body/left_hand/Armature/Skeleton3D")
+hand_modifier = NodePath("../Body/left_hand/Armature/Skeleton3D/XRHandModifier3D")
+grab_joint = NodePath("../Body/left_hand/Armature/Skeleton3D/LeftHand/GrabJoint")
+grab_area = NodePath("../Body/left_hand/Armature/Skeleton3D/LeftHand/GrabArea")
 
 [node name="PhysicsHandRight" parent="." node_paths=PackedStringArray("tracker", "controller", "hand_tracker", "skeleton", "hand_modifier", "grab_joint", "grab_area") instance=ExtResource("10_p3jmf")]
 unique_name_in_owner = true
@@ -844,10 +865,10 @@ hand = "Right"
 tracker = NodePath("../Body/XROrigin/XRHandTrackerRight")
 controller = NodePath("../Body/XROrigin/XRControllerRight")
 hand_tracker = NodePath("../Body/XROrigin/XRHandTrackerRight")
-skeleton = NodePath("../Body/robot_hand_right_v2/Armature/Skeleton3D")
-hand_modifier = NodePath("../Body/robot_hand_right_v2/Armature/Skeleton3D/XRHandModifier3D")
-grab_joint = NodePath("../Body/robot_hand_right_v2/Armature/Skeleton3D/RightHand/GrabJoint")
-grab_area = NodePath("../Body/robot_hand_right_v2/Armature/Skeleton3D/RightHand/GrabArea")
+skeleton = NodePath("../Body/right_hand/Armature/Skeleton3D")
+hand_modifier = NodePath("../Body/right_hand/Armature/Skeleton3D/XRHandModifier3D")
+grab_joint = NodePath("../Body/right_hand/Armature/Skeleton3D/RightHand/GrabJoint")
+grab_area = NodePath("../Body/right_hand/Armature/Skeleton3D/RightHand/GrabArea")
 
 [connection signal="button_pressed" from="Body/XROrigin/XRControllerLeft" to="Body/XROrigin/XRControllerLeft" method="_on_button_pressed"]
 [connection signal="button_released" from="Body/XROrigin/XRControllerLeft" to="Body/XROrigin/XRControllerLeft" method="_on_button_released"]
@@ -869,14 +890,12 @@ grab_area = NodePath("../Body/robot_hand_right_v2/Armature/Skeleton3D/RightHand/
 [connection signal="tracking_changed" from="Body/XROrigin/XRControllerRight" to="PhysicsHandRight" method="_on_controller_tracking_changed"]
 [connection signal="turned_x" from="Body/XROrigin/XRControllerRight" to="Body" method="_on_turned_x"]
 [connection signal="turned_y" from="Body/XROrigin/XRControllerRight" to="Body" method="_on_turned_y"]
-[connection signal="skeleton_updated" from="Body/robot_hand_left_v2/Armature/Skeleton3D" to="Body/robot_hand_left_v2/Armature/Skeleton3D" method="_on_skeleton_updated"]
-[connection signal="modification_processed" from="Body/robot_hand_left_v2/Armature/Skeleton3D/XRHandModifier3D" to="Body/robot_hand_left_v2/Armature/Skeleton3D/XRHandModifier3D" method="_on_modification_processed"]
-[connection signal="skeleton_updated" from="Body/robot_hand_right_v2/Armature/Skeleton3D" to="Body/robot_hand_right_v2/Armature/Skeleton3D" method="_on_skeleton_updated"]
-[connection signal="modification_processed" from="Body/robot_hand_right_v2/Armature/Skeleton3D/XRHandModifier3D" to="Body/robot_hand_right_v2/Armature/Skeleton3D/XRHandModifier3D" method="_on_modification_processed"]
-[connection signal="dropped_held_object" from="PhysicsHandLeft" to="Body/robot_hand_left_v2/Armature/Skeleton3D/XRGrabIK" method="_on_physics_hand_dropped_held_object"]
-[connection signal="grabbed" from="PhysicsHandLeft" to="Body/robot_hand_left_v2/Armature/Skeleton3D/XRGrabIK" method="_on_physics_hand_grabbed"]
-[connection signal="dropped_held_object" from="PhysicsHandRight" to="Body/robot_hand_right_v2/Armature/Skeleton3D/XRGrabIK" method="_on_physics_hand_dropped_held_object"]
-[connection signal="grabbed" from="PhysicsHandRight" to="Body/robot_hand_right_v2/Armature/Skeleton3D/XRGrabIK" method="_on_physics_hand_grabbed"]
+[connection signal="modification_processed" from="Body/left_hand/Armature/Skeleton3D/XRHandModifier3D" to="Body/left_hand/Armature/Skeleton3D/XRHandModifier3D" method="_on_modification_processed"]
+[connection signal="modification_processed" from="Body/right_hand/Armature/Skeleton3D/XRHandModifier3D" to="Body/right_hand/Armature/Skeleton3D/XRHandModifier3D" method="_on_modification_processed"]
+[connection signal="dropped_held_object" from="PhysicsHandLeft" to="Body/left_hand/Armature/Skeleton3D/XRGrabIK" method="_on_physics_hand_dropped_held_object"]
+[connection signal="grabbed" from="PhysicsHandLeft" to="Body/left_hand/Armature/Skeleton3D/XRGrabIK" method="_on_physics_hand_grabbed"]
+[connection signal="dropped_held_object" from="PhysicsHandRight" to="Body/right_hand/Armature/Skeleton3D/XRGrabIK" method="_on_physics_hand_dropped_held_object"]
+[connection signal="grabbed" from="PhysicsHandRight" to="Body/right_hand/Armature/Skeleton3D/XRGrabIK" method="_on_physics_hand_grabbed"]
 
-[editable path="Body/robot_hand_left_v2"]
-[editable path="Body/robot_hand_right_v2"]
+[editable path="Body/left_hand"]
+[editable path="Body/right_hand"]

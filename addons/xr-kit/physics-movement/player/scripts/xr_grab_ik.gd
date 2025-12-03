@@ -60,7 +60,7 @@ func _process_modification() -> void:
 		
 
 
-func _on_physics_hand_grabbed(_object: Node3D) -> void:
+func _on_physics_hand_grabbed(_object: Node3D, _collision_normal: Vector3) -> void:
 	grabbing = true
 	# Enable SkeletonIK nodes
 	for finger in ["Thumb", "Index", "Middle", "Ring", "Little"]:

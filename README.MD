@@ -8,26 +8,6 @@ Physics-based XR movement. Player hands collide with environment and can grab or
 
 ![Godot XR Kit - Physics Movement](/screenshots/physics_movement.gif)
 
-### Features
-
-- Physics hand follows controller and can be blocked by world objects
-- Player can grab and move objects
-  - Heavy objects are harder to move
-  - Grabbing heavy objects with two hands makes them easier to move
-  - Fingers curl around grabbed objects geometry
-- Player can move themselves by pushing away from objects
-  - Heavier objects allow for stronger push
-- Player can move in space with thrusters
-- Player can brake in space with thruster brake
-- Player can hit objects with their head and push themselves away
-- Ghost hand appears when controller hand gets far from physics one
-- Physics hand is reset to controller position if it gets too far from it (ex. hand got stuck)
-- Joystick snap rotation
-- Smooth 6 degrees of freedom rotation around grabbed static object (trigger activated)
-- Fingers wiggle a little when hand is moving
-
-(this is very much work in progress, sometimes things stop working after updates)
-
 [Read more](/addons/xr-kit/physics-movement/)
 
 ## Hand Gesture Recognition
@@ -35,19 +15,6 @@ Physics-based XR movement. Player hands collide with environment and can grab or
 Real-time recognition of hand poses based on predefined templates.
 
 ![Godot XR Kit - Hand Gesture Recognition](/screenshots/hand_gesture_recognition.gif)
-
-## Poses tracked by default:
-
-- open
-- rest
-- fist
-- thumb_up
-- one
-- two
-- three
-- four
-- five
-- middle_finger
 
 [Read more](/addons/xr-kit/hand-gesture-recognition/)
 
@@ -57,27 +24,15 @@ Applies smoothing to XR hand movement using [1€ filter](https://gery.casiez.ne
 
 ![Godot XR Kit - Smooth Input Filter](/screenshots/smooth_input_filter.gif)
 
-### Features:
-
-- Supports smoothing movement for hand tracking Skeleton3D and Node3D (ex. XRController3D)
-- Reduces jitter while keeping lag to minimum
-
 [Read more](/addons/xr-kit/smooth-input-filter/)
 
 ## Cinematic View
 
 Smooth VR preview for recording in native monitor resolution.
 
-![Godot XR Kit - Cinematic View](/screenshots/cinematic_view.gif)
-
 *Raw preview (left) vs Cinematic View*
 
-### Features:
-
-- Full screen VR preview in monitor native resolution
-- Smooth preview can be rendered to another screen
-- Smoothing parameters can be tuned
-- Full range of Godot's camera settings is available 
+![Godot XR Kit - Cinematic View](/screenshots/cinematic_view.gif)
 
 [Read more](/addons/xr-kit/cinematic-view/)
 
@@ -88,8 +43,6 @@ Repository contains Godot 4.5 project with XR and main scene preconfigured. Rele
 To get most recent version of the whole project (for Godot 4.5, without official release yet), [download from master branch](https://github.com/patrykkalinowski/godot-xr-kit/archive/refs/heads/master.zip).
 
 Latest release (for Godot 4.2) is available in Godot's Asset Library under the name [XR Kit](https://godotengine.org/asset-library/asset/1870) or on [releases page](https://github.com/patrykkalinowski/godot-xr-kit/releases/latest).
-
-
 
 If you are on Quest, make sure your hardware is configured properly:
 

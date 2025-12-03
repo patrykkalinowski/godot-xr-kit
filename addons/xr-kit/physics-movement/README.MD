@@ -2,7 +2,7 @@
 
 Scripts and scenes for physics-based XR movement. Player hands collide with environment and can grab or push physics object in realistic manner. Player body can collide with physics objects and be moved around in space.
 
-*Physics Movement is in alpha stage. Provided hand models currently have no meshes (skeleton only), make sure to enable Visible Collision Shapes in Debug settings to see your hands.*
+Physics Movement is in alpha stage. Provided hand models are [from Valve](https://github.com/ValveSoftware/openvr/wiki/Hand-Skeleton) and are not open source.
 
 ![Godot XR Kit - Physics Movement](/screenshots/physics_movement.gif)
 
@@ -15,16 +15,14 @@ Scripts and scenes for physics-based XR movement. Player hands collide with envi
   - Fingers curl around grabbed objects geometry
 - Player can move themselves by pushing away from objects
   - Heavier objects allow for stronger push
-- Player can move in space with thrusters
-- Player can brake in space with thruster brake
+- Player can move in zero G with thrusters
+- Player can brake in zero G with thruster brake
 - Player can hit objects with their head and push themselves away
-- Ghost hand appears when controller hand gets far from physics one
+- ~~Ghost hand appears when controller hand gets far from physics one~~
 - Physics hand is reset to controller position if it gets too far from it (ex. hand got stuck)
 - Joystick snap rotation
 - Smooth 6 degrees of freedom rotation around grabbed static object (trigger activated)
-- Fingers wiggle a little when hand is moving
-
-(this is very much work in progress, sometimes things stop working after updates)
+- ~~Fingers wiggle a little when hand is moving~~
 
 ## How does it work
 
@@ -40,7 +38,7 @@ Custom OpenXR Action Map is provided for control scheme used by Physics Movement
 
 ## Getting started
 
-Physics Movement requires Jolt Physics engine to be set in Project Settings.
+Physics Movement requires Jolt Physics engine to be set in Project Settings (default since Godot 4.4).
 
 Open main scene with example playground at `/addons/xr-kit/main/main.tscn`. It implements physics movement in zero gravity with some objects to interact with.
 
